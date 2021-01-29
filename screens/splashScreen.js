@@ -74,8 +74,6 @@ class SplashScreen extends Component {
                     />
                     </View>
             </LinearGradient>
-            
-            
         )
     }
 }
