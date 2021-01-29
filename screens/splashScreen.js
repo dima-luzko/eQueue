@@ -49,9 +49,7 @@ class SplashScreen extends Component {
     }
 
     render() {
-
         return (
-            
                 <LinearGradient
                 colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
                 start={{ x: 0, y: 1 }}
