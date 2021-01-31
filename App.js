@@ -13,6 +13,8 @@ import ChangeFlexPriority from './screens/ChangeFlexPriorityScreen'
 import SplashScreen from './screens/splashScreen'
 import ConnectingToIP from './screens/ConnectingToIPScreen'
 import ErrorConnectToServer from './screens/errorConnectToServerScreen'
+import ServerNoConnection from './screens/serverNoConnectionScreen'
+import ServerConnection from './screens/serverConnectionScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -39,26 +41,35 @@ export default class App extends Component {
               component={SplashScreen}
             /> */}
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="ErrorConnectToServer"
               component={ErrorConnectToServer}
-            />
+            /> */}
+
             <Stack.Screen
               name="ConnectingToIP"
               component={ConnectingToIP} />
 
+            <Stack.Screen
+              name="ServerConnection"
+              component={ServerConnection} />
+
+            <Stack.Screen
+              name="ServerNoConnection"
+              component={ServerNoConnection} />
 
             <Stack.Screen
               name="LoginScreen"
-              component={LoginScreen}
-              options={{ title: 'Welcome' }}
-            />
+              component={LoginScreen} />
+
             <Stack.Screen
               name="CallClient"
               component={CallClient} />
+
             <Stack.Screen
               name="RedirectCustomer"
               component={RedirectCustomer} />
+
             <Stack.Screen
               name="CustomerToPostpone"
               component={CustomerToPostpone} />
@@ -69,14 +80,11 @@ export default class App extends Component {
 
             <Stack.Screen
               name="ResultList"
-              component={ResultList}
-            />
+              component={ResultList} />
 
             <Stack.Screen
               name="ChangeFlexPriority"
-              component={ChangeFlexPriority}
-            />
-
+              component={ChangeFlexPriority} />
 
           </Stack.Navigator>
         </NavigationContainer>
