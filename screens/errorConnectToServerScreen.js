@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Dimensions, PixelRatio, Text } from 'react-native'
+import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react-native'
 import Dialog, { DialogContent, DialogTitle } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { checkServerState } from '../action/serverStateAction'
-
+import LinearGradient from 'react-native-linear-gradient'
+import { Col, Grid } from "react-native-easy-grid";
+import { passwordState, userState, showPassword } from '../action/updateStateAction'
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -46,11 +48,11 @@ class ErrorConnectToServer extends Component {
         switch (this.state.text) {
             case 0:
                 return (
-                    <Text style={styles.textNotConnection}>Нет подключения!</Text>
+                    <Text style={styles.textNotConnection}>Проблемы с подключением к серверу!</Text>
                 )
             case 1:
                 return (
-                    <Text style={styles.textConnection}>Подключение установлено!</Text>
+                    <Text style={styles.textConnection}>Соединение с сервером установлено!</Text>
                 )
         }
     }
@@ -67,112 +69,146 @@ class ErrorConnectToServer extends Component {
                         this.setState({ text: 0, buttom: 0 })
                     }
                 }, 100);
-        }, 300);
-    }, 2000);
+            }, 300);
+        }, 2000);
 
-}
+    }
 
-changeButtom() {
-    switch (this.state.buttom) {
-        case 0:
-            return (
-                <Button
-                    title="Попробовать снова"
-                    buttonStyle={{
-                        backgroundColor: 'red'
-                    }}
+    changeButtom() {
+        switch (this.state.buttom) {
+            case 0:
+                return (
+                    <View>
+                        <Grid>
+                            <Col style={{ height: heightPercentageToDP('10%') }}>
+                                <Button
+                                    title="Попробовать снова"
+                                    buttonStyle={{
+                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
+                                        borderRadius: 4,
+                                        width: widthPercentageToDP('38%'),
 
-                    containerStyle={{
-                        width: widthPercentageToDP('50%'),
-                        alignSelf: 'center',
-                        marginTop: heightPercentageToDP('2%')
+                                    }}
 
-                    }}
+                                    titleStyle={{
+                                        fontSize: heightPercentageToDP('1.67%'),
+                                        color: '#FFFFFF',
+                                        fontWeight: "bold",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={() => {
+                                        this.checkServer()
+                                    }}
+                                />
+                            </Col>
+                            <Col style={{ height: heightPercentageToDP('10%') }}>
+                                <Button
+                                    title="Ввести новый ip-адресс"
+                                    buttonStyle={{
+                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
+                                        borderRadius: 4,
+                                        width: widthPercentageToDP('40%')
+                                    }}
 
-                    titleStyle={{
-                        fontSize: heightPercentageToDP('2%'),
-                        color: 'white',
-                        height: heightPercentageToDP('3%')
-                    }}
-                    onPress={() => {
-                        this.checkServer()
-                    }}
-                />
-            )
-        case 1:
-            return (
-                <Button
-                    title="ОK"
-                    buttonStyle={{
-                        backgroundColor: 'red'
-                    }}
+                                    titleStyle={{
+                                        fontSize: heightPercentageToDP('1.67%'),
+                                        color: '#FFFFFF',
+                                        fontWeight: "bold",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={() => {
+                                        this.props.navigation.replace("ConnectingToIP")
+                                    }}
+                                />
+                            </Col>
+                        </Grid>
 
-                    containerStyle={{
-                        width: widthPercentageToDP('50%'),
-                        alignSelf: 'center',
-                        marginTop: heightPercentageToDP('2%')
+                    </View>
 
-                    }}
+                )
+            case 1:
+                return (
+                    <Button
+                        title="ОK"
+                        buttonStyle={{
+                            backgroundColor: '#41D38D',
+                            borderRadius: 4,
+                            width: widthPercentageToDP('38%'),
+                            alignSelf: "center"
+                        }}
 
-                    titleStyle={{
-                        fontSize: heightPercentageToDP('2%'),
-                        color: 'white',
-                        height: heightPercentageToDP('3%')
-                    }}
-                    onPress={() => {
-                         this.props.navigation.goBack(),
+                        titleStyle={{
+                            fontSize: heightPercentageToDP('2%'),
+                            color: '#FFFFFF',
+                            fontWeight: "bold",
+                            fontFamily: "Roboto",
+                            alignItems: "center"
+                        }}
+                        onPress={() => {
+                            this.props.navigation.replace("LoginScreen"),
+                                this.props.userState(""),
+                                this.props.passwordState(""),
+                                this.props.showPassword(true)
                             this.setState({ visiable: false })
-                    }}
-                />
-            )
+                        }}
+                    />
+                )
+        }
+    }
+
+    render() {
+        return (
+            <LinearGradient
+                colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 1 }}
+                style={{ flex: 1 }}
+            >
+                <StatusBar translucent={true} backgroundColor={'transparent'} />
+                <View >
+                    <Dialog
+                        visible={this.state.visiable}
+                    >
+                        <DialogContent
+                            style={styles.dialogStyle}
+                        >
+                            <View>
+                                {this.changeText()}
+                            </View>
+                            <View >
+                                {this.changeButtom()}
+                            </View>
+                        </DialogContent>
+                    </Dialog>
+                </View>
+            </LinearGradient>
+        )
     }
 }
 
-render() {
-
-    return (
-        <View>
-            <Dialog
-                visible={this.state.visiable}
-            >
-                <DialogTitle
-                    title="Проблема с подключением к серверу!"
-                />
-                <DialogContent>
-                    <View >
-                        {this.changeText()}
-                    </View>
-                    <View >
-                        {this.changeButtom()}
-                    </View>
-                </DialogContent>
-            </Dialog>
-        </View>
-
-    )
-}
-}
-
-
 const styles = StyleSheet.create({
-    dialogFutter: {
-        width: widthPercentageToDP('70%'),
-        alignSelf: 'center'
+    dialogStyle: {
+        width: widthPercentageToDP('90%'),
+        height: heightPercentageToDP('25%')
     },
 
     textConnection: {
         textAlign: 'center',
-        fontSize: heightPercentageToDP('2.2%'),
-        color: 'green',
-        marginTop: heightPercentageToDP('3%'),
-        marginBottom: heightPercentageToDP('1%')
+        fontWeight: "bold",
+        fontSize: heightPercentageToDP('2.3%'),
+        color: '#A1A0A0',
+        marginTop: heightPercentageToDP('7%'),
+        marginBottom: heightPercentageToDP('4%')
     },
     textNotConnection: {
         textAlign: 'center',
-        fontSize: heightPercentageToDP('2.2%'),
-        color: 'red',
-        marginTop: heightPercentageToDP('3%'),
-        marginBottom: heightPercentageToDP('1%')
+        fontWeight: "bold",
+        fontSize: heightPercentageToDP('2.3%'),
+        color: '#A1A0A0',
+        marginTop: heightPercentageToDP('7%'),
+        marginBottom: heightPercentageToDP('4%')
     },
 
 });
@@ -186,7 +222,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress))
+        checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
+        passwordState: (password) => dispatch(passwordState(password)),
+        userState: (userSelected) => dispatch(userState(userSelected)),
+        showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ErrorConnectToServer); 

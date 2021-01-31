@@ -1,7 +1,7 @@
 import { CHECK_SERVER_STATE , SERVER_STATE_ERROR} from '../constants/constants'
 
 const initialState = {
-    server: true
+    server: false
     
 }
 

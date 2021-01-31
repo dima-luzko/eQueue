@@ -24,7 +24,7 @@ export { store }
 
 export default class App extends Component {
 
- 
+
   render() {
     return (
       <Provider store={store}>
@@ -37,21 +37,21 @@ export default class App extends Component {
             {/* <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
-            />
-
-            <Stack.Screen
-              name="ConnectingToIP"
-              component={ConnectingToIP} />
+            /> */}
 
             <Stack.Screen
               name="ErrorConnectToServer"
               component={ErrorConnectToServer}
-            /> */}
+            />
+            <Stack.Screen
+              name="ConnectingToIP"
+              component={ConnectingToIP} />
+
+
             <Stack.Screen
               name="LoginScreen"
               component={LoginScreen}
               options={{ title: 'Welcome' }}
-
             />
             <Stack.Screen
               name="CallClient"
