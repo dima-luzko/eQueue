@@ -56,12 +56,12 @@ class ConnectingToIP extends Component {
                 setTimeout(() => {
                     if (this.props.server.server) {
                         AsyncStorage.setItem('ip', this.props.ipAddress.ipAddress)
-                        this.props.navigation.navigate("ServerNoConnection")
+                        this.props.navigation.navigate("ServerConnection")
                         console.log("Соединение с сервером установлено!");
                     }
 
                     else {
-                        this.props.navigation.navigate("ServerConnection")
+                        this.props.navigation.navigate("ServerNoConnection")
                         console.error("Нет соединения с сервером!");
                     }
                 }, 100);
