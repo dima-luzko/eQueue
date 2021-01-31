@@ -167,25 +167,7 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         marginTop: heightPercentageToDP('2%'),
         marginBottom: heightPercentageToDP('3%')
-    },
-
-    textConnection: {
-        textAlign: 'center',
-        fontWeight: "bold",
-        fontSize: heightPercentageToDP('2.3%'),
-        color: '#A1A0A0',
-        marginTop: heightPercentageToDP('7%'),
-        marginBottom: heightPercentageToDP('4%')
-    },
-    textNotConnection: {
-        textAlign: 'center',
-        fontWeight: "bold",
-        fontSize: heightPercentageToDP('2.3%'),
-        color: '#A1A0A0',
-        marginTop: heightPercentageToDP('7%'),
-        marginBottom: heightPercentageToDP('4%')
-    },
-
+    }
 });
 
 const mapStateToProps = state => {
