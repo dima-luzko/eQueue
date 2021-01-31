@@ -43,7 +43,7 @@ class SplashScreen extends Component {
 
         setTimeout(() => {
             this.props.selectIpAddress(ipStatus)
-            // this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
+             //this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
         }, 2000);
 
     }

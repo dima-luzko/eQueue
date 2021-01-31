@@ -110,11 +110,9 @@ class LoginScreen extends Component {
         <View style={styles.pickerStyle}>
           <Picker
             style={styles.pickerText}
-            itemStyle={{
-              backgroundColor: "grey", color: "blue", fontFamily: "Ebrima", fontSize: 17
-            }}
           >
             <Picker.Item label="Выберите пользователя..." value='default' />
+            <Picker.Item label="Пользователь" value='1' />
           </Picker>
         </View>
       )
@@ -240,7 +238,7 @@ const styles = StyleSheet.create({
   },
 
   passwordText: {
-    marginLeft: widthPercentageToDP('25%'),
+    marginLeft: widthPercentageToDP('27%'),
     fontSize: heightPercentageToDP('2%')
   },
 
@@ -250,14 +248,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: heightPercentageToDP('4.5%'),
     marginBottom: heightPercentageToDP('2.5%'),
-    justifyContent: "center",
-    paddingRight: heightPercentageToDP('2%')
+    paddingRight: heightPercentageToDP('2%'),
+    paddingLeft: heightPercentageToDP('5%'),
+    justifyContent: "center"
   },
 
   pickerText: {
-    height: heightPercentageToDP('6%'),
-    color: "#A2A0A0",
-    marginLeft: widthPercentageToDP('10%')
+    color: "#A2A0A0"
   }
 });
 

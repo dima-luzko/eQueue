@@ -185,7 +185,8 @@ class CallClient extends Component {
           <Appbar.Header
             style={{
               backgroundColor: '#003f5c',
-              height: heightPercentageToDP('8%')
+              height: heightPercentageToDP('8%'),
+              marginTop: heightPercentageToDP('3%')
             }}
           >
             <TouchableOpacity
@@ -256,11 +257,12 @@ class CallClient extends Component {
               disabled={this.props.disableButtonCallClient.disableButtonCallClient}
               title="Вызвать следующего клиента"
               buttonStyle={{
-                backgroundColor: 'black'
+                backgroundColor: 'black',
+                borderRadius: 15,
               }}
 
               containerStyle={{
-                borderRadius: 15,
+                // borderRadius: 15,
                 width: widthPercentageToDP('72%'),
                 alignSelf: 'center',
                 marginTop: heightPercentageToDP('12%'),
