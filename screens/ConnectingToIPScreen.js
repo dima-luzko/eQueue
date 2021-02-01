@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Dimensions, PixelRatio, Text, TextInput, Alert } from 'react-native'
-import { Dialog } from 'react-native-simple-dialogs';
+import { View, StyleSheet, Dimensions, PixelRatio, Text, TextInput, Alert, StatusBar } from 'react-native'
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
 import { checkServerState } from '../action/serverStateAction'
 import { selectIpAddress } from '../action/updateStateAction'
+import LinearGradient from 'react-native-linear-gradient'
 
 
 const widthPercentageToDP = widthPercent => {
@@ -31,7 +32,7 @@ class ConnectingToIP extends Component {
     errorInputIPAlert() {
         Alert.alert(
             "Ошибка",
-            "Сначала необходимо ввести ip-адрес!",
+            "Сначала необходимо ввести ip - адресс сервера!",
             [
                 { text: "OK", onPress: () => console.log("OK Pressed") }
             ],
@@ -39,50 +40,28 @@ class ConnectingToIP extends Component {
         );
     }
 
-
     constructor(props) {
         super(props);
         this.state = {
-            dialogVisible: true,
-            text: 0,
-            buttom: 0
+            dialogVisible: true
         };
-    }
-
-
-
-    changeText() {
-        switch (this.state.text) {
-            case 0:
-                return (
-                    null
-                )
-            case 1:
-                return (
-                    <Text style={styles.textConnection}>Соединение с сервером установлено!</Text>
-                )
-            case 2:
-                return (
-                    <Text style={styles.textNotConnection}>Нет соединения с сервером!</Text>
-                )
-        }
     }
 
     checkServer() {
         setTimeout(() => {
             this.props.checkServerState(this.props.ipAddress.ipAddress)
             if (this.props.ipAddress.ipAddress) {
-               
+
                 console.log("Введенный ip-адрес: " + this.props.ipAddress.ipAddress);
                 setTimeout(() => {
                     if (this.props.server.server) {
                         AsyncStorage.setItem('ip', this.props.ipAddress.ipAddress)
-                        this.setState({ text: 1, buttom: 2 })                        
+                        this.props.navigation.navigate("ServerConnection")
                         console.log("Соединение с сервером установлено!");
                     }
 
                     else {
-                        this.setState({ text: 2, buttom: 1 })
+                        this.props.navigation.navigate("ServerNoConnection")
                         console.error("Нет соединения с сервером!");
                     }
                 }, 100);
@@ -93,121 +72,72 @@ class ConnectingToIP extends Component {
         }, 300);
     }
 
-    changeButtom() {
-        switch (this.state.buttom) {
-            case 0:
-                return (
-                    <Button
-                        title="Проверить соединение"
-                        buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
-
-                        containerStyle={{
-                            width: widthPercentageToDP('50%'),
-                            alignSelf: 'center',
-                            marginTop: heightPercentageToDP('2%')
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('3%')
-                        }}
-                        onPress={() => {
-                            this.checkServer()
-                        }}
-                    />
-                )
-            case 1:
-                return (
-                    <Button
-                        title="Попробовать снова"
-                        buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
-
-                        containerStyle={{
-                            width: widthPercentageToDP('50%'),
-                            alignSelf: 'center',
-                            marginTop: heightPercentageToDP('2%')
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('3%')
-                        }}
-                        onPress={() => {
-                            this.setState({ text: 0, buttom: 0 }),
-                                this.props.selectIpAddress("")
-                        }}
-                    />
-                )
-            case 2:
-                return (
-                    <Button
-                        title="ОK"
-                        buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
-
-                        containerStyle={{
-                            width: widthPercentageToDP('50%'),
-                            alignSelf: 'center',
-                            marginTop: heightPercentageToDP('2%')
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('3%')
-                        }}
-                        onPress={() => {
-                            this.setState({ text: 0 }),
-                                this.props.navigation.navigate('LoginScreen'),
-                                this.setState({ dialogVisible: false })
-                        }}
-                    />
-                )
-        }
-    }
-
     render() {
-
         return (
-            <View>
-                <Dialog
-                    titleStyle={styles.dialog}
-                    visible={this.state.dialogVisible}
-                    title="Введите ip-адрес сервера"
-                >
-                    <View>
-                        <Text style={styles.text}>Введите ip-адрес для подключения к серверу:</Text>
-                        <View style={styles.inputStyle}>
-                            <TextInput
-                                value={this.props.ipAddress.ipAddress}
-                                onChangeText={value => this.props.selectIpAddress(value)}
-                                placeholder="127.0.0.1"
-                                maxLength={15}
-                                numberOfLines={1}
-                                keyboardType='numeric'
-                                
-                            />
-                        </View>
-                        <View style={{ height: heightPercentageToDP('5%') }}>
-                            {this.changeText()}
-                        </View>
+            <LinearGradient
+                colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 1 }}
+                style={{ flex: 1 }}
+            >
+                <StatusBar translucent={true} backgroundColor={'transparent'} />
+                <View>
+                    <Dialog
+                        visible={this.state.dialogVisible}
+                    >
+                        <DialogContent
+                            style={styles.dialogStyle}
+                        >
+                            <View>
+                                <Text style={styles.text}>Введите ip - aдресс сервера</Text>
+                                <View style={styles.inputStyle}>
+                                    <TextInput
+                                        value={this.props.ipAddress.ipAddress}
+                                        onChangeText={value => this.props.selectIpAddress(value)}
+                                        placeholder="Введите ip - адресс для подключения к серверу"
+                                        maxLength={15}
+                                        numberOfLines={1}
+                                        keyboardType='numeric'
 
-                        <View >
-                            {this.changeButtom()}
-                        </View>
-                    </View>
-                </Dialog>
-            </View>
+                                    />
+                                </View>
+                                <View >
+                                    <Button
+                                        title="Проверить соединение"
+                                        buttonStyle={{
+                                            backgroundColor: '#F4F1F1',
+                                            width: widthPercentageToDP('80%'),
+                                            alignSelf: 'center',
+                                            borderRadius: 4,
+                                            marginTop: heightPercentageToDP('3%'),
+                                            //shadowColor: "rgba(0, 0, 0, 0.25)",
+                                            // shadowOffset: {
+                                            //     width: 0,
+                                            //     height: 2,
+                                            // },
+                                            // shadowOpacity: 0.25,
+                                            // shadowRadius: 4,
+                                            // elevation: 5,
+                                        }}
+
+                                        titleStyle={{
+                                            fontSize: heightPercentageToDP('2%'),
+                                            color: '#A1A0A0',
+                                            fontWeight: "bold",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center"
+                                        }}
+                                        onPress={() => {
+                                            this.setState({dialogVisible: false})
+                                            this.checkServer()
+                                        }}
+                                    />
+                                </View>
+                            </View>
+                        </DialogContent>
+                    </Dialog>
+                </View>
+            </LinearGradient>
 
         )
     }
@@ -215,37 +145,29 @@ class ConnectingToIP extends Component {
 
 
 const styles = StyleSheet.create({
+
+    dialogStyle: {
+        width: widthPercentageToDP('90%'),
+        height: heightPercentageToDP('25%')
+    },
+
     inputStyle: {
-        width: widthPercentageToDP('32%'),
-        backgroundColor: "#ff7f50",
-        borderRadius: 12,
+        width: widthPercentageToDP('80%'),
+        backgroundColor: "rgba(244, 244, 244, 0.9)",
+        borderRadius: 4,
         height: heightPercentageToDP('6%'),
-        marginTop: heightPercentageToDP('2%'),
-        alignSelf: 'center'
+        alignSelf: 'center',
+
 
     },
     text: {
         textAlign: 'center',
-        fontSize: heightPercentageToDP('1.8%'),
-    },
-    dialog: {
-        fontSize: heightPercentageToDP('2.5%'),
-        alignSelf: 'center'
-    },
-
-    textConnection: {
+        fontSize: heightPercentageToDP('2.3%'),
+        color: "#A1A0A0",
+        fontWeight: "500",
         marginTop: heightPercentageToDP('2%'),
-        textAlign: 'center',
-        fontSize: heightPercentageToDP('2%'),
-        color: 'green'
-    },
-    textNotConnection: {
-        marginTop: heightPercentageToDP('2%'),
-        textAlign: 'center',
-        fontSize: heightPercentageToDP('2%'),
-        color: 'red'
-    },
-
+        marginBottom: heightPercentageToDP('3%')
+    }
 });
 
 const mapStateToProps = state => {

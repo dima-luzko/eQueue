@@ -74,6 +74,14 @@ class RedirectCustomer extends Component {
                     </Picker>
                 </View>
             )
+        } else {
+            return(
+                <View style={styles.pickerStyle}>
+                    <Picker>
+                        <Picker.Item label="Выбор услуги..." value='default' />
+                    </Picker>
+                </View>
+            )
         }
     }
 

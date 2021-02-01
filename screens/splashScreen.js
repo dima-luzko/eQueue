@@ -43,15 +43,13 @@ class SplashScreen extends Component {
 
         setTimeout(() => {
             this.props.selectIpAddress(ipStatus)
-            // this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
+             //this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
         }, 2000);
 
     }
 
     render() {
-
         return (
-            
                 <LinearGradient
                 colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
                 start={{ x: 0, y: 1 }}
@@ -74,8 +72,6 @@ class SplashScreen extends Component {
                     />
                     </View>
             </LinearGradient>
-            
-            
         )
     }
 }
