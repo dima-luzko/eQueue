@@ -1,12 +1,9 @@
-import { View } from 'native-base';
 import React, { Component } from 'react'
 import { Appbar } from 'react-native-paper'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {loggedUser} from '../action/loggedUserAction'
-import {PixelRatio, Dimensions} from 'react-native'
-
-
+import { loggedUser } from '../action/loggedUserAction'
+import { PixelRatio, Dimensions, Image,StyleSheet } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -26,51 +23,75 @@ export {
 };
 
 class Bar extends Component {
-    render(){
-        return(
-            <View>
-                 <Appbar.Header
-          style={{
-            backgroundColor: '#003f5c',
-            height: heightPercentageToDP('8%')
-          }}
+  render() {
+    return (
+      <LinearGradient
+          colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 1 }}
         >
-          <Icon
-            name="user"
-            size={3*widthPercentageToDP("2.5%")}
-            color="white"
+
+          <Appbar.Header
             style={{
-              marginLeft: widthPercentageToDP("2%")
-            }} />
-          <Appbar.Content
-            titleStyle={{
-              fontSize: heightPercentageToDP('2.8%'),
-              marginLeft: "1%"
+              backgroundColor: 'transparent',
+              height: heightPercentageToDP('8%'),
+              marginTop: heightPercentageToDP('4%'),
+              borderBottomWidth: 1,
+              borderBottomColor: "#BA5FA6"
+
             }}
-            subtitleStyle={{
-              fontSize: heightPercentageToDP('2%'),
-              marginLeft: "1%"
-            }}
-            title={"Окно: " + this.props.user.user.point}
-            subtitle={'Оператор: ' + this.props.user.user.name}
-          />
-        </Appbar.Header>
-            </View>
-        )
-    }
+          >
+              <Image
+                style={styles.userIcon}
+                source={
+                  require('../images/user_icon.png')
+                }
+              />
+            <Appbar.Content
+              titleStyle={{
+                fontSize: heightPercentageToDP('2.5%'),
+                marginLeft: widthPercentageToDP('1%'),
+                color: "#FFFFFF",
+                fontFamily: "Roboto",
+                fontWeight: '600'
+              }}
+              subtitleStyle={{
+                fontSize: heightPercentageToDP('2.5%'),
+                marginLeft: widthPercentageToDP('1%'),
+                color: "#FFFFFF",
+                fontFamily: "Roboto",
+                fontWeight: 'normal'
+              }}
+              title={"Окно: " + this.props.user.user.point}
+              subtitle={'Оператор: ' + this.props.user.user.name}
+            />
+          </Appbar.Header>
+        </LinearGradient>
+    )
+  }
 }
+
+const styles = StyleSheet.create({
+
+  userIcon: {
+    marginLeft: widthPercentageToDP('2%'),
+    width: widthPercentageToDP('10.6%'),
+    height: heightPercentageToDP('5.7%')
+  }
+
+});
 
 
 const mapStateToProps = state => {
-    return {
-      user: state.user,
-    };
+  return {
+    user: state.user,
   };
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-        loggedUser: (user) => dispatch(loggedUser(user))
-  
-    }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loggedUser: (user) => dispatch(loggedUser(user))
+
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(Bar);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Bar);

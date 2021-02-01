@@ -9,7 +9,6 @@ import { loggedUser } from '../action/loggedUserAction'
 import { getSelfServices } from '../action/selfServicesAction'
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
 import EyeIcon from 'react-native-vector-icons/Octicons'
-import TriangleIcon from 'react-native-vector-icons/MaterialIcons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import DoubleClick from 'react-native-double-tap'
 import { checkServerState } from '../action/serverStateAction'
@@ -112,7 +111,6 @@ class LoginScreen extends Component {
             style={styles.pickerText}
           >
             <Picker.Item label="Выберите пользователя..." value='default' />
-            <Picker.Item label="Пользователь" value='1' />
           </Picker>
         </View>
       )
@@ -148,17 +146,6 @@ class LoginScreen extends Component {
             />
 
             {this.renderPicker()}
-
-            {/* <View>
-              <TriangleIcon
-                name="arrow-drop-down"
-                size={4 * widthPercentageToDP("2.5%")}
-                color="green"
-                style={{
-                  marginStart: widthPercentageToDP('59%'),
-                  marginVertical: heightPercentageToDP('-7%')
-                }} />
-            </View> */}
 
             <Item style={styles.passwordStyle}>
               <Input
