@@ -2,15 +2,13 @@ import { Text } from 'native-base'
 import React, { Component } from 'react'
 import { View, StyleSheet, PixelRatio, Dimensions, TextInput, Alert } from 'react-native'
 import Bar from '../components/appbar'
-import {Picker} from '@react-native-picker/picker'
+import { Picker } from '@react-native-picker/picker'
 import CheckBox from '@react-native-community/checkbox'
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { getServices } from '../action/getServicesAction'
 import { redirectCustomer } from '../action/redirectCustomerAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
-
-
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -28,8 +26,6 @@ export {
     widthPercentageToDP,
     heightPercentageToDP
 };
-
-
 
 
 class RedirectCustomer extends Component {
@@ -60,13 +56,12 @@ class RedirectCustomer extends Component {
             return (
                 <View style={styles.pickerStyle}>
                     <Picker
-
+                        style={styles.pickerText}
                         selectedValue={this.state.PickerValueHolder}
                         onValueChange={(itemValue, itemIndex) => (console.log(itemValue), this.setState({ PickerValueHolder: itemValue }))} >
-                        <Picker.Item label="Выбор услуги..." value='default' />
+                        <Picker.Item label="Выбрать услугу..." value='default' />
                         {this.props.services.services.inner_services.map((item, key) =>
                             <Picker.Item
-
                                 label={item.name}
                                 value={item.id}
                                 key={key} />
@@ -75,10 +70,12 @@ class RedirectCustomer extends Component {
                 </View>
             )
         } else {
-            return(
+            return (
                 <View style={styles.pickerStyle}>
-                    <Picker>
-                        <Picker.Item label="Выбор услуги..." value='default' />
+                    <Picker
+                        style={styles.pickerText}
+                    >
+                        <Picker.Item label="Выбрать услугу..." value='default' />
                     </Picker>
                 </View>
             )
@@ -121,81 +118,91 @@ class RedirectCustomer extends Component {
         return (
             <View>
                 <Bar />
-                <Text style={styles.redirectText}>Перенаправление</Text>
+                <Text style={styles.redirectText}>Перенаправление клиента</Text>
+                <View>
+                    {this.servicesPicker()}
+                </View>
 
-
-                {this.servicesPicker()}
                 <View style={styles.inputStyle}>
                     <TextInput
                         style={styles.inputText}
                         value={this.state.comment}
                         onChangeText={value => this.setState({ comment: value })}
                         placeholder="Коментарий..."
-                        placeholderTextColor="#006400"
-
-                        maxLength={200}
-                        numberOfLines={4}
+                        placeholderTextColor="#AFAFAF"
+                        maxLength={150}
+                        numberOfLines={5}
                         multiline={true}
-
                     />
                 </View>
-                <View style={styles.checkBoxStyle}>
+                
+                    <View style={styles.checkBoxStyle}>
                     <CheckBox
                         value={this.state.check}
                         style={styles.checkBox}
                         onValueChange={(newValue => this.setState({ check: newValue }))}
                     />
-                    <View style={styles.returnText}>
-                        <Text >С возвратом</Text>
+                     </View>
+                     <View >
+                        <Text style={styles.returnText} >С возвращением клиента</Text>
                     </View >
-                </View>
+                    
                 <View>
-                    <Button
-                        title="Отмена"
-                        buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
 
-                        containerStyle={{
-                            width: widthPercentageToDP('25%'),
-                            marginLeft: widthPercentageToDP('17%'),
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('5.3%'),
-                            paddingTop: heightPercentageToDP('1%')
-                        }}
-                        onPress={() => {
-                            this.props.navigation.navigate('CallClient')
-                        }}
-                    />
-                </View>
                 <View>
                     <Button
                         title="Выполнить перенаправление"
                         buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
-
-                        containerStyle={{
-                            width: widthPercentageToDP('40%'),
-                            marginLeft: widthPercentageToDP('46.5%'),
-                            marginTop: heightPercentageToDP('-7.5%'),
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white'
-                        }}
+                            backgroundColor: "#41D38D",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            alignSelf: "center",
+                            marginTop: heightPercentageToDP('4%'),
+                            marginBottom: heightPercentageToDP('2%'),
+                            height: heightPercentageToDP('4.5%')
+                          }}
+              
+                          titleStyle={{
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
+                          }}
                         onPress={() => {
                             this.checkPicker()
                         }}
                     />
                 </View>
+
+                    <Button
+                        title="Отмена"
+                        buttonStyle={{
+                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
+                            height: heightPercentageToDP('4.5%')
+                          }}
+              
+                          titleStyle={{
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
+                          }}
+                        onPress={() => {
+                            this.props.navigation.navigate('CallClient')
+                        }}
+                    />
+                </View>
+                
 
             </View>
         )
@@ -206,55 +213,64 @@ const styles = StyleSheet.create({
     redirectText: {
         textAlign: 'center',
         fontSize: heightPercentageToDP('2.5%'),
-        marginTop: heightPercentageToDP('20%')
+        marginTop: heightPercentageToDP('13%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        color: "#A1A0A0",
+        marginBottom: heightPercentageToDP('4%')
     },
     pickerStyle: {
         width: widthPercentageToDP('70%'),
-        backgroundColor: "#ff7f50",
-        borderRadius: 12,
-        height: heightPercentageToDP('5%'),
+        backgroundColor: "rgba(233, 233, 233, 1)",
+        borderRadius: 8,
+        height: heightPercentageToDP('4.5%'),
         justifyContent: "center",
-        marginTop: heightPercentageToDP('2%'),
-        marginLeft: widthPercentageToDP('17%'),
-        marginBottom: "2%"
+        alignSelf: "center",
+        paddingRight: heightPercentageToDP('1.7%'),
+        marginBottom: heightPercentageToDP('2%')
     },
+
+    pickerText: {
+        color: "#AFAFAF"
+    },
+
     inputText: {
-        width: "80%",
-        height: 100,
-        borderRadius: 12,
         textAlign: 'left',
-        paddingStart: 10,
-        // marginBottom: heightPercentageToDP('10%'),
-        color: "red",
+        paddingStart: widthPercentageToDP('2.5%'),
+        color: "#AFAFAF",
 
 
     },
     inputStyle: {
         width: widthPercentageToDP('70%'),
-        backgroundColor: "#ff7f50",
+        backgroundColor: "#E9E9E9",
         borderRadius: 12,
         height: heightPercentageToDP('15%'),
-        marginTop: heightPercentageToDP('2%'),
-        marginLeft: widthPercentageToDP('17%'),
+        alignSelf: "center",
 
     },
     returnText: {
-        marginLeft: widthPercentageToDP('15%'),
+        marginLeft: widthPercentageToDP('17.5%'),
         marginTop: heightPercentageToDP('-3.5%'),
+        fontSize: heightPercentageToDP('2%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        color: "#AFAFAF",
     },
     checkBox: {
-        marginTop: heightPercentageToDP('-1%'),
-        marginLeft: widthPercentageToDP('5%'),
+        alignSelf: "flex-end",
+        marginRight: widthPercentageToDP('1.7%')
     },
     checkBoxStyle: {
         width: widthPercentageToDP('70%'),
-        backgroundColor: "#ff7f50",
-        borderRadius: 12,
-        height: heightPercentageToDP('5%'),
+        backgroundColor: "#E9E9E9",
+        borderRadius: 8,
+        height: heightPercentageToDP('4.5%'),
         justifyContent: "center",
         marginTop: heightPercentageToDP('2%'),
-        marginLeft: widthPercentageToDP('17%'),
-        marginBottom: "4%"
+        alignSelf: "center",
     }
 
 })

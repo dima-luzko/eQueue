@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Appbar } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { loggedUser } from '../action/loggedUserAction'
-import { PixelRatio, Dimensions, Image,StyleSheet } from 'react-native'
+import { PixelRatio, Dimensions, Image,StyleSheet, StatusBar } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 const widthPercentageToDP = widthPercent => {
@@ -30,7 +30,7 @@ class Bar extends Component {
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
         >
-
+<StatusBar translucent={true} backgroundColor={'transparent'} />
           <Appbar.Header
             style={{
               backgroundColor: 'transparent',
