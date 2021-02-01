@@ -72,7 +72,6 @@ class ServerConnection extends Component {
                                     }}
                                     onPress={() => {
                                         this.props.navigation.replace("LoginScreen"),
-                                            this.props.selectIpAddress(""),
                                             this.props.userState(""),
                                             this.props.passwordState(""),
                                             this.props.showPassword(true),

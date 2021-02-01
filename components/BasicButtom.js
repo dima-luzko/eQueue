@@ -7,14 +7,14 @@ import { inviteNextCustomer, getStartCustomer } from '../action/callClientAction
 import { loggedUser } from '../action/loggedUserAction'
 import { getSelfServices } from '../action/selfServicesAction'
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Appbar } from 'react-native-paper'
 import { killNextCustomer } from '../action/killNextCustomerAction';
-import { updateText, updateDisableButtom, updateImage, passwordState,userState,showPassword,getSocketData,showTotalLength} from '../action/updateStateAction'
+import { updateText, updateDisableButtom, updateImage, passwordState, userState, showPassword, getSocketData, showTotalLength } from '../action/updateStateAction'
 import SockJS from 'sockjs-client/dist/sockjs'
 import Stomp from 'stompjs'
 import { SOCKET_URL } from '../constants/url'
-import {store} from '../App'
+import { store } from '../App'
+import LinearGradient from 'react-native-linear-gradient'
 
 
 const Export = function (props) {
@@ -26,7 +26,6 @@ const Export = function (props) {
 export {
   Export
 }
-
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -70,63 +69,53 @@ class CallClient extends Component {
           queueLength += value.line.length
 
         })
-        console.log("Количество человек в очереди: ", queueLength ? queueLength : "Клиентов нет!")
+        console.log("Общее количество клиентов в очереди: ", queueLength ? queueLength : "0")
       }
       this.props.showTotalLength(queueLength)
 
     }, 100)
   }
 
-
-  changeImage() {
-    switch (this.props.image.image) {
-      case 0:
-        return (
-          <Image
-            style={styles.imageCircle}
-            source={
-              require('../images/redCircle.png')
-            }
-          />
-        )
-      case 1:
-        return (
-          <Image
-            style={styles.imageCircle}
-            source={
-              require('../images/yellowCircle.png')
-            }
-          />
-        )
-      case 2:
-        return (
-          <Image
-            style={styles.imageCircle}
-            source={
-              require('../images/greenCircle.png')
-            }
-          />
-        )
-    }
-  }
-
   changeText() {
     switch (this.props.text.text) {
       case 0:
         return (
-          <Text style={styles.textClient}>Клиент не вызван:</Text>
+          <LinearGradient
+            style={styles.clientCallingForm}
+            colors={["rgba(255,173,188,1) 0%", "rgba(235,181,223,1) 100%"]}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <Text style={styles.textClient}>Клиент не вызван</Text>
+          </LinearGradient>
+
         )
       case 1:
         return (
-          <Text style={styles.textClient}>Приглашен клиент:</Text>
+          <LinearGradient
+            style={styles.clientCallingForm}
+            colors={["rgba(255,227,129,1) 0%", "rgba(255,161,120,1) 100%"]}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <Text style={styles.textClient}>Приглашен клиент</Text>
+          </LinearGradient>
+
         )
       case 2:
         return (
-          <Text style={styles.textClientStart}>Начата работа с клиентом:</Text>
+          <LinearGradient
+            style={styles.clientCallingForm}
+            colors={["rgba(129,255,179,1) 0%", "rgba(120,206,255,1) 100%"]}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <Text style={styles.textClient}>Работа с клиентом</Text>
+          </LinearGradient>
+
         )
     }
   }
-
 
   connectingToSocket = () => {
 
@@ -142,7 +131,6 @@ class CallClient extends Component {
 
         const data = JSON.parse(message.body);
         let len = 0;
-
 
         if (data.self_services && data.self_services.length > 0) {
           data.self_services.forEach(value => {
@@ -161,7 +149,7 @@ class CallClient extends Component {
       }
 
     });
-   
+
   }
 
   componentWillUnmount() {
@@ -176,157 +164,173 @@ class CallClient extends Component {
 
   }
 
-
   render() {
-
     return (
-      <View style={{ flex: 1, backgroundColor: "#f8f8ff" }}>
-        <View>
+
+      <View >
+        <LinearGradient
+          colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 1 }}
+        >
+
           <Appbar.Header
             style={{
-              backgroundColor: '#003f5c',
+              backgroundColor: 'transparent',
               height: heightPercentageToDP('8%'),
-              marginTop: heightPercentageToDP('3%')
+              marginTop: heightPercentageToDP('4%'),
+              borderBottomWidth: 1,
+              borderBottomColor: "#BA5FA6"
+
             }}
           >
             <TouchableOpacity
+              disabled={this.props.disableButtonExit.disableButtonExit}
               onPress={() => {
                 this.props.navigation.navigate('ChangeFlexPriority')
               }}
             >
-              <Icon
-                name="user"
-                size={3*widthPercentageToDP("2.5%")}
-                color="white"
-                style={{
-                  marginLeft: widthPercentageToDP("2%")
-                }} />
+              <Image
+                style={styles.userIcon}
+                source={
+                  require('../images/user_icon.png')
+                }
+              />
+
             </TouchableOpacity>
             <Appbar.Content
               titleStyle={{
-                fontSize: heightPercentageToDP('2.8%'),
-                marginLeft: "1%"
+                fontSize: heightPercentageToDP('2.5%'),
+                marginLeft: widthPercentageToDP('1%'),
+                color: "#FFFFFF",
+                fontFamily: "Roboto",
+                fontWeight: '600'
               }}
               subtitleStyle={{
-                fontSize: heightPercentageToDP('2%'),
-                marginLeft: "1%"
+                fontSize: heightPercentageToDP('2.5%'),
+                marginLeft: widthPercentageToDP('1%'),
+                color: "#FFFFFF",
+                fontFamily: "Roboto",
+                fontWeight: 'normal'
               }}
               title={"Окно: " + this.props.user.user.point}
               subtitle={'Оператор: ' + this.props.user.user.name}
             />
-            <Button
-              disabled={this.props.disableButtonExit.disableButtonExit}
-              title="Выход"
-              buttonStyle={{
-                backgroundColor: '#b22222'
-              }}
-              titleStyle={{
-                fontSize: heightPercentageToDP('2%'),
-                color: 'white',
-              }}
-              containerStyle={{
-                width: widthPercentageToDP('18%'),
-                marginEnd: widthPercentageToDP('5%')
-              }}
-
-
+            <TouchableOpacity
+            disabled={this.props.disableButtonExit.disableButtonExit}
               onPress={() => {
                 this.props.navigation.replace('LoginScreen'),
-                this.props.userState(""),
-                this.props.passwordState(""),
-                this.props.showPassword(true)
-
+                  this.props.userState(""),
+                  this.props.passwordState(""),
+                  this.props.showPassword(true)
               }}
-
-            />
+            >
+              <Text style={styles.exitText}>Выход</Text>
+            </TouchableOpacity>
           </Appbar.Header>
-        </View>
-        <Text style={styles.valueInQueue}>Всего клиентов в очереди: {this.props.totalLength.totalLength ? this.props.totalLength.totalLength : "Клиентов нет!"} </Text>
-        {this.changeImage()}
-        {this.changeText()}
+        </LinearGradient>
+
         <View>
-          <Text style={styles.number}>{this.props.customer.customer ? this.props.customer.customer.prefix + this.props.customer.customer.number : ""}</Text>
-          <View style={styles.services}>
-            <Text >{this.props.customer.customer ? this.props.customer.customer.to_service.name : ""}</Text>
-          </View>
-          <View style={styles.description}>
-            <Text >{this.props.customer.customer ? this.props.customer.customer.to_service.description : ""}</Text>
-          </View>
-          <View>
-            <Button
-              disabled={this.props.disableButtonCallClient.disableButtonCallClient}
-              title="Вызвать следующего клиента"
-              buttonStyle={{
-                backgroundColor: 'black',
-                borderRadius: 15,
-              }}
-
-              containerStyle={{
-                // borderRadius: 15,
-                width: widthPercentageToDP('72%'),
-                alignSelf: 'center',
-                marginTop: heightPercentageToDP('12%'),
-                marginBottom: "2%"
-              }}
-
-              titleStyle={{
-                fontSize: heightPercentageToDP('2%'),
-                color: 'gold'
-              }}
-              onPress={() => {
-                this.props.inviteNextCustomer(this.props.user.user.id),
-                  this.props.updateText(1),
-                  this.props.updateImage(1)
-                  this.props.updateDisableButtom(false, true, false, false, true, true, true, true)
-
-
-
-              }}
-            />
-          </View>
-          <View>
-            <Button
-              disabled={this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer}
-              title="Посмотреть отложенных клиентов"
-              buttonStyle={{
-                backgroundColor: 'black'
-              }}
-
-              containerStyle={{
-                borderRadius: 15,
-                width: widthPercentageToDP('72%'),
-                marginBottom: '2%',
-                alignSelf: 'center'
-              }}
-
-              titleStyle={{
-                fontSize: heightPercentageToDP('2%'),
-                color: 'gold'
-              }}
-              onPress={() => {
-                this.props.navigation.navigate('InvitePostponeCustomer')
-              }}
-            />
-          </View>
+          <Text style={styles.valueInQueue}>Общее количество клиентов в очереди: {this.props.totalLength.totalLength ? this.props.totalLength.totalLength : "0"} </Text>
         </View>
+
+        <View>
+          {this.changeText()}
+        </View>
+
+        <View>
+          <Text style={styles.number} numberOfLines={1}> {this.props.customer.customer ? this.props.customer.customer.prefix + this.props.customer.customer.number : ""}</Text>
+        </View>
+        <View
+          style={{
+            width: widthPercentageToDP('90%'),
+            height: heightPercentageToDP('10%'),
+            marginBottom: heightPercentageToDP('2%')
+          }} >
+          <Text numberOfLines={3}
+            style={styles.services}
+          >{this.props.customer.customer ? this.props.customer.customer.to_service.name : ""} </Text>
+        </View>
+
+        <View>
+          <Button
+            disabled={this.props.totalLength.totalLength ? this.props.disableButtonCallClient.disableButtonCallClient : true}
+            title="Вызвать следующего клиента"
+            buttonStyle={{
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
+            }}
+
+            titleStyle={{
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
+            }}
+            onPress={() => {
+              this.props.inviteNextCustomer(this.props.user.user.id),
+                this.props.updateText(1),
+                this.props.updateImage(1)
+              this.props.updateDisableButtom(false, true, false, false, true, true, true, true)
+            }}
+          />
+        </View>
+        <View>
+          <Button
+            disabled={this.props.totalLength.totalLength ? this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer : true}
+            title="Посмотреть отложенных клиентов"
+            buttonStyle={{
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
+            }}
+
+            titleStyle={{
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
+            }}
+            onPress={() => {
+              this.props.navigation.navigate('InvitePostponeCustomer')
+            }}
+          />
+        </View>
+
         <View>
           <Button
             disabled={this.props.disableButtonClientNotEnter.disableButtonClientNotEnter}
             title="Клиент не явился"
             buttonStyle={{
-              backgroundColor: 'black'
-            }}
-
-            containerStyle={{
-              borderRadius: 15,
-              width: widthPercentageToDP('72%'),
-              marginBottom: "2%",
-              alignSelf: 'center'
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('2%'),
-              color: 'gold'
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
             }}
             onPress={() => {
               this.props.killNextCustomer(this.props.user.user.id),
@@ -342,19 +346,22 @@ class CallClient extends Component {
             disabled={this.props.disableButtonStartClient.disableButtonStartClient}
             title="Начать работу с клиентом"
             buttonStyle={{
-              backgroundColor: 'black'
-            }}
-
-            containerStyle={{
-              borderRadius: 15,
-              width: widthPercentageToDP('72%'),
-              marginBottom: "2%",
-              alignSelf: 'center'
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('2%'),
-              color: 'gold'
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
             }}
             onPress={() => {
               this.props.getStartCustomer(this.props.user.user.id)
@@ -370,24 +377,25 @@ class CallClient extends Component {
             disabled={this.props.disableButtonRedirectClient.disableButtonRedirectClient}
             title="Перенаправить клиента"
             buttonStyle={{
-              backgroundColor: 'black'
-            }}
-
-            containerStyle={{
-              borderRadius: 15,
-              width: widthPercentageToDP('72%'),
-              marginBottom: '2%',
-              alignSelf: 'center'
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('2%'),
-              color: 'gold'
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
             }}
             onPress={() => {
               this.props.navigation.navigate('RedirectCustomer')
-
-
             }}
           />
         </View>
@@ -397,19 +405,22 @@ class CallClient extends Component {
             disabled={this.props.disableButtonPostponeClient.disableButtonPostponeClient}
             title="Отложить клиента"
             buttonStyle={{
-              backgroundColor: 'black'
-            }}
-
-            containerStyle={{
-              borderRadius: 15,
-              width: widthPercentageToDP('72%'),
-              marginBottom: '2%',
-              alignSelf: 'center'
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('2%'),
-              color: 'gold'
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
             }}
             onPress={() => {
               this.props.navigation.navigate('CustomerToPostpone')
@@ -422,19 +433,22 @@ class CallClient extends Component {
             disabled={this.props.disableFinishClient.disableFinishClient}
             title="Закончить работу с клиентом"
             buttonStyle={{
-              backgroundColor: 'black'
-            }}
-
-            containerStyle={{
-              borderRadius: 15,
-              width: widthPercentageToDP('72%'),
-              marginBottom: '2%',
-              alignSelf: 'center'
+              backgroundColor: "#41D38D",
+              borderRadius: 8,
+              width: widthPercentageToDP('65%'),
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%'),
+              height: heightPercentageToDP('4.5%')
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('2%'),
-              color: 'gold'
+              fontSize: heightPercentageToDP('1.8%'),
+              color: "#FFFFFF",
+              textAlign: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontStyle: "normal",
+              fontFamily: "Roboto"
             }}
             onPress={() => {
               this.props.navigation.navigate('ResultList')
@@ -442,56 +456,68 @@ class CallClient extends Component {
           />
         </View>
       </View>
-    );
-
+    )
   };
 }
 
 
 const styles = StyleSheet.create({
-  pickerStyle: {
-    width: widthPercentageToDP('73%'),
-    marginLeft: widthPercentageToDP('16%'),
 
+  userIcon: {
+    marginLeft: widthPercentageToDP('2%'),
+    width: widthPercentageToDP('10.6%'),
+    height: heightPercentageToDP('5.7%')
   },
 
-
-  imageCircle: {
-    height: heightPercentageToDP('2.5%'),
-    width: widthPercentageToDP('4.5%'),
-    marginVertical: heightPercentageToDP('8.5%'),
-    marginLeft: "15%"
-  },
-
-  textClient: {
-    marginVertical: heightPercentageToDP('-11%'),
-    textAlign: 'center',
-    fontSize: heightPercentageToDP('2%')
-  },
-
-  textClientStart: {
-    textAlign: 'center',
-    marginStart: "5%",
-    marginVertical: heightPercentageToDP('-11%'),
-    fontSize: heightPercentageToDP('2%')
+  exitText: {
+    marginRight: widthPercentageToDP('2%'),
+    fontSize: heightPercentageToDP('2.3%'),
+    color: "#FFFFFF",
+    fontFamily: "Roboto"
   },
 
   valueInQueue: {
+    marginTop: heightPercentageToDP('5%'),
+    textAlign: "center",
+    fontSize: heightPercentageToDP('2.3%'),
+    fontFamily: "Roboto",
+    fontWeight: "normal",
+    color: "#A1A0A0"
+  },
+
+  clientCallingForm: {
+    marginTop: heightPercentageToDP('3%'),
+    height: heightPercentageToDP('9%'),
+    width: widthPercentageToDP('65%'),
+    alignSelf: "center",
+    borderRadius: 4
+  },
+
+  textClient: {
     textAlign: 'center',
-    fontSize: heightPercentageToDP('2%'),
-    height: heightPercentageToDP('3%')
+    fontSize: heightPercentageToDP('3%'),
+    color: "#FFFFFF",
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    marginTop: heightPercentageToDP('2%')
   },
 
   number: {
-    marginStart: "5%",
-    marginTop: heightPercentageToDP('13%'),
-    fontWeight: 'bold',
-    fontSize: heightPercentageToDP('2%')
+    textAlign: "center",
+    fontFamily: "Roboto",
+    fontWeight: "600",
+    marginTop: heightPercentageToDP('3%'),
+    fontSize: heightPercentageToDP('2.5%'),
+    color: "#A1A0A0"
   },
 
   services: {
-    marginStart: "16%",
-    marginTop: heightPercentageToDP('-3%'),
+    fontFamily: "Roboto",
+    fontWeight: "600",
+    fontSize: heightPercentageToDP('2.5%'),
+    color: "#A1A0A0",
+    marginLeft: widthPercentageToDP('8%'),
+    textAlign: "center"
   },
 
   description: {
@@ -548,7 +574,7 @@ const mapDispatchToProps = dispatch => {
     updateImage: (image) => dispatch(updateImage(image)),
     passwordState: (password) => dispatch(passwordState(password)),
     userState: (userSelected) => dispatch(userState(userSelected)),
-    showPassword: (secureTextEntry) =>dispatch(showPassword(secureTextEntry)),
+    showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
     getSocketData: (socket) => dispatch(getSocketData(socket)),
     showTotalLength: (totalLength) => dispatch(showTotalLength(totalLength)),
     updateDisableButtom: (
