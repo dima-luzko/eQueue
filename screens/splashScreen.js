@@ -43,7 +43,7 @@ class SplashScreen extends Component {
 
         setTimeout(() => {
             this.props.selectIpAddress(ipStatus)
-             //this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
+             this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
         }, 2000);
 
     }
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         width: widthPercentageToDP('60%')
     },
     logoHorizont: {
-        marginTop: heightPercentageToDP('31%'),
+        marginTop: heightPercentageToDP('35%'),
         width: widthPercentageToDP('28%')
     }
 });

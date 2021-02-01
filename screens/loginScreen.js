@@ -71,7 +71,7 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.props.usersFetchData()
-    //this.check()
+    this.check()
   }
 
   check() {
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: heightPercentageToDP('4.5%'),
     marginBottom: heightPercentageToDP('2.5%'),
-    paddingRight: heightPercentageToDP('2%'),
+    paddingRight: heightPercentageToDP('1.7%'),
     paddingLeft: heightPercentageToDP('5%'),
     justifyContent: "center"
   },

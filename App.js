@@ -39,12 +39,12 @@ export default class App extends Component {
             {/* <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
-            /> */}
+            />
 
-            {/* <Stack.Screen
+            <Stack.Screen
               name="ErrorConnectToServer"
               component={ErrorConnectToServer}
-            /> */}
+            />
 
             <Stack.Screen
               name="ConnectingToIP"
@@ -60,7 +60,7 @@ export default class App extends Component {
 
             <Stack.Screen
               name="LoginScreen"
-              component={LoginScreen} />
+              component={LoginScreen} /> */}
 
             <Stack.Screen
               name="CallClient"
