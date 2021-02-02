@@ -1,4 +1,4 @@
-import { UPDATE_TEXT, UPDATE_IMAGE, UPDATE_STATE_BUTTOM, PASSWORD, SELECT_USER, SECURE_TEXT_ENTRY, INPUT_IP_ADDRESS, TOTAL_LENGTH, GET_SOCKET_DATA } from '../constants/constants'
+import { UPDATE_TEXT, UPDATE_IMAGE, UPDATE_STATE_BUTTOM, PASSWORD, SELECT_USER, SECURE_TEXT_ENTRY, INPUT_IP_ADDRESS, TOTAL_LENGTH, GET_SOCKET_DATA, TOTAL_MINUTES } from '../constants/constants'
 
 
 
@@ -18,7 +18,8 @@ const initialState = {
     secureTextEntry: true,
     ipAddress: "",
     socket: undefined,
-    totalLength: 0
+    totalLength: 0,
+    totalMinutes: 0
 
 }
 
@@ -70,6 +71,12 @@ export default updateStateReducer = (state = initialState, action) => {
             return {
                 ...state,
                 totalLength: action.totalLength
+            }
+
+        case TOTAL_MINUTES:
+            return {
+                ...state,
+                totalMinutes: action.totalMinutes
             }
         case GET_SOCKET_DATA:
             return {

@@ -36,6 +36,7 @@ export default combineReducers({
     ipAddress: updateStateReducer,
     server : serverStateReducer,
     socket: updateStateReducer,
-    totalLength: updateStateReducer
+    totalLength: updateStateReducer,
+    totalMinutes: updateStateReducer
 
 })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native-elements';
 import { View, Text } from 'native-base';
-import { Image, StyleSheet, PixelRatio, Dimensions, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, PixelRatio, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { inviteNextCustomer, getStartCustomer } from '../action/callClientAction'
 import { loggedUser } from '../action/loggedUserAction'
@@ -167,13 +167,13 @@ class CallClient extends Component {
   render() {
     return (
 
-      <View >
+      <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
         <LinearGradient
           colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
         >
-
+          <StatusBar translucent={true} backgroundColor={'transparent'} />
           <Appbar.Header
             style={{
               backgroundColor: 'transparent',
@@ -217,7 +217,7 @@ class CallClient extends Component {
               subtitle={'Оператор: ' + this.props.user.user.name}
             />
             <TouchableOpacity
-            disabled={this.props.disableButtonExit.disableButtonExit}
+              disabled={this.props.disableButtonExit.disableButtonExit}
               onPress={() => {
                 this.props.navigation.replace('LoginScreen'),
                   this.props.userState(""),

@@ -79,6 +79,19 @@ export const getSocketData = (socket) => {
     }
 }
 
+export const totalMinutesToPostponeClient = totalMinutes =>{
+    return {
+        type : "TOTAL_MINUTES",
+        totalMinutes
+    }
+}
+
+export const changeTotalMinutes = (totalMinutes) => {
+    return (dispatch) => {
+        dispatch(totalMinutesToPostponeClient(totalMinutes))
+    }
+}
+
 export const total = totalLength =>{
     return {
         type : "TOTAL_LENGTH",

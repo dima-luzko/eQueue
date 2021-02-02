@@ -116,7 +116,7 @@ class RedirectCustomer extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{backgroundColor: "#FFFFFF", flex:1}}>
                 <Bar />
                 <Text style={styles.redirectText}>Перенаправление клиента</Text>
                 <View>

@@ -6,13 +6,15 @@ import CheckBox from '@react-native-community/checkbox';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { postponeCustomer } from '../action/posponeCustomerAction';
-import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
+import { updateText, updateDisableButtom, updateImage, changeTotalMinutes } from '../action/updateStateAction'
+import { Col, Grid } from "react-native-easy-grid";
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
     // Convert string input to decimal number
     const elemWidth = parseFloat(widthPercent);
-    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100)}
+    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100)
+}
 const heightPercentageToDP = heightPercent => {
     const screenHeight = Dimensions.get('window').height;
     // Convert string input to decimal number
@@ -24,163 +26,107 @@ export {
     heightPercentageToDP
 };
 
-
-let error = false
-let minutes = 0
-
 class CustomerToPostpone extends Component {
-
-    showAlert() {
-        Alert.alert(
-            "Ошибка",
-            "Проверьте введенное время",
-            [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-            ],
-            { cancelable: false }
-        );
-    }
-
-    showAlert1() {
-        Alert.alert(
-            "Ошибка",
-            "Необходимо сначала ввести время!",
-            [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-            ],
-            { cancelable: false }
-        );
-    }
 
     constructor(props) {
         super(props);
         this.state = {
             comment: "",
-            check: false,
-            postponePeriod: 0
+            check: false
         };
     }
 
 
-
-    postpone() {
-        if (parseInt(this.minsforHours) || parseInt(this.mins)) {
-
-            if (this.minsforHours || this.hours) {
-
-                if (Number.parseInt(this.minsforHours) < 0 || Number.parseInt(this.minsforHours) > 59) {
-                    error = true
-                }
-                else if (Number.parseInt(this.hours) < 0 || Number.parseInt(this.hours) > 23) {
-                    error = true
-                } else {
-                    error = false
-                }
-
-                minutes = (Number.parseInt(this.hours * 60) + Number.parseInt(this.minsforHours)) - (Number.parseInt((new Date().getHours() * 60)) + Number.parseInt((new Date().getMinutes())))
-                console.log("time === ", minutes)
-            }
-            else {
-                minutes = this.mins
-            }
-
-            if (minutes <= 0 || minutes > 480) {
-                error = true
-            }
-
-            if (error) {
-                this.showAlert()
-            }
-
-            else {
-                this.data()
-            }
-
-        }
-        else {
-            this.showAlert1()
-        }
-
-    }
-
-    data() {
+    postponeData() {
         let data = {
             "user_id": this.props.user.user.id,
             "comments": this.state.comment,
             "is_only_mine": this.state.check,
-            "postponed_period": minutes
+            "postponed_period": this.props.totalMinutes.totalMinutes
         }
         this.props.postponeCustomer(data),
             this.props.navigation.navigate('CallClient'),
             this.props.updateText(0),
             this.props.updateImage(0),
-            this.props.updateDisableButtom(false,false,true,true,true,true,true,false)
+            this.props.updateDisableButtom(false, false, true, true, true, true, true, false)
     }
 
     render() {
 
-
         return (
-            <View>
+            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
                 <Bar />
 
                 <Text style={styles.postponeText}>Отложить клиента</Text>
 
-                <View style={styles.minutesStyle}>
-                    <Text style={styles.minutesText}>мин.</Text>
-                </View>
+                <Grid>
+                    <Col >
+                        <View style={styles.postponeToMinutesStyle}>
+                            <Text style={styles.postponeToMinutes} >Отложить на {this.props.totalMinutes.totalMinutes ? this.props.totalMinutes.totalMinutes : "0"} минут</Text>
+                        </View>
+                    </Col>
+                    <Col >
+                        <View style={{ marginRight: widthPercentageToDP('-3%'), }}>
+                            <Button
+                                title="-"
+                                buttonStyle={{
+                                    backgroundColor: "#F8D477",
+                                    borderRadius: 2,
+                                    width: widthPercentageToDP('5%'),
+                                    marginTop: heightPercentageToDP('2.6%'),
+                                    height: heightPercentageToDP('3%'),
+                                    alignSelf: "flex-end"
 
-                <View style={styles.numberOfMinutesStyle}>
-                    <TextInput
-                        onChangeText={value => this.mins = value}
-                        style={styles.minutes}
-                        maxLength={2}
-                        keyboardType='numeric'
-                    />
-
-                </View>
-
-                <View style={styles.minutesInputStyle}>
-
-                    <Text style={{ textAlign: 'left', marginLeft: widthPercentageToDP('1.5%'), fontSize: heightPercentageToDP('2.3%') }} >Отложить на:</Text>
-                </View>
-
-                <Text style={styles.orText}>Или</Text>
-
-                <View>
-
-                    <View style={styles.hoursStyle}>
-                        <Text style={styles.minutesText}>ч.</Text>
-                    </View>
-
-                    <View style={styles.nextMinutesStyle}>
-                        <Text style={styles.minutesText}>мин.</Text>
-                    </View>
-
-                    <View style={styles.inputHoursStyle}>
-                        <TextInput
-                            onChangeText={value => this.hours = value}
-                            style={styles.minutes}
-                            maxLength={2}
-                            keyboardType='numeric'
-                            placeholder={new Date().getHours() + ""}
-                        />
-                    </View>
-
-                    <View style={styles.inputNextMinuteStyle}>
-                        <TextInput
-                            onChangeText={value => this.minsforHours = value}
-                            placeholder={new Date().getMinutes() + ""}
-                            style={styles.minutes}
-                            maxLength={2}
-                            keyboardType='numeric'
-                        />
-                    </View>
-
-                    <View style={styles.postponeInputStyle}>
-                        <Text style={{ textAlign: 'left', marginLeft: widthPercentageToDP('1.5%'), fontSize: heightPercentageToDP('2.3%') }} >Отложить до:</Text>
-                    </View>
-                </View>
+                                }}
+                                titleStyle={{
+                                    fontSize: heightPercentageToDP('3%'),
+                                    width: widthPercentageToDP('5%'),
+                                    paddingBottom: heightPercentageToDP('0.5%'),
+                                    color: "#FFFFFF",
+                                    textAlign: "center",
+                                    alignItems: "center",
+                                    fontWeight: "bold",
+                                    fontStyle: "normal",
+                                    fontFamily: "Roboto"
+                                }}
+                                onPress={() => {
+                                    this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes > 0 ? this.props.totalMinutes.totalMinutes -= 5 : this.props.totalMinutes.totalMinutes),
+                                        console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
+                                }}
+                            />
+                        </View>
+                    </Col>
+                    <Col>
+                        <View >
+                            <Button
+                                title="+"
+                                buttonStyle={{
+                                    backgroundColor: "#41D38D",
+                                    borderRadius: 2,
+                                    width: widthPercentageToDP('5%'),
+                                    marginTop: heightPercentageToDP('2.5%'),
+                                    height: heightPercentageToDP('3%'),
+                                    alignSelf: "flex-end",
+                                    marginRight: widthPercentageToDP('20%'),
+                                }}
+                                titleStyle={{
+                                    fontSize: heightPercentageToDP('2.6%'),
+                                    width: widthPercentageToDP('5%'),
+                                    color: "#FFFFFF",
+                                    textAlign: "center",
+                                    alignItems: "center",
+                                    fontWeight: "bold",
+                                    fontStyle: "normal",
+                                    fontFamily: "Roboto"
+                                }}
+                                onPress={() => {
+                                    this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes < 30  ?  this.props.totalMinutes.totalMinutes += 5 : this.props.totalMinutes.totalMinutes),
+                                        console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
+                                }}
+                            />
+                        </View>
+                    </Col>
+                </Grid>
 
                 <View style={styles.inputStyle}>
                     <TextInput
@@ -188,9 +134,9 @@ class CustomerToPostpone extends Component {
                         value={this.state.comment}
                         onChangeText={value => this.setState({ comment: value })}
                         placeholder="Коментарий..."
-                        placeholderTextColor="#006400"
-                        maxLength={200}
-                        numberOfLines={4}
+                        placeholderTextColor="#AFAFAF"
+                        maxLength={150}
+                        numberOfLines={5}
                         multiline={true}
                     />
                 </View>
@@ -201,28 +147,59 @@ class CustomerToPostpone extends Component {
                         style={styles.checkBox}
                         onValueChange={(newValue => this.setState({ check: newValue }))}
                     />
-                    <View style={styles.onlyForMeText}>
-                        <Text >Только для меня</Text>
-                    </View >
+                </View>
+                <View >
+                    <Text style={styles.asForMeText} >Только для меня</Text>
+                </View >
+
+                <View>
+                    <Button
+                        title="Отложить клиента"
+                        buttonStyle={{
+                            backgroundColor: "#41D38D",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            alignSelf: "center",
+                            marginTop: heightPercentageToDP('4%'),
+                            marginBottom: heightPercentageToDP('2%'),
+                            height: heightPercentageToDP('4.5%')
+                        }}
+
+                        titleStyle={{
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
+                        }}
+                        onPress={() => {
+                            this.postponeData()
+                        }}
+                    />
                 </View>
 
                 <View>
                     <Button
                         title="Отмена"
                         buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
-
-                        containerStyle={{
-                            width: widthPercentageToDP('25%'),
-                            marginLeft: widthPercentageToDP('17%'),
-
+                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('22%'),
+                            height: heightPercentageToDP('4.5%')
                         }}
 
                         titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('3%')
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
                         }}
                         onPress={() => {
                             this.props.navigation.navigate('CallClient')
@@ -230,29 +207,6 @@ class CustomerToPostpone extends Component {
                     />
                 </View>
 
-                <View>
-                    <Button
-                        title="Отложить клиента"
-                        buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
-
-                        containerStyle={{
-                            width: widthPercentageToDP('40%'),
-                            marginLeft: widthPercentageToDP('46.5%'),
-                            marginTop: heightPercentageToDP('-5.5%'),
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white'
-                        }}
-                        onPress={() => {
-                            this.postpone()
-                        }}
-                    />
-                </View>
 
             </View>
         )
@@ -261,161 +215,73 @@ class CustomerToPostpone extends Component {
 
 const styles = StyleSheet.create({
 
-    orText: {
-        textAlign: 'center',
-        marginLeft: widthPercentageToDP('1.5%'),
-        fontSize: heightPercentageToDP('2.5%'),
-        marginTop: heightPercentageToDP('1%'),
-
-    },
-
     postponeText: {
         textAlign: 'center',
         fontSize: heightPercentageToDP('2.5%'),
-        marginTop: heightPercentageToDP('16%'),
-        marginBottom: heightPercentageToDP('2%'),
+        marginTop: heightPercentageToDP('13%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        color: "#A1A0A0",
+        marginBottom: heightPercentageToDP('4%')
     },
 
-    minutesText: {
-        textAlign: 'right',
-        fontSize: heightPercentageToDP('2.3%'),
-        marginRight: widthPercentageToDP('1.5%'),
-        paddingTop: heightPercentageToDP('1%'),
-
+    postponeToMinutesStyle: {
+        width: widthPercentageToDP('45%'),
+        backgroundColor: "#E9E9E9",
+        borderRadius: 8,
+        height: heightPercentageToDP('4.5%'),
+        marginLeft: widthPercentageToDP('15%'),
+        marginTop: heightPercentageToDP('2%'),
+        justifyContent: "center"
     },
 
-    minutesStyle: {
-        width: widthPercentageToDP('13%'),
-        backgroundColor: "#ff7f50",
-        borderTopRightRadius: 12,
-        borderBottomRightRadius: 12,
-        height: heightPercentageToDP('5%'),
-        marginLeft: widthPercentageToDP('74%'),
-        marginBottom: heightPercentageToDP('-7%')
-    },
-
-    nextMinutesStyle: {
-        width: widthPercentageToDP('13%'),
-        backgroundColor: "#ff7f50",
-        borderTopRightRadius: 12,
-        borderBottomRightRadius: 12,
-        height: heightPercentageToDP('5%'),
-        marginLeft: widthPercentageToDP('74%'),
-        marginBottom: heightPercentageToDP('-2%'),
-        marginTop: heightPercentageToDP('-5%')
-    },
-
-
-
-    postponeInputStyle: {
-        width: widthPercentageToDP('30%'),
-        backgroundColor: "#ff7f50",
-        borderTopLeftRadius: 12,
-        borderBottomLeftRadius: 12,
-        height: heightPercentageToDP('5%'),
-        marginLeft: widthPercentageToDP('17%'),
-        marginTop: heightPercentageToDP('-10%'),
-        justifyContent: "center",
+    postponeToMinutes: {
+        marginLeft: widthPercentageToDP('1.5%'),
+        fontSize: heightPercentageToDP('2%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "500",
+        color: "#AFAFAF"
     },
 
     inputText: {
-        width: "80%",
-        height: 100,
-        borderRadius: 12,
         textAlign: 'left',
-        paddingStart: 10,
-        color: "white",
+        paddingStart: widthPercentageToDP('2.5%'),
+        color: "#AFAFAF",
 
 
     },
     inputStyle: {
         width: widthPercentageToDP('70%'),
-        backgroundColor: "#ff7f50",
+        backgroundColor: "#E9E9E9",
         borderRadius: 12,
         height: heightPercentageToDP('15%'),
-        marginTop: heightPercentageToDP('2%'),
-        marginLeft: widthPercentageToDP('17%'),
-
-
+        alignSelf: "center"
     },
 
-    minutes: {
-        textAlign: 'center',
-        fontSize: heightPercentageToDP('2.3%'),
-        paddingTop: heightPercentageToDP('0.7%'),
-        paddingBottom: heightPercentageToDP('0.5%'),
-        color: "white"
-
+    asForMeText: {
+        marginLeft: widthPercentageToDP('17.5%'),
+        marginTop: heightPercentageToDP('-3.7%'),
+        fontSize: heightPercentageToDP('1.9%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        color: "#AFAFAF",
     },
 
-    numberOfMinutesStyle: {
-        width: widthPercentageToDP('27.5%'),
-        backgroundColor: "#ff7f50",
-        marginLeft: widthPercentageToDP('47%'),
-        height: heightPercentageToDP('5%'),
-        marginTop: heightPercentageToDP('2%'),
-        borderWidth: 1.5,
-    },
-
-    inputHoursStyle: {
-        width: widthPercentageToDP('10%'),
-        backgroundColor: "#ff7f50",
-        marginLeft: widthPercentageToDP('47%'),
-        height: heightPercentageToDP('5%'),
-        marginTop: heightPercentageToDP('-3%'),
-        marginBottom: heightPercentageToDP('5%'),
-        borderWidth: 1.5,
-    },
-
-    inputNextMinuteStyle: {
-        width: widthPercentageToDP('10%'),
-        backgroundColor: "#ff7f50",
-        marginLeft: widthPercentageToDP('64%'),
-        height: heightPercentageToDP('5%'),
-        marginTop: heightPercentageToDP('-10%'),
-        marginBottom: heightPercentageToDP('5%'),
-        borderWidth: 1.5,
-    },
-
-    hoursStyle: {
-        width: widthPercentageToDP('7.2%'),
-        backgroundColor: "#ff7f50",
-        height: heightPercentageToDP('5%'),
-        marginLeft: widthPercentageToDP('57%'),
-        marginTop: heightPercentageToDP('1%')
-    },
-
-    minutesInputStyle: {
-        width: widthPercentageToDP('30%'),
-        backgroundColor: "#ff7f50",
-        borderTopLeftRadius: 12,
-        borderBottomLeftRadius: 12,
-        height: heightPercentageToDP('5%'),
-        marginLeft: widthPercentageToDP('17%'),
-        marginTop: heightPercentageToDP('-5%'),
-        justifyContent: "center",
-
-    },
-
-
-
-    onlyForMeText: {
-        marginLeft: widthPercentageToDP('15%'),
-        marginTop: heightPercentageToDP('-4.3%'),
-    },
     checkBox: {
-        marginTop: heightPercentageToDP('-1%'),
-        marginLeft: widthPercentageToDP('5%'),
+        alignSelf: "flex-end",
+        marginRight: widthPercentageToDP('1.7%')
     },
     checkBoxStyle: {
         width: widthPercentageToDP('70%'),
-        backgroundColor: "#ff7f50",
-        borderRadius: 12,
-        height: heightPercentageToDP('5%'),
+        backgroundColor: "#E9E9E9",
+        borderRadius: 8,
+        height: heightPercentageToDP('4.5%'),
         justifyContent: "center",
         marginTop: heightPercentageToDP('2%'),
-        marginLeft: widthPercentageToDP('17%'),
-        marginBottom: "4%"
+        alignSelf: "center",
     }
 
 })
@@ -426,6 +292,7 @@ const mapStateToProps = state => {
         customer: state.customer,
         text: state.text,
         image: state.image,
+        totalMinutes: state.totalMinutes,
         disableButtonCallClient: state.disableButtonCallClient,
         disableButtonInvitePostponeCustomer: state.disableButtonInvitePostponeCustomer,
         disableButtonClientNotEnter: state.disableButtonClientNotEnter,
@@ -442,6 +309,7 @@ const mapDispatchToProps = dispatch => {
         postponeCustomer: (data) => dispatch(postponeCustomer(data)),
         updateText: (text) => dispatch(updateText(text)),
         updateImage: (image) => dispatch(updateImage(image)),
+        changeTotalMinutes: (totalMinutes) => dispatch(changeTotalMinutes(totalMinutes)),
         updateDisableButtom: (
             disableButtonCallClient,
             disableButtonInvitePostponeCustomer,
