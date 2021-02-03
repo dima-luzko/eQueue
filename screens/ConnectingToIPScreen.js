@@ -92,11 +92,11 @@ class ConnectingToIP extends Component {
                                 <Text style={styles.text}>Введите ip - aдресс сервера</Text>
                                 <View style={styles.inputStyle}>
                                     <TextInput
-                                    style={{fontSize:heightPercentageToDP('2%'),  marginLeft: widthPercentageToDP('2%')}}
+                                        style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
                                         value={this.props.ipAddress.ipAddress}
                                         onChangeText={value => this.props.selectIpAddress(value)}
                                         placeholder="Введите ip - адресс для подключения к серверу"
-                                        
+
                                         maxLength={15}
                                         numberOfLines={1}
                                         keyboardType='numeric'
@@ -130,7 +130,7 @@ class ConnectingToIP extends Component {
                                             alignItems: "center"
                                         }}
                                         onPress={() => {
-                                            this.setState({dialogVisible: false})
+                                            this.setState({ dialogVisible: false })
                                             this.checkServer()
                                         }}
                                     />

@@ -68,6 +68,7 @@ class ResultList extends Component {
             return (
                 <View >
                         <FlatList
+                        
                             showsVerticalScrollIndicator={false}
                             data={resultList.result}
                             keyExtractor={item => item.id.toString()}
@@ -82,11 +83,11 @@ class ResultList extends Component {
                                             backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
                                             justifyContent: "center",
                                             alignItems: "center",
-                                            width: widthPercentageToDP('45%'),
+                                            width: widthPercentageToDP('65%'),
                                             borderRadius: 8,
                                             marginTop: heightPercentageToDP('3%'),
                                             height: heightPercentageToDP('4.5%'),
-                                            marginLeft: widthPercentageToDP('27%'),
+                                            marginLeft: widthPercentageToDP('18%'),
                                         }}
                                     >
 
@@ -123,26 +124,33 @@ class ResultList extends Component {
         return (
             <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
                 <Bar />
+                <Text style={styles.resultText}>Закончить работу с клиентом</Text>
                 <Grid>
-                    <Row size={30}>
-                        <View>
-                            <Text style={styles.resultText}>Закончить работу с клиентом</Text>
-                        </View>
-                    </Row>
+                            
                     <Row size={25}>
                             {this.list()}
                     </Row>
                     <Row size={30}>
                         <View style={{alignSelf:"flex-start"}}> 
                             <Button
+                            raised={true}
                             title="OK"
                             buttonStyle={{
-                                backgroundColor: "#E9E9E9",
-                                width: widthPercentageToDP('45%'),
+                                // backgroundColor: "#E9E9E9",
+                                backgroundColor: "#ff0000",
+                                width: widthPercentageToDP('65%'),
                                 borderRadius: 8,
                                 height: heightPercentageToDP('4.5%'),
-                                marginLeft: widthPercentageToDP('27%')
+                                // marginLeft: widthPercentageToDP('18%'),
+                                
                             }}
+                                containerStyle={{
+                                    backgroundColor: "#E9E9E9",
+                               
+                                marginLeft: widthPercentageToDP('18%'),
+                                }}
+                            
+                                
 
 
                             titleStyle={{
@@ -169,15 +177,15 @@ class ResultList extends Component {
 
 const styles = StyleSheet.create({
     resultText: {
-        marginLeft: widthPercentageToDP('25%'),
-        textAlign: 'center',
+        alignSelf:"center",
         fontSize: heightPercentageToDP('2.5%'),
         marginTop: heightPercentageToDP('20%'),
         fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         alignItems: "center",
-        color: "#A1A0A0"
+        color: "#A1A0A0",
+        marginBottom: heightPercentageToDP('8%')
     }
 });
 

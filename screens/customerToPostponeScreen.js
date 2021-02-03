@@ -59,77 +59,84 @@ class CustomerToPostpone extends Component {
 
                 <Text style={styles.postponeText}>Отложить клиента</Text>
 
-                <Grid>
-                    <Col size={45}  >
-                            <Text style={styles.postponeToMinutes} >Отложить на {this.props.totalMinutes.totalMinutes ? this.props.totalMinutes.totalMinutes : "0"} минут</Text>
-                    </Col>
-                    <Col size={30}>
-                    <TouchableOpacity>
-                        <View >
-                            <Button
-                                title="-"
-                                buttonStyle={{
-                                    backgroundColor: "#F8D477",
-                                    borderRadius: 2,
-                                    width: widthPercentageToDP('5%'),
-                                    height: heightPercentageToDP('3%'),
-                                    alignSelf: "flex-start",
-                                    marginLeft: widthPercentageToDP('20%')
+                <View style={{ height: heightPercentageToDP('7%') }}>
+                    <View style={{marginBottom: heightPercentageToDP('-2.5%'),}}>
+                        <Text style={styles.postponeToMinutes} >Отложить на {this.props.totalMinutes.totalMinutes ? this.props.totalMinutes.totalMinutes : "0"} минут</Text>
+                    </View>
 
-                                }}
-                                titleStyle={{
-                                    fontSize: heightPercentageToDP('3%'),
-                                    width: widthPercentageToDP('5%'),
-                                    paddingBottom: heightPercentageToDP('0.5%'),
-                                    color: "#FFFFFF",
-                                    textAlign: "center",
-                                    alignItems: "center",
-                                    fontWeight: "bold",
-                                    fontStyle: "normal",
-                                    fontFamily: "Roboto"
-                                }}
-                                onPress={() => {
-                                    this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes > 0 ? this.props.totalMinutes.totalMinutes -= 5 : this.props.totalMinutes.totalMinutes),
-                                        console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
-                                }}
-                            />
-                            
-                        </View>
-                        </TouchableOpacity>
-                    </Col>
-                    <Col size={30}>
-                    <TouchableOpacity>
-                        <View >
-                            <Button
-                                title="+"
-                                buttonStyle={{
-                                    backgroundColor: "#41D38D",
-                                    borderRadius: 2,
-                                    width: widthPercentageToDP('5%'),
-                                    height: heightPercentageToDP('3%'),
-                                    alignSelf: "flex-start",
-                                    marginLeft: widthPercentageToDP('5%'),
-                                }}
-                                titleStyle={{
-                                    fontSize: heightPercentageToDP('2.6%'),
-                                    width: widthPercentageToDP('5%'),
-                                    color: "#FFFFFF",
-                                    textAlign: "center",
-                                    alignItems: "center",
-                                    fontWeight: "bold",
-                                    fontStyle: "normal",
-                                    fontFamily: "Roboto"
-                                }}
-                                onPress={() => {
-                                    this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes < 30  ?  this.props.totalMinutes.totalMinutes += 5 : this.props.totalMinutes.totalMinutes),
-                                        console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
-                                }}
-                            />
-                           
-                        </View>
-                        </TouchableOpacity>
-                    </Col>
-                </Grid>
+
+                    <Grid >
+
+                        <Col style={{ width: widthPercentageToDP('67%') }}>
+                            <TouchableOpacity>
+                                <View >
+                                    <Button
+                                        title="-"
+                                        buttonStyle={{
+                                            backgroundColor: "#F8D477",
+                                            borderRadius: 2,
+                                            width: widthPercentageToDP('5%'),
+                                            height: heightPercentageToDP('3%'),
+                                            alignSelf:"flex-end"
+                                           
+
+
+                                        }}
+                                        titleStyle={{
+                                            fontSize: heightPercentageToDP('3%'),
+                                            width: widthPercentageToDP('5%'),
+                                            paddingBottom: heightPercentageToDP('0.5%'),
+                                            color: "#FFFFFF",
+                                            textAlign: "center",
+                                            alignItems: "center",
+                                            fontWeight: "bold",
+                                            fontStyle: "normal",
+                                            fontFamily: "Roboto"
+                                        }}
+                                        onPress={() => {
+                                            this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes > 0 ? this.props.totalMinutes.totalMinutes -= 5 : this.props.totalMinutes.totalMinutes),
+                                                console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
+                                        }}
+                                    />
+
+                                </View>
+                            </TouchableOpacity>
+                        </Col>
+                        <Col style={{ width: widthPercentageToDP('20%') }}>
+                            <TouchableOpacity>
+                                <View >
+                                    <Button
+                                        title="+"
+                                        buttonStyle={{
+                                            backgroundColor: "#41D38D",
+                                            borderRadius: 2,
+                                            width: widthPercentageToDP('5%'),
+                                            height: heightPercentageToDP('3%'),
+                                            alignSelf: "flex-start",
+                                            marginLeft: widthPercentageToDP('5%')
+                                        }}
+                                        titleStyle={{
+                                            fontSize: heightPercentageToDP('2.6%'),
+                                            width: widthPercentageToDP('5%'),
+                                            color: "#FFFFFF",
+                                            textAlign: "center",
+                                            alignItems: "center",
+                                            fontWeight: "bold",
+                                            fontStyle: "normal",
+                                            fontFamily: "Roboto"
+                                        }}
+                                        onPress={() => {
+                                            this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes < 30 ? this.props.totalMinutes.totalMinutes += 5 : this.props.totalMinutes.totalMinutes),
+                                                console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
+                                        }}
+                                    />
+
+                                </View>
+                            </TouchableOpacity>
+                        </Col>
+                    </Grid>
+                </View>
+
 
                 <View style={styles.inputStyle}>
                     <TextInput
@@ -245,7 +252,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "500",
         color: "#AFAFAF",
-        alignSelf: "flex-end",
+marginLeft:widthPercentageToDP('16%')
     },
 
     inputText: {

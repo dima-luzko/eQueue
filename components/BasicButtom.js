@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
 
   userIcon: {
     marginLeft: widthPercentageToDP('2%'),
-    width: widthPercentageToDP('7%'),
+    width: widthPercentageToDP('9.5%'),
      height: heightPercentageToDP('5%')
   },
 

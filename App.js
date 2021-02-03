@@ -36,7 +36,7 @@ export default class App extends Component {
             screenOptions={{ headerShown: false }}
           >
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
             />
@@ -76,7 +76,7 @@ export default class App extends Component {
 
             <Stack.Screen
               name="InvitePostponeCustomer"
-              component={InvitePostponeCustomer} />
+              component={InvitePostponeCustomer} /> */}
 
             <Stack.Screen
               name="ResultList"

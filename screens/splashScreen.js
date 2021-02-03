@@ -43,14 +43,14 @@ class SplashScreen extends Component {
 
         setTimeout(() => {
             this.props.selectIpAddress(ipStatus)
-             this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP') 
+            this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
         }, 2000);
 
     }
 
     render() {
         return (
-                <LinearGradient
+            <LinearGradient
                 colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 1 }}
@@ -64,17 +64,21 @@ class SplashScreen extends Component {
                             require('../images/logo_equeue.png')
                         }
                     />
-                    <Image
-                        style={styles.logoHorizont}
-                        source={
-                            require('../images/logo_horizont.png')
-                        }
-                    />
+                    <View style={{ height: heightPercentageToDP('5%') }}>
+                        <Image
+                            style={styles.logoHorizont}
+                            source={
+                                require('../images/logo_horizont.png')
+                            }
+                        />
                     </View>
+
+                </View>
             </LinearGradient>
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -83,13 +87,13 @@ const styles = StyleSheet.create({
 
     logo: {
         marginTop: heightPercentageToDP('43%'),
-        width: widthPercentageToDP('50%'),
+        width: widthPercentageToDP('52%'),
         height: heightPercentageToDP('10%')
     },
     logoHorizont: {
         marginTop: heightPercentageToDP('35%'),
-        width: widthPercentageToDP('30%'),
-        height: heightPercentageToDP('10%')
+        // width: widthPercentageToDP('34.5%'),
+        //  height: heightPercentageToDP('8.7%')
     }
 });
 
