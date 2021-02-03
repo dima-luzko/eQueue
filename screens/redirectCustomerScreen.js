@@ -239,6 +239,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         paddingStart: widthPercentageToDP('2.5%'),
         color: "#AFAFAF",
+        fontSize: heightPercentageToDP('2%')
 
 
     },

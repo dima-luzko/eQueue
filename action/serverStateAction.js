@@ -19,10 +19,10 @@ export const checkServerState = (ipAddress) => {
            fetch( "http://" + ipAddress + ":8081/api" + SERVER_STATE_URL) 
            .then((result) => {result.status === 200 ? 
                     dispatch(serverState()) :  dispatch(serverStateError()) })
-                    .catch(() => {
-                        dispatch(serverStateError())
-                      });
-                    }
+                    // .catch(() => {
+                    //     dispatch(serverStateError())
+                    //   });
+                    // }
                     
-    
+           }
 }

@@ -11,12 +11,12 @@
     
     <style name="SpinnerItem" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:gravity">center</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">@dimen/picker_text_size</item>
     </style>
 
     <style name="SpinnerDropDownItem" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">@dimen/picker_text_size</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/my_divider</item>
     </style>

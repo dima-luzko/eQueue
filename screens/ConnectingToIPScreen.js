@@ -92,9 +92,11 @@ class ConnectingToIP extends Component {
                                 <Text style={styles.text}>Введите ip - aдресс сервера</Text>
                                 <View style={styles.inputStyle}>
                                     <TextInput
+                                    style={{fontSize:heightPercentageToDP('2%'),  marginLeft: widthPercentageToDP('2%')}}
                                         value={this.props.ipAddress.ipAddress}
                                         onChangeText={value => this.props.selectIpAddress(value)}
                                         placeholder="Введите ip - адресс для подключения к серверу"
+                                        
                                         maxLength={15}
                                         numberOfLines={1}
                                         keyboardType='numeric'
@@ -157,12 +159,11 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         height: heightPercentageToDP('6%'),
         alignSelf: 'center',
-
-
+        justifyContent: "center"
     },
     text: {
         textAlign: 'center',
-        fontSize: heightPercentageToDP('2.3%'),
+        fontSize: heightPercentageToDP('2.5%'),
         color: "#A1A0A0",
         fontWeight: "500",
         marginTop: heightPercentageToDP('2%'),

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getResultList } from '../action/resultListAction'
 import { getFinishCustomer } from '../action/callClientAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
-
+import { Row, Grid } from "react-native-easy-grid";
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -43,7 +43,6 @@ class ResultList extends Component {
         super();
         this.state = {
             selected: null
-
         };
     }
 
@@ -67,15 +66,11 @@ class ResultList extends Component {
         const { resultList } = this.props.resultList
         if (resultList && resultList.result.length > 0) {
             return (
-                <View>
-                    <ScrollView
-                        style={{ height: heightPercentageToDP('40%') }}
-                        horizontal={true}
-                    >
+                <View >
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             data={resultList.result}
-                            keyExtractor = {item => item.id.toString()}
+                            keyExtractor={item => item.id.toString()}
                             renderItem={({ item }) =>
                                 <TouchableOpacity
                                     onPress={() => {
@@ -84,44 +79,30 @@ class ResultList extends Component {
                                 >
                                     <View
                                         style={{
-                                            backgroundColor: item.id === this.state.selected ? "#87cefa" : "#f9c2ff",
-                                            padding: heightPercentageToDP('2%'),
-                                            marginVertical: heightPercentageToDP('1%'),
-                                            width: widthPercentageToDP('50%'),
-                                            marginLeft: widthPercentageToDP('25%'),
-                                            borderRadius: 5
+                                            backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            width: widthPercentageToDP('45%'),
+                                            borderRadius: 8,
+                                            marginTop: heightPercentageToDP('3%'),
+                                            height: heightPercentageToDP('4.5%'),
+                                            marginLeft: widthPercentageToDP('27%'),
                                         }}
                                     >
 
-                                        <Text >{item.name} </Text>
+                                        <Text style={{
+                                            fontSize: heightPercentageToDP('2%'),
+                                            color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
+                                            fontWeight: "500",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center",
+                                            textAlign: "center"
+
+                                        }}>{item.name} </Text>
                                     </View>
                                 </TouchableOpacity>
                             }
                         />
-                    </ScrollView>
-                    <View style={{ height: heightPercentageToDP('10%') }}>
-                        <Button
-                            title="OK"
-                            buttonStyle={{
-                                backgroundColor: 'red'
-                            }}
-
-                            containerStyle={{
-                                width: widthPercentageToDP('25%'),
-                                marginLeft: widthPercentageToDP('37%'),
-                                marginTop: heightPercentageToDP('5%')
-                            }}
-
-                            titleStyle={{
-                                fontSize: heightPercentageToDP('2%'),
-                                color: 'white',
-                                height: heightPercentageToDP('3%')
-                            }}
-                            onPress={() => {
-                                this.checkResultList()
-                            }}
-                        />
-                    </View>
                 </View>
 
 
@@ -140,16 +121,46 @@ class ResultList extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
                 <Bar />
-                <View>
-                    <Text style={styles.resultText}>Выберите результат работы: </Text>
-                </View>
-                <View>
-                    {this.list()}
-                </View>
+                <Grid>
+                    <Row size={30}>
+                        <View>
+                            <Text style={styles.resultText}>Закончить работу с клиентом</Text>
+                        </View>
+                    </Row>
+                    <Row size={25}>
+                            {this.list()}
+                    </Row>
+                    <Row size={30}>
+                        <View style={{alignSelf:"flex-start"}}> 
+                            <Button
+                            title="OK"
+                            buttonStyle={{
+                                backgroundColor: "#E9E9E9",
+                                width: widthPercentageToDP('45%'),
+                                borderRadius: 8,
+                                height: heightPercentageToDP('4.5%'),
+                                marginLeft: widthPercentageToDP('27%')
+                            }}
 
 
+                            titleStyle={{
+                                fontSize: heightPercentageToDP('2%'),
+                                color: '#AFAFAF',
+                                fontWeight: "500",
+                                fontFamily: "Roboto",
+                                alignItems: "center",
+                                textAlign: "center"
+                            }}
+                            onPress={() => {
+                                this.checkResultList()
+                            }}
+                        />
+                        </View>
+                        
+                    </Row>
+                </Grid>
             </View>
         )
     }
@@ -158,13 +169,16 @@ class ResultList extends Component {
 
 const styles = StyleSheet.create({
     resultText: {
+        marginLeft: widthPercentageToDP('25%'),
         textAlign: 'center',
-        fontSize: heightPercentageToDP('2.3%'),
-        height: heightPercentageToDP('3%'),
-        marginTop: heightPercentageToDP('5%'),
-        marginBottom: heightPercentageToDP('5%'),
-    },
-
+        fontSize: heightPercentageToDP('2.5%'),
+        marginTop: heightPercentageToDP('20%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        alignItems: "center",
+        color: "#A1A0A0"
+    }
 });
 
 const mapStateToProps = state => {

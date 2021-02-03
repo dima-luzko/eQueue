@@ -83,11 +83,13 @@ const styles = StyleSheet.create({
 
     logo: {
         marginTop: heightPercentageToDP('43%'),
-        width: widthPercentageToDP('60%')
+        width: widthPercentageToDP('50%'),
+        height: heightPercentageToDP('10%')
     },
     logoHorizont: {
         marginTop: heightPercentageToDP('35%'),
-        width: widthPercentageToDP('28%')
+        width: widthPercentageToDP('30%'),
+        height: heightPercentageToDP('10%')
     }
 });
 

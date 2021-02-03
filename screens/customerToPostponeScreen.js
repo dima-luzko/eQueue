@@ -1,6 +1,6 @@
 import { Text } from 'native-base'
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, TextInput, Alert } from 'react-native'
+import { View, StyleSheet, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native'
 import Bar from '../components/appbar'
 import CheckBox from '@react-native-community/checkbox';
 import { Button } from 'react-native-elements';
@@ -60,22 +60,21 @@ class CustomerToPostpone extends Component {
                 <Text style={styles.postponeText}>Отложить клиента</Text>
 
                 <Grid>
-                    <Col >
-                        <View style={styles.postponeToMinutesStyle}>
+                    <Col size={45}  >
                             <Text style={styles.postponeToMinutes} >Отложить на {this.props.totalMinutes.totalMinutes ? this.props.totalMinutes.totalMinutes : "0"} минут</Text>
-                        </View>
                     </Col>
-                    <Col >
-                        <View style={{ marginRight: widthPercentageToDP('-3%'), }}>
+                    <Col size={30}>
+                    <TouchableOpacity>
+                        <View >
                             <Button
                                 title="-"
                                 buttonStyle={{
                                     backgroundColor: "#F8D477",
                                     borderRadius: 2,
                                     width: widthPercentageToDP('5%'),
-                                    marginTop: heightPercentageToDP('2.6%'),
                                     height: heightPercentageToDP('3%'),
-                                    alignSelf: "flex-end"
+                                    alignSelf: "flex-start",
+                                    marginLeft: widthPercentageToDP('20%')
 
                                 }}
                                 titleStyle={{
@@ -94,9 +93,12 @@ class CustomerToPostpone extends Component {
                                         console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
                                 }}
                             />
+                            
                         </View>
+                        </TouchableOpacity>
                     </Col>
-                    <Col>
+                    <Col size={30}>
+                    <TouchableOpacity>
                         <View >
                             <Button
                                 title="+"
@@ -104,10 +106,9 @@ class CustomerToPostpone extends Component {
                                     backgroundColor: "#41D38D",
                                     borderRadius: 2,
                                     width: widthPercentageToDP('5%'),
-                                    marginTop: heightPercentageToDP('2.5%'),
                                     height: heightPercentageToDP('3%'),
-                                    alignSelf: "flex-end",
-                                    marginRight: widthPercentageToDP('20%'),
+                                    alignSelf: "flex-start",
+                                    marginLeft: widthPercentageToDP('5%'),
                                 }}
                                 titleStyle={{
                                     fontSize: heightPercentageToDP('2.6%'),
@@ -124,7 +125,9 @@ class CustomerToPostpone extends Component {
                                         console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
                                 }}
                             />
+                           
                         </View>
+                        </TouchableOpacity>
                     </Col>
                 </Grid>
 
@@ -188,7 +191,7 @@ class CustomerToPostpone extends Component {
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
                             alignSelf: "center",
-                            marginBottom: heightPercentageToDP('22%'),
+                            marginBottom: heightPercentageToDP('25%'),
                             height: heightPercentageToDP('4.5%')
                         }}
 
@@ -227,7 +230,7 @@ const styles = StyleSheet.create({
     },
 
     postponeToMinutesStyle: {
-        width: widthPercentageToDP('45%'),
+        width: widthPercentageToDP('43%'),
         backgroundColor: "#E9E9E9",
         borderRadius: 8,
         height: heightPercentageToDP('4.5%'),
@@ -237,18 +240,19 @@ const styles = StyleSheet.create({
     },
 
     postponeToMinutes: {
-        marginLeft: widthPercentageToDP('1.5%'),
         fontSize: heightPercentageToDP('2%'),
         fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "500",
-        color: "#AFAFAF"
+        color: "#AFAFAF",
+        alignSelf: "flex-end",
     },
 
     inputText: {
         textAlign: 'left',
         paddingStart: widthPercentageToDP('2.5%'),
         color: "#AFAFAF",
+        fontSize: heightPercentageToDP('2%')
 
 
     },

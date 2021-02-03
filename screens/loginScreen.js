@@ -70,7 +70,7 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.props.usersFetchData()
-    this.check()
+    // this.check()
   }
 
   check() {
@@ -149,6 +149,7 @@ class LoginScreen extends Component {
 
             <Item style={styles.passwordStyle}>
               <Input
+                maxLength={32}
                 value={this.props.password.password}
                 onChangeText={(value) => this.props.passwordState(value)}
                 style={styles.passwordText}
@@ -225,8 +226,9 @@ const styles = StyleSheet.create({
   },
 
   passwordText: {
-    marginLeft: widthPercentageToDP('27%'),
-    fontSize: heightPercentageToDP('2%')
+    marginLeft: widthPercentageToDP('8%'),
+    fontSize: heightPercentageToDP('2%'),
+    textAlign: "center"
   },
 
   pickerStyle: {
