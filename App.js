@@ -35,16 +35,16 @@ export default class App extends Component {
           <Stack.Navigator
             screenOptions={{ headerShown: false }}
           >
-
-            {/* <Stack.Screen
+{/* 
+            <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
-            />
+            /> */}
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="ErrorConnectToServer"
               component={ErrorConnectToServer}
-            />
+            /> */}
 
             <Stack.Screen
               name="ConnectingToIP"
@@ -76,7 +76,7 @@ export default class App extends Component {
 
             <Stack.Screen
               name="InvitePostponeCustomer"
-              component={InvitePostponeCustomer} /> */}
+              component={InvitePostponeCustomer} />
 
             <Stack.Screen
               name="ResultList"

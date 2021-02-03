@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { getServices } from '../action/getServicesAction'
 import { redirectCustomer } from '../action/redirectCustomerAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -55,6 +56,19 @@ class RedirectCustomer extends Component {
         if (this.props.services.services.inner_services) {
             return (
                 <View style={styles.pickerStyle}>
+                    <Shadow
+                        inner
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('70%'),
+                            borderRadius: 8,
+                            height: heightPercentageToDP('4.5%'),
+                            justifyContent: "center",
+                            alignSelf: "center"
+                        }}
+                    >
                     <Picker
                         style={styles.pickerText}
                         selectedValue={this.state.PickerValueHolder}
@@ -67,16 +81,31 @@ class RedirectCustomer extends Component {
                                 key={key} />
                         )}
                     </Picker>
+                    </Shadow>
                 </View>
             )
         } else {
             return (
                 <View style={styles.pickerStyle}>
+                    <Shadow
+                        inner
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('70%'),
+                            borderRadius: 8,
+                            height: heightPercentageToDP('4.5%'),
+                            justifyContent: "center",
+                            alignSelf: "center"
+                        }}
+                    >
                     <Picker
                         style={styles.pickerText}
                     >
                         <Picker.Item label="Выбрать услугу..." value='default' />
                     </Picker>
+                    </Shadow>
                 </View>
             )
         }
@@ -124,6 +153,19 @@ class RedirectCustomer extends Component {
                 </View>
 
                 <View style={styles.inputStyle}>
+                <Shadow
+                        inner
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowOpacity: 1,
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('70%'),
+                            borderRadius: 12,
+                            height: heightPercentageToDP('15%'),
+                            alignSelf: "center"
+                        }}
+                    >
                     <TextInput
                         style={styles.inputText}
                         value={this.state.comment}
@@ -134,14 +176,29 @@ class RedirectCustomer extends Component {
                         numberOfLines={5}
                         multiline={true}
                     />
+                    </Shadow>
                 </View>
                 
                     <View style={styles.checkBoxStyle}>
+                    <Shadow
+                        inner
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('70%'),
+                            borderRadius: 8,
+                            height: heightPercentageToDP('4.5%'),
+                            justifyContent: "center",
+                            alignSelf: "center"
+                        }}
+                    >
                     <CheckBox
                         value={this.state.check}
                         style={styles.checkBox}
                         onValueChange={(newValue => this.setState({ check: newValue }))}
                     />
+                    </Shadow>
                      </View>
                      <View >
                         <Text style={styles.returnText} >С возвращением клиента</Text>
@@ -151,15 +208,19 @@ class RedirectCustomer extends Component {
 
                 <View>
                     <Button
+                    raised={true}
                         title="Выполнить перенаправление"
                         buttonStyle={{
                             backgroundColor: "#41D38D",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
+                          }}
+
+                          containerStyle={{
                             alignSelf: "center",
                             marginTop: heightPercentageToDP('4%'),
                             marginBottom: heightPercentageToDP('2%'),
-                            height: heightPercentageToDP('4.5%')
                           }}
               
                           titleStyle={{
@@ -178,14 +239,18 @@ class RedirectCustomer extends Component {
                 </View>
 
                     <Button
+                    raised={true}
                         title="Отмена"
                         buttonStyle={{
                             backgroundColor: "rgba(255, 215, 112, 0.9)",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
+                          }}
+
+                          containerStyle={{
                             alignSelf: "center",
                             marginBottom: heightPercentageToDP('2%'),
-                            height: heightPercentageToDP('4.5%')
                           }}
               
                           titleStyle={{

@@ -15,6 +15,7 @@ import Stomp from 'stompjs'
 import { SOCKET_URL } from '../constants/url'
 import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 
 const Export = function (props) {
@@ -254,15 +255,19 @@ class CallClient extends Component {
 
         <View>
           <Button
+            raised={true}
             disabled={this.props.totalLength.totalLength ? this.props.disableButtonCallClient.disableButtonCallClient : true}
             title="Вызвать следующего клиента"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -284,15 +289,19 @@ class CallClient extends Component {
         </View>
         <View>
           <Button
+            raised={true}
             disabled={this.props.totalLength.totalLength ? this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer : true}
             title="Посмотреть отложенных клиентов"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -312,15 +321,19 @@ class CallClient extends Component {
 
         <View>
           <Button
+            raised={true}
             disabled={this.props.disableButtonClientNotEnter.disableButtonClientNotEnter}
             title="Клиент не явился"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -343,15 +356,19 @@ class CallClient extends Component {
 
         <View>
           <Button
+            raised={true}
             disabled={this.props.disableButtonStartClient.disableButtonStartClient}
             title="Начать работу с клиентом"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -374,15 +391,19 @@ class CallClient extends Component {
 
         <View>
           <Button
+            raised={true}
             disabled={this.props.disableButtonRedirectClient.disableButtonRedirectClient}
             title="Перенаправить клиента"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -402,15 +423,19 @@ class CallClient extends Component {
 
         <View>
           <Button
+            raised={true}
             disabled={this.props.disableButtonPostponeClient.disableButtonPostponeClient}
             title="Отложить клиента"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -430,15 +455,19 @@ class CallClient extends Component {
 
         <View>
           <Button
+            raised={true}
             disabled={this.props.disableFinishClient.disableFinishClient}
             title="Закончить работу с клиентом"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
               width: widthPercentageToDP('65%'),
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%'),
               height: heightPercentageToDP('4.5%')
+            }}
+
+            containerStyle={{
+              alignSelf: "center",
+              marginBottom: heightPercentageToDP('2%')
             }}
 
             titleStyle={{
@@ -466,7 +495,7 @@ const styles = StyleSheet.create({
   userIcon: {
     marginLeft: widthPercentageToDP('2%'),
     width: widthPercentageToDP('9.5%'),
-     height: heightPercentageToDP('5%')
+    height: heightPercentageToDP('5%')
   },
 
   exitText: {

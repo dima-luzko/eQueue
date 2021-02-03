@@ -13,6 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import DoubleClick from 'react-native-double-tap'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -107,11 +108,28 @@ class LoginScreen extends Component {
     } else {
       return (
         <View style={styles.pickerStyle}>
-          <Picker
-            style={styles.pickerText}
-          >
-            <Picker.Item label="Выберите пользователя..." value='default' />
-          </Picker>
+          {/* <Shadow
+            inner
+            style={{
+              shadowOffset: { width: 2, height: 2 },
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowRadius: 2,
+              width: widthPercentageToDP('72%'),
+              borderRadius: 8,
+              height: heightPercentageToDP('4.5%'),
+               justifyContent: "center",
+              
+            }}
+
+            
+          > */}
+            
+            <Picker
+              style={styles.pickerText}
+            >
+              <Picker.Item label="Выберите пользователя..." value='default' />
+            </Picker>
+          {/* </Shadow> */}
         </View>
       )
     }
@@ -148,6 +166,7 @@ class LoginScreen extends Component {
             {this.renderPicker()}
 
             <Item style={styles.passwordStyle}>
+
               <Input
                 maxLength={32}
                 value={this.props.password.password}
@@ -157,6 +176,8 @@ class LoginScreen extends Component {
                 placeholderTextColor="#A2A0A0"
                 secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
               />
+
+
               <TouchableOpacity
                 onPress={this.updateSecurityTextEntry}
               >
@@ -181,12 +202,17 @@ class LoginScreen extends Component {
             </Item>
 
             <Button
+              raised={true}
               title="Войти"
               buttonStyle={{
                 width: widthPercentageToDP('72%'),
                 backgroundColor: "rgba(255, 255, 255, 0.9)",
                 borderRadius: 8,
                 height: heightPercentageToDP('4.5%')
+              }}
+
+              containerStyle={{
+                alignItems:"center"
               }}
 
               titleStyle={{

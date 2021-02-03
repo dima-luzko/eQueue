@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, Text, TouchableOpacity, FlatList, ScrollView, Alert } from 'react-native'
+import { View, StyleSheet, PixelRatio, Dimensions, Text, TouchableOpacity, FlatList,  Alert } from 'react-native'
 import Bar from '../components/appbar'
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -67,43 +67,43 @@ class ResultList extends Component {
         if (resultList && resultList.result.length > 0) {
             return (
                 <View >
-                        <FlatList
-                        
-                            showsVerticalScrollIndicator={false}
-                            data={resultList.result}
-                            keyExtractor={item => item.id.toString()}
-                            renderItem={({ item }) =>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        this.setState({ selected: item.id })
+                    <FlatList
+
+                        showsVerticalScrollIndicator={false}
+                        data={resultList.result}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({ item }) =>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.setState({ selected: item.id })
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        width: widthPercentageToDP('65%'),
+                                        borderRadius: 8,
+                                        marginTop: heightPercentageToDP('3%'),
+                                        height: heightPercentageToDP('4.5%'),
+                                        marginLeft: widthPercentageToDP('18%'),
                                     }}
                                 >
-                                    <View
-                                        style={{
-                                            backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            width: widthPercentageToDP('65%'),
-                                            borderRadius: 8,
-                                            marginTop: heightPercentageToDP('3%'),
-                                            height: heightPercentageToDP('4.5%'),
-                                            marginLeft: widthPercentageToDP('18%'),
-                                        }}
-                                    >
 
-                                        <Text style={{
-                                            fontSize: heightPercentageToDP('2%'),
-                                            color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
-                                            fontWeight: "500",
-                                            fontFamily: "Roboto",
-                                            alignItems: "center",
-                                            textAlign: "center"
+                                    <Text style={{
+                                        fontSize: heightPercentageToDP('2%'),
+                                        color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
+                                        fontWeight: "500",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center",
+                                        textAlign: "center"
 
-                                        }}>{item.name} </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            }
-                        />
+                                    }}>{item.name} </Text>
+                                </View>
+                            </TouchableOpacity>
+                        }
+                    />
                 </View>
 
 
@@ -126,47 +126,43 @@ class ResultList extends Component {
                 <Bar />
                 <Text style={styles.resultText}>Закончить работу с клиентом</Text>
                 <Grid>
-                            
+
                     <Row size={25}>
-                            {this.list()}
+                        {this.list()}
                     </Row>
                     <Row size={30}>
-                        <View style={{alignSelf:"flex-start"}}> 
+                        <View style={{ alignSelf: "flex-start" }}>
                             <Button
-                            raised={true}
-                            title="OK"
-                            buttonStyle={{
-                                // backgroundColor: "#E9E9E9",
-                                backgroundColor: "#ff0000",
-                                width: widthPercentageToDP('65%'),
-                                borderRadius: 8,
-                                height: heightPercentageToDP('4.5%'),
-                                // marginLeft: widthPercentageToDP('18%'),
-                                
-                            }}
-                                containerStyle={{
+                                raised={true}
+                                title="OK"
+                                buttonStyle={{
                                     backgroundColor: "#E9E9E9",
-                               
-                                marginLeft: widthPercentageToDP('18%'),
+                                    width: widthPercentageToDP('65%'),
+                                    borderRadius: 8,
+                                    height: heightPercentageToDP('4.5%'),
+
                                 }}
-                            
-                                
+                                containerStyle={{
+                                    marginLeft: widthPercentageToDP('18%')
+                                }}
 
 
-                            titleStyle={{
-                                fontSize: heightPercentageToDP('2%'),
-                                color: '#AFAFAF',
-                                fontWeight: "500",
-                                fontFamily: "Roboto",
-                                alignItems: "center",
-                                textAlign: "center"
-                            }}
-                            onPress={() => {
-                                this.checkResultList()
-                            }}
-                        />
+
+
+                                titleStyle={{
+                                    fontSize: heightPercentageToDP('2%'),
+                                    color: '#AFAFAF',
+                                    fontWeight: "500",
+                                    fontFamily: "Roboto",
+                                    alignItems: "center",
+                                    textAlign: "center"
+                                }}
+                                onPress={() => {
+                                    this.checkResultList()
+                                }}
+                            />
                         </View>
-                        
+
                     </Row>
                 </Grid>
             </View>
@@ -177,7 +173,7 @@ class ResultList extends Component {
 
 const styles = StyleSheet.create({
     resultText: {
-        alignSelf:"center",
+        alignSelf: "center",
         fontSize: heightPercentageToDP('2.5%'),
         marginTop: heightPercentageToDP('20%'),
         fontFamily: "Roboto",

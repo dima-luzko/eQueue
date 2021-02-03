@@ -7,6 +7,7 @@ import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -81,47 +82,73 @@ class ErrorConnectToServer extends Component {
                     <View>
                         <Grid>
                             <Col style={{ height: heightPercentageToDP('10%') }}>
-                                <Button
-                                    title="Попробовать снова"
-                                    buttonStyle={{
-                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
-                                        borderRadius: 4,
+                                <Shadow
+                                    style={{
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowColor: "rgba(253, 174, 190, 0.7)",
+                                        shadowRadius: 4,
                                         width: widthPercentageToDP('38%'),
+                                        borderRadius: 4,
+                                        height: heightPercentageToDP('5%'),
+                                        backgroundColor: "rgba(253, 174, 190, 0.7)",
 
                                     }}
+                                >
+                                    <Button
+                                        title="Попробовать снова"
+                                        buttonStyle={{
+                                            backgroundColor: 'rgba(253, 174, 190, 0.7)',
+                                            borderRadius: 4,
+                                            width: widthPercentageToDP('38%'),
 
-                                    titleStyle={{
-                                        fontSize: heightPercentageToDP('1.67%'),
-                                        color: '#FFFFFF',
-                                        fontWeight: "bold",
-                                        fontFamily: "Roboto",
-                                        alignItems: "center"
-                                    }}
-                                    onPress={() => {
-                                        this.checkServer()
-                                    }}
-                                />
+                                        }}
+
+                                        titleStyle={{
+                                            fontSize: heightPercentageToDP('1.67%'),
+                                            color: '#FFFFFF',
+                                            fontWeight: "bold",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center"
+                                        }}
+                                        onPress={() => {
+                                            this.checkServer()
+                                        }}
+                                    />
+                                </Shadow>
                             </Col>
                             <Col style={{ height: heightPercentageToDP('10%') }}>
-                                <Button
-                                    title="Ввести новый ip-адресс"
-                                    buttonStyle={{
-                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
+                                <Shadow
+                                    style={{
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowColor: "rgba(253, 174, 190, 0.7)",
+                                        shadowRadius: 4,
+                                        width: widthPercentageToDP('40%'),
                                         borderRadius: 4,
-                                        width: widthPercentageToDP('40%')
-                                    }}
+                                        height: heightPercentageToDP('5%'),
+                                        backgroundColor: "rgba(253, 174, 190, 0.7)",
 
-                                    titleStyle={{
-                                        fontSize: heightPercentageToDP('1.67%'),
-                                        color: '#FFFFFF',
-                                        fontWeight: "bold",
-                                        fontFamily: "Roboto",
-                                        alignItems: "center"
                                     }}
-                                    onPress={() => {
-                                        this.props.navigation.replace("ConnectingToIP")
-                                    }}
-                                />
+                                >
+                                    <Button
+                                        title="Ввести новый ip-адресс"
+                                        buttonStyle={{
+                                            backgroundColor: 'rgba(253, 174, 190, 0.7)',
+                                            borderRadius: 4,
+                                            width: widthPercentageToDP('40%')
+                                        }}
+
+                                        titleStyle={{
+                                            fontSize: heightPercentageToDP('1.67%'),
+                                            color: '#FFFFFF',
+                                            fontWeight: "bold",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center"
+                                        }}
+                                        onPress={() => {
+                                            this.props.navigation.replace("ConnectingToIP")
+                                        }}
+                                    />
+                                </Shadow>
                             </Col>
                         </Grid>
 
@@ -130,30 +157,46 @@ class ErrorConnectToServer extends Component {
                 )
             case 1:
                 return (
-                    <Button
-                        title="ОK"
-                        buttonStyle={{
-                            backgroundColor: '#41D38D',
-                            borderRadius: 4,
+                    <Shadow
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowColor: "rgba(65, 211, 141, 0.7)",
+                            shadowRadius: 4,
                             width: widthPercentageToDP('38%'),
-                            alignSelf: "center"
+                            borderRadius: 4,
+                            height: heightPercentageToDP('5%'),
+                            backgroundColor: "#41D38D",
+                            marginLeft: widthPercentageToDP('22%')
                         }}
+                    >
+                        <Button
+                            title="ОK"
+                            buttonStyle={{
+                                backgroundColor: '#41D38D',
+                                borderRadius: 4,
+                                width: widthPercentageToDP('38%')
+                            }}
 
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: '#FFFFFF',
-                            fontWeight: "bold",
-                            fontFamily: "Roboto",
-                            alignItems: "center"
-                        }}
-                        onPress={() => {
-                            this.props.navigation.replace("LoginScreen"),
-                                this.props.userState(""),
-                                this.props.passwordState(""),
-                                this.props.showPassword(true)
-                            this.setState({ visiable: false })
-                        }}
-                    />
+                            containerStyle={{
+                                alignSelf: "center"
+                            }}
+
+                            titleStyle={{
+                                fontSize: heightPercentageToDP('2%'),
+                                color: '#FFFFFF',
+                                fontWeight: "bold",
+                                fontFamily: "Roboto",
+                                alignItems: "center"
+                            }}
+                            onPress={() => {
+                                this.props.navigation.replace("LoginScreen"),
+                                    this.props.userState(""),
+                                    this.props.passwordState(""),
+                                    this.props.showPassword(true)
+                                this.setState({ visiable: false })
+                            }}
+                        />
+                    </Shadow>
                 )
         }
     }
@@ -167,7 +210,7 @@ class ErrorConnectToServer extends Component {
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                <View >
+                <View style={{ backgroundColor: "#FFFFFF" }}>
                     <Dialog
                         visible={this.state.visiable}
                     >

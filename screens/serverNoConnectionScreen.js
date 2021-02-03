@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -42,7 +43,7 @@ class ServerNoConnection extends Component {
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                <View >
+                <View  style={{ backgroundColor: "#FFFFFF"}}>
                     <Dialog
                         visible={this.state.visiable}
                     >
@@ -53,12 +54,27 @@ class ServerNoConnection extends Component {
                                 <Text style={styles.textNotConnection}>Нет соединения с сервером!</Text>
                             </View>
                             <View >
+                            <Shadow
+                                    style={{
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowColor: "rgba(253, 174, 190, 0.7)",
+                                        shadowRadius: 4,
+                                        width: widthPercentageToDP('38%'),
+                                        borderRadius: 4,
+                                        height: heightPercentageToDP('5%'),
+                                        backgroundColor:"#FDAEBE",
+                                        marginLeft:widthPercentageToDP('22%')
+                                    }}
+                                >
                                 <Button
                                     title="Попробовать снова"
                                     buttonStyle={{
-                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
+                                        backgroundColor: "#FDAEBE",
                                         borderRadius: 4,
-                                        width: widthPercentageToDP('38%'),
+                                        width: widthPercentageToDP('38%')
+                                    }}
+
+                                    containerStyle={{
                                         alignSelf: "center"
                                     }}
 
@@ -75,6 +91,7 @@ class ServerNoConnection extends Component {
                                             this.props.navigation.replace("ConnectingToIP")
                                     }}
                                 />
+                                </Shadow>
                             </View>
                         </DialogContent>
                     </Dialog>

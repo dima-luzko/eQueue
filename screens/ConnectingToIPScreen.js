@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { checkServerState } from '../action/serverStateAction'
 import { selectIpAddress } from '../action/updateStateAction'
 import LinearGradient from 'react-native-linear-gradient'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 
 const widthPercentageToDP = widthPercent => {
@@ -81,7 +82,7 @@ class ConnectingToIP extends Component {
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                <View>
+                <View style={{ backgroundColor: "#FFFFFF" }}>
                     <Dialog
                         visible={this.state.dialogVisible}
                     >
@@ -91,35 +92,55 @@ class ConnectingToIP extends Component {
                             <View>
                                 <Text style={styles.text}>Введите ip - aдресс сервера</Text>
                                 <View style={styles.inputStyle}>
-                                    <TextInput
-                                        style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
-                                        value={this.props.ipAddress.ipAddress}
-                                        onChangeText={value => this.props.selectIpAddress(value)}
-                                        placeholder="Введите ip - адресс для подключения к серверу"
-
-                                        maxLength={15}
-                                        numberOfLines={1}
-                                        keyboardType='numeric'
-
-                                    />
+                                    <Shadow
+                                        inner
+                                        style={{
+                                            shadowOffset: { width: 2, height: 2 },
+                                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                                            shadowRadius: 2,
+                                            width: widthPercentageToDP('80%'),
+                                            borderRadius: 4,
+                                            height: heightPercentageToDP('6%'),
+                                            justifyContent: "center",
+                                            alignSelf: "center"
+                                        }}
+                                    >
+                                        <TextInput
+                                            style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
+                                            value={this.props.ipAddress.ipAddress}
+                                            onChangeText={value => this.props.selectIpAddress(value)}
+                                            placeholder="Введите ip - адресс для подключения к серверу"
+                                            maxLength={15}
+                                            numberOfLines={1}
+                                            keyboardType='numeric'
+                                        />
+                                    </Shadow>
                                 </View>
                                 <View >
+                                <Shadow
+                                    style={{
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowColor: "rgba(0, 0, 0, 0.25)",
+                                        shadowRadius: 4,
+                                        width: widthPercentageToDP('80%'),
+                                        borderRadius: 4,
+                                        height: heightPercentageToDP('4.5%'),
+                                        backgroundColor:"#F4F1F1",
+                                        marginTop: heightPercentageToDP('3%'),
+                                        marginLeft: widthPercentageToDP('0.9%')
+                                    }}
+                                >
                                     <Button
                                         title="Проверить соединение"
                                         buttonStyle={{
                                             backgroundColor: '#F4F1F1',
                                             width: widthPercentageToDP('80%'),
-                                            alignSelf: 'center',
-                                            borderRadius: 4,
-                                            marginTop: heightPercentageToDP('3%'),
-                                            //shadowColor: "rgba(0, 0, 0, 0.25)",
-                                            // shadowOffset: {
-                                            //     width: 0,
-                                            //     height: 2,
-                                            // },
-                                            // shadowOpacity: 0.25,
-                                            // shadowRadius: 4,
-                                            // elevation: 5,
+                                            height: heightPercentageToDP('4.5%'),
+                                            borderRadius: 4
+                                        }}
+
+                                        containerStyle={{
+                                            alignSelf: "center"
                                         }}
 
                                         titleStyle={{
@@ -134,6 +155,7 @@ class ConnectingToIP extends Component {
                                             this.checkServer()
                                         }}
                                     />
+                                    </Shadow>
                                 </View>
                             </View>
                         </DialogContent>

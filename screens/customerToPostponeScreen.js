@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { postponeCustomer } from '../action/posponeCustomerAction';
 import { updateText, updateDisableButtom, updateImage, changeTotalMinutes } from '../action/updateStateAction'
 import { Col, Grid } from "react-native-easy-grid";
+import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -60,7 +61,7 @@ class CustomerToPostpone extends Component {
                 <Text style={styles.postponeText}>Отложить клиента</Text>
 
                 <View style={{ height: heightPercentageToDP('7%') }}>
-                    <View style={{marginBottom: heightPercentageToDP('-2.5%'),}}>
+                    <View style={{ marginBottom: heightPercentageToDP('-2.5%'), }}>
                         <Text style={styles.postponeToMinutes} >Отложить на {this.props.totalMinutes.totalMinutes ? this.props.totalMinutes.totalMinutes : "0"} минут</Text>
                     </View>
 
@@ -71,17 +72,20 @@ class CustomerToPostpone extends Component {
                             <TouchableOpacity>
                                 <View >
                                     <Button
+                                        raised={true}
                                         title="-"
                                         buttonStyle={{
                                             backgroundColor: "#F8D477",
                                             borderRadius: 2,
                                             width: widthPercentageToDP('5%'),
                                             height: heightPercentageToDP('3%'),
-                                            alignSelf:"flex-end"
-                                           
-
 
                                         }}
+
+                                        containerStyle={{
+                                            alignSelf: "flex-end"
+                                        }}
+
                                         titleStyle={{
                                             fontSize: heightPercentageToDP('3%'),
                                             width: widthPercentageToDP('5%'),
@@ -106,15 +110,20 @@ class CustomerToPostpone extends Component {
                             <TouchableOpacity>
                                 <View >
                                     <Button
+                                        raised={true}
                                         title="+"
                                         buttonStyle={{
                                             backgroundColor: "#41D38D",
                                             borderRadius: 2,
                                             width: widthPercentageToDP('5%'),
-                                            height: heightPercentageToDP('3%'),
+                                            height: heightPercentageToDP('3%')
+                                        }}
+
+                                        containerStyle={{
                                             alignSelf: "flex-start",
                                             marginLeft: widthPercentageToDP('5%')
                                         }}
+
                                         titleStyle={{
                                             fontSize: heightPercentageToDP('2.6%'),
                                             width: widthPercentageToDP('5%'),
@@ -139,40 +148,80 @@ class CustomerToPostpone extends Component {
 
 
                 <View style={styles.inputStyle}>
-                    <TextInput
-                        style={styles.inputText}
-                        value={this.state.comment}
-                        onChangeText={value => this.setState({ comment: value })}
-                        placeholder="Коментарий..."
-                        placeholderTextColor="#AFAFAF"
-                        maxLength={150}
-                        numberOfLines={5}
-                        multiline={true}
-                    />
+                    <Shadow
+                        inner
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowOpacity: 1,
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('70%'),
+                            borderRadius: 12,
+                            height: heightPercentageToDP('15%'),
+                            alignSelf: "center"
+                        }}
+                    >
+                        <TextInput
+                            style={styles.inputText}
+                            value={this.state.comment}
+                            onChangeText={value => this.setState({ comment: value })}
+                            placeholder="Коментарий..."
+                            placeholderTextColor="#AFAFAF"
+                            maxLength={150}
+                            numberOfLines={5}
+                            multiline={true}
+                        />
+                    </Shadow>
                 </View>
 
+
+
+
+
                 <View style={styles.checkBoxStyle}>
-                    <CheckBox
-                        value={this.state.check}
-                        style={styles.checkBox}
-                        onValueChange={(newValue => this.setState({ check: newValue }))}
-                    />
+                    <Shadow
+                        inner
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('70%'),
+                            borderRadius: 8,
+                            height: heightPercentageToDP('4.5%'),
+                            justifyContent: "center",
+                            alignSelf: "center"
+                        }}
+                    >
+                        <CheckBox
+                            value={this.state.check}
+                            style={styles.checkBox}
+                            onValueChange={(newValue => this.setState({ check: newValue }))}
+                        />
+                    </Shadow>
                 </View>
+
+
+
                 <View >
+
                     <Text style={styles.asForMeText} >Только для меня</Text>
                 </View >
 
                 <View>
                     <Button
+                        raised={true}
                         title="Отложить клиента"
                         buttonStyle={{
                             backgroundColor: "#41D38D",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
-                            alignSelf: "center",
-                            marginTop: heightPercentageToDP('4%'),
-                            marginBottom: heightPercentageToDP('2%'),
                             height: heightPercentageToDP('4.5%')
+                        }}
+
+                        containerStyle={{
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
+                            marginTop: heightPercentageToDP('4%'),
                         }}
 
                         titleStyle={{
@@ -192,14 +241,18 @@ class CustomerToPostpone extends Component {
 
                 <View>
                     <Button
+                        raised={true}
                         title="Отмена"
                         buttonStyle={{
                             backgroundColor: "rgba(255, 215, 112, 0.9)",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
-                            alignSelf: "center",
-                            marginBottom: heightPercentageToDP('25%'),
                             height: heightPercentageToDP('4.5%')
+                        }}
+
+                        containerStyle={{
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('25%')
                         }}
 
                         titleStyle={{
@@ -252,7 +305,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "500",
         color: "#AFAFAF",
-marginLeft:widthPercentageToDP('16%')
+        marginLeft: widthPercentageToDP('16%')
     },
 
     inputText: {
