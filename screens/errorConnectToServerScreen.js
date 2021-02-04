@@ -100,7 +100,7 @@ class ErrorConnectToServer extends Component {
                                             backgroundColor: 'rgba(253, 174, 190, 0.7)',
                                             borderRadius: 4,
                                             width: widthPercentageToDP('38%'),
-
+                                            height: heightPercentageToDP('5%')
                                         }}
 
                                         titleStyle={{
@@ -134,8 +134,10 @@ class ErrorConnectToServer extends Component {
                                         buttonStyle={{
                                             backgroundColor: 'rgba(253, 174, 190, 0.7)',
                                             borderRadius: 4,
-                                            width: widthPercentageToDP('40%')
+                                            width: widthPercentageToDP('40%'),
+                                            height: heightPercentageToDP('5%'),
                                         }}
+
 
                                         titleStyle={{
                                             fontSize: heightPercentageToDP('1.67%'),

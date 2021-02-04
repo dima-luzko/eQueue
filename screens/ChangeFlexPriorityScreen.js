@@ -7,6 +7,7 @@ import { changeFlexPriority } from '../action/changeFlexPriorityAction'
 import { Col, Grid } from "react-native-easy-grid";
 
 
+
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
     // Convert string input to decimal number
@@ -76,39 +77,45 @@ class ChangeFlexPriority extends Component {
         if (user.plan && user.plan.length > 0) {
             return (
                 <View >
-                    <ScrollView
-                        style={{ height: heightPercentageToDP('40%') }}
-                        horizontal={true}
-                    >
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            data={user.plan.filter((val) => val.flex === true)}
-                            ListEmptyComponent={<View style = {styles.listEmpty}><Text style={styles.text}>Нет доступных услуг для изменения!</Text></View>}
-                            renderItem={({ item }) =>
+                    <FlatList
+                        ListFooterComponent={<View><Text></Text></View>}
+                        showsVerticalScrollIndicator={false}
+                        data={user.plan.filter((val) => val.flex === true)}
+                        ListEmptyComponent={<View><Text style={styles.text}>Нет доступных услуг для изменения!</Text></View>}
+                        renderItem={({ item }) =>
 
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        this.setState({ selectService: item.service.id })
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.setState({ selectService: item.service.id })
+                                }}
+                            >
+
+                                <View
+                                    style={{
+                                        backgroundColor: item.service.id === this.state.selectService ? "#41D38D" : "#E9E9E9",
+                                        padding: heightPercentageToDP('2%'),
+                                        marginVertical: heightPercentageToDP('1%'),
+                                        width: widthPercentageToDP('35%'),
+                                        height: heightPercentageToDP('10%'),
+                                        marginLeft: widthPercentageToDP('8%'),
+                                        borderRadius: 8,
+                                        justifyContent: "center",
+                                        elevation: 3
                                     }}
                                 >
+                                    <Text style={{
+                                        fontSize: heightPercentageToDP('2%'),
+                                        color: item.service.id === this.state.selectService ? "#FFFFFF" : "#BABABA",
+                                        fontWeight: "500",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center",
+                                        textAlign: "center"
+                                    }}>{item.service.name} </Text>
+                                </View>
+                            </TouchableOpacity>
 
-                                    <View
-                                        style={{
-                                            backgroundColor: item.service.id === this.state.selectService ? "#87cefa" : "#f9c2ff",
-                                            padding: heightPercentageToDP('2%'),
-                                            marginVertical: heightPercentageToDP('1%'),
-                                            width: widthPercentageToDP('35%'),
-                                            marginLeft: widthPercentageToDP('5%'),
-                                            borderRadius: 5
-                                        }}
-                                    >
-                                        <Text style={styles.text}>{item.service.name} </Text>
-                                    </View>
-                                </TouchableOpacity>
-
-                            }
-                        />
-                    </ScrollView>
+                        }
+                    />
                 </View>
             )
         }
@@ -119,6 +126,7 @@ class ChangeFlexPriority extends Component {
         return (
             <View>
                 <FlatList
+                    ListFooterComponent={<View><Text></Text></View>}
                     showsVerticalScrollIndicator={false}
                     data={DATA}
 
@@ -130,16 +138,26 @@ class ChangeFlexPriority extends Component {
                         >
                             <View
                                 style={{
-                                    backgroundColor: item.id === this.state.selected ? "#87cefa" : "#f9c2ff",
+                                    backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
                                     padding: heightPercentageToDP('2%'),
                                     marginVertical: heightPercentageToDP('1%'),
                                     width: widthPercentageToDP('35%'),
+                                    height: heightPercentageToDP('10%'),
                                     marginLeft: widthPercentageToDP('8%'),
-                                    borderRadius: 5
+                                    borderRadius: 8,
+                                    justifyContent: "center",
+                                    elevation: 3
                                 }}
                             >
 
-                                <Text style={styles.text}>{item.name} </Text>
+                                <Text style={{
+                                    fontSize: heightPercentageToDP('2%'),
+                                    color: item.id === this.state.selected ? "#FFFFFF" : "#BABABA",
+                                    fontWeight: "500",
+                                    fontFamily: "Roboto",
+                                    alignItems: "center",
+                                    textAlign: "center"
+                                }}>{item.name} </Text>
 
                             </View>
                         </TouchableOpacity>
@@ -152,67 +170,79 @@ class ChangeFlexPriority extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
                 <Bar />
-                <View>
+                <View style={{ height: heightPercentageToDP('70%') }}>
                     <Grid>
                         <Col style={{ height: heightPercentageToDP('40%') }}>
                             <Text style={styles.serviceList}>Список услуг: </Text>
                             {this.list()}
                         </Col>
                         <Col style={{ height: heightPercentageToDP('40%') }}>
-                            <Text style={styles.priorityList}>Изменить приоритет: </Text>
+                            <Text style={styles.priorityList}>Приоритет: </Text>
                             {this.priorityList()}
                         </Col>
                     </Grid>
 
                 </View>
 
-                <View >
+                <View style={{ marginTop: heightPercentageToDP('2%') }}>
+
                     <Button
+                        raised={true}
                         title="Изменить приоритет"
                         buttonStyle={{
-                            backgroundColor: 'red'
+                            backgroundColor: "#41D38D",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
                         }}
 
                         containerStyle={{
-                            width: widthPercentageToDP('25%'),
-                            marginLeft: widthPercentageToDP('55%'),
-                            marginTop: heightPercentageToDP('55%')
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
                         }}
 
                         titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('6%')
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
                         }}
                         onPress={() => {
                             this.checkPriorityList()
                         }}
                     />
-                </View>
-                <View>
+
                     <Button
+                        raised={true}
                         title="Отмена"
                         buttonStyle={{
-                            backgroundColor: 'red'
+                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
                         }}
 
                         containerStyle={{
-                            width: widthPercentageToDP('25%'),
-                            marginLeft: widthPercentageToDP('17%'),
-                            marginTop: heightPercentageToDP('-8%')
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
                         }}
 
                         titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('6%'),
-                            textAlignVertical: 'center'
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
                         }}
                         onPress={() => {
                             this.props.navigation.navigate('CallClient')
-
                         }}
                     />
                 </View>
@@ -224,42 +254,52 @@ class ChangeFlexPriority extends Component {
 
 const styles = StyleSheet.create({
     serviceList: {
-        marginLeft: widthPercentageToDP('7%'),
+        color: "#A1A0A0",
         fontSize: heightPercentageToDP('2.3%'),
         height: heightPercentageToDP('3%'),
         marginTop: heightPercentageToDP('5%'),
         marginBottom: heightPercentageToDP('2%'),
-    },
-
-    priorityList: {
-        marginLeft: widthPercentageToDP('2%'),
-        fontSize: heightPercentageToDP('2.3%'),
-        height: heightPercentageToDP('3%'),
-        marginTop: heightPercentageToDP('5%'),
-        marginBottom: heightPercentageToDP('2%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        textAlign: "center",
+        alignItems: "center"
     },
 
     text: {
-        alignSelf: 'center',
-        fontSize: heightPercentageToDP('1.8%')
+        fontSize: heightPercentageToDP('2%'),
+        color: "#B6B6B6",
+        fontWeight: "500",
+        fontFamily: "Roboto",
+        alignItems: "center",
+        textAlign: "center",
+        marginTop: heightPercentageToDP('3%')
     },
 
-    noServiceForm: {
-        backgroundColor: "#d2b48c",
-        padding: heightPercentageToDP('2%'),
-        marginVertical: heightPercentageToDP('1%'),
-        width: widthPercentageToDP('35%'),
-        marginLeft: widthPercentageToDP('5%'),
-        borderRadius: 5
-    }, 
+    priorityList: {
+        color: "#A1A0A0",
+        fontSize: heightPercentageToDP('2.3%'),
+        height: heightPercentageToDP('3%'),
+        marginTop: heightPercentageToDP('5%'),
+        marginBottom: heightPercentageToDP('2%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        textAlign: "center",
+        alignItems: "center"
+    },
+
 
     listEmpty: {
-        backgroundColor: "#f9c2ff",
+        backgroundColor: "#E9E9E9",
         padding: heightPercentageToDP('2%'),
         marginVertical: heightPercentageToDP('1%'),
         width: widthPercentageToDP('35%'),
-        marginLeft: widthPercentageToDP('5%'),
-        borderRadius: 5
+        height: heightPercentageToDP('10%'),
+        marginLeft: widthPercentageToDP('8%'),
+        borderRadius: 8,
+        justifyContent: "center",
+        elevation: 3
     }
 
 });

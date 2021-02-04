@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, Text, TouchableOpacity, FlatList,  Alert } from 'react-native'
+import { View, StyleSheet, PixelRatio, Dimensions, Text, TouchableOpacity, FlatList, Alert } from 'react-native'
 import Bar from '../components/appbar'
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -7,6 +7,7 @@ import { getResultList } from '../action/resultListAction'
 import { getFinishCustomer } from '../action/callClientAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
 import { Row, Grid } from "react-native-easy-grid";
+import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -68,8 +69,8 @@ class ResultList extends Component {
             return (
                 <View >
                     <FlatList
-
                         showsVerticalScrollIndicator={false}
+                        ListFooterComponent={<View><Text></Text></View>}
                         data={resultList.result}
                         keyExtractor={item => item.id.toString()}
                         renderItem={({ item }) =>
@@ -88,18 +89,18 @@ class ResultList extends Component {
                                         marginTop: heightPercentageToDP('3%'),
                                         height: heightPercentageToDP('4.5%'),
                                         marginLeft: widthPercentageToDP('18%'),
+                                        elevation:3
                                     }}
                                 >
+                                        <Text style={{
+                                            fontSize: heightPercentageToDP('2%'),
+                                            color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
+                                            fontWeight: "500",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center",
+                                            textAlign: "center"
 
-                                    <Text style={{
-                                        fontSize: heightPercentageToDP('2%'),
-                                        color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
-                                        fontWeight: "500",
-                                        fontFamily: "Roboto",
-                                        alignItems: "center",
-                                        textAlign: "center"
-
-                                    }}>{item.name} </Text>
+                                        }}>{item.name} </Text>
                                 </View>
                             </TouchableOpacity>
                         }

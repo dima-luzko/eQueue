@@ -73,6 +73,7 @@ class ServerConnection extends Component {
                                         buttonStyle={{
                                             backgroundColor: '#41D38D',
                                             borderRadius: 4,
+                                            height: heightPercentageToDP('5%'),
                                             width: widthPercentageToDP('38%')
                                         }}
 

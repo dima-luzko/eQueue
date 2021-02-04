@@ -105,6 +105,21 @@ export const showTotalLength = (totalLength) => {
     }
 }
 
+export const postponedTotal = posponedLength =>{
+    return {
+        type : "POSTPONED_TOTAL_LENGTH",
+        posponedLength
+    }
+}
+
+export const showPostponedTotalLength = (posponedLength) => {
+    return (dispatch) => {
+        dispatch(postponedTotal(posponedLength))
+    }
+}
+
+
+
 export const selectIpAddress = (ipAddress) => {
     return (dispatch) => {
         dispatch(inputIpAdress(ipAddress))

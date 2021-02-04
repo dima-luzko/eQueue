@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { loggedUser } from '../action/loggedUserAction'
 import { PixelRatio, Dimensions, Image, StyleSheet, StatusBar } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import UserIcon from 'react-native-vector-icons/FontAwesome'
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -41,12 +42,14 @@ class Bar extends Component {
 
           }}
         >
-          <Image
-            style={styles.userIcon}
-            source={
-              require('../images/user_icon.png')
-            }
-          />
+          <UserIcon
+                name="user-circle-o"
+                size={2 * heightPercentageToDP("3%")}
+                color="white"
+                style={{
+                  marginLeft: widthPercentageToDP('2%')
+                }}
+              />
           <Appbar.Content
             titleStyle={{
               fontSize: heightPercentageToDP('2.5%'),

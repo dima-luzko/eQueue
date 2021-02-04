@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native-elements';
 import { View, Text } from 'native-base';
-import { Image, StyleSheet, PixelRatio, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
+import { StyleSheet, PixelRatio, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { inviteNextCustomer, getStartCustomer } from '../action/callClientAction'
 import { loggedUser } from '../action/loggedUserAction'
@@ -15,7 +15,7 @@ import Stomp from 'stompjs'
 import { SOCKET_URL } from '../constants/url'
 import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
-import { Shadow } from 'react-native-neomorph-shadows';
+import UserIcon from 'react-native-vector-icons/FontAwesome'
 
 
 const Export = function (props) {
@@ -191,11 +191,14 @@ class CallClient extends Component {
                 this.props.navigation.navigate('ChangeFlexPriority')
               }}
             >
-              <Image
-                style={styles.userIcon}
-                source={
-                  require('../images/user_icon.png')
-                }
+
+              <UserIcon
+                name="user-circle-o"
+                size={2 * heightPercentageToDP("3%")}
+                color="white"
+                style={{
+                  marginLeft: widthPercentageToDP('2%')
+                }}
               />
 
             </TouchableOpacity>
@@ -290,7 +293,7 @@ class CallClient extends Component {
         <View>
           <Button
             raised={true}
-            disabled={this.props.totalLength.totalLength ? this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer : true}
+            disabled={ this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer }
             title="Посмотреть отложенных клиентов"
             buttonStyle={{
               backgroundColor: "#41D38D",
@@ -561,8 +564,7 @@ const styles = StyleSheet.create({
     height: heightPercentageToDP('15%'),
     width: widthPercentageToDP('28%'),
     marginTop: heightPercentageToDP('1%'),
-    marginLeft: widthPercentageToDP('35%'),
-
+    marginLeft: widthPercentageToDP('35%')
   }
 
 

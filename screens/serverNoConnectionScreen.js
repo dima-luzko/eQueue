@@ -71,6 +71,7 @@ class ServerNoConnection extends Component {
                                     buttonStyle={{
                                         backgroundColor: "#FDAEBE",
                                         borderRadius: 4,
+                                        height: heightPercentageToDP('5%'),
                                         width: widthPercentageToDP('38%')
                                     }}
 
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     },
 
     textNotConnection: {
-        textAlign: 'center',
+        textAlign: "center",
         fontWeight: "bold",
         fontSize: heightPercentageToDP('2.3%'),
         color: '#A1A0A0',

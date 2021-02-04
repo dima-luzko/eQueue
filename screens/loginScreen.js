@@ -184,7 +184,7 @@ class LoginScreen extends Component {
                 {this.props.secureTextEntry.secureTextEntry ?
                   <EyeIcon
                     name="eye-closed"
-                    size={2 * widthPercentageToDP("2.5%")}
+                    size={1.5 * heightPercentageToDP("2%")}
                     color="rgba(188, 182, 185, 0.7)"
                     style={{
                       paddingRight: heightPercentageToDP('2%')
@@ -192,7 +192,7 @@ class LoginScreen extends Component {
                   :
                   <EyeIcon
                     name="eye"
-                    size={2 * widthPercentageToDP("2.5%")}
+                    size={1.5 * heightPercentageToDP("2%")}
                     color="rgba(188, 182, 185, 0.7)"
                     style={{
                       paddingRight: heightPercentageToDP('2%')

@@ -69,18 +69,18 @@ class RedirectCustomer extends Component {
                             alignSelf: "center"
                         }}
                     >
-                    <Picker
-                        style={styles.pickerText}
-                        selectedValue={this.state.PickerValueHolder}
-                        onValueChange={(itemValue, itemIndex) => (console.log(itemValue), this.setState({ PickerValueHolder: itemValue }))} >
-                        <Picker.Item label="Выбрать услугу..." value='default' />
-                        {this.props.services.services.inner_services.map((item, key) =>
-                            <Picker.Item
-                                label={item.name}
-                                value={item.id}
-                                key={key} />
-                        )}
-                    </Picker>
+                        <Picker
+                            style={styles.pickerText}
+                            selectedValue={this.state.PickerValueHolder}
+                            onValueChange={(itemValue, itemIndex) => (console.log(itemValue), this.setState({ PickerValueHolder: itemValue }))} >
+                            <Picker.Item label="Выбрать услугу..." value='default' />
+                            {this.props.services.services.inner_services.map((item, key) =>
+                                <Picker.Item
+                                    label={item.name}
+                                    value={item.id}
+                                    key={key} />
+                            )}
+                        </Picker>
                     </Shadow>
                 </View>
             )
@@ -100,11 +100,11 @@ class RedirectCustomer extends Component {
                             alignSelf: "center"
                         }}
                     >
-                    <Picker
-                        style={styles.pickerText}
-                    >
-                        <Picker.Item label="Выбрать услугу..." value='default' />
-                    </Picker>
+                        <Picker
+                            style={styles.pickerText}
+                        >
+                            <Picker.Item label="Выбрать услугу..." value='default' />
+                        </Picker>
                     </Shadow>
                 </View>
             )
@@ -145,7 +145,7 @@ class RedirectCustomer extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor: "#FFFFFF", flex:1}}>
+            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
                 <Bar />
                 <Text style={styles.redirectText}>Перенаправление клиента</Text>
                 <View>
@@ -153,7 +153,7 @@ class RedirectCustomer extends Component {
                 </View>
 
                 <View style={styles.inputStyle}>
-                <Shadow
+                    <Shadow
                         inner
                         style={{
                             shadowOffset: { width: 0, height: 2 },
@@ -166,20 +166,20 @@ class RedirectCustomer extends Component {
                             alignSelf: "center"
                         }}
                     >
-                    <TextInput
-                        style={styles.inputText}
-                        value={this.state.comment}
-                        onChangeText={value => this.setState({ comment: value })}
-                        placeholder="Коментарий..."
-                        placeholderTextColor="#AFAFAF"
-                        maxLength={150}
-                        numberOfLines={5}
-                        multiline={true}
-                    />
+                        <TextInput
+                            style={styles.inputText}
+                            value={this.state.comment}
+                            onChangeText={value => this.setState({ comment: value })}
+                            placeholder="Коментарий..."
+                            placeholderTextColor="#AFAFAF"
+                            maxLength={150}
+                            numberOfLines={5}
+                            multiline={true}
+                        />
                     </Shadow>
                 </View>
-                
-                    <View style={styles.checkBoxStyle}>
+
+                <View style={styles.checkBoxStyle}>
                     <Shadow
                         inner
                         style={{
@@ -193,67 +193,68 @@ class RedirectCustomer extends Component {
                             alignSelf: "center"
                         }}
                     >
-                    <CheckBox
-                        value={this.state.check}
-                        style={styles.checkBox}
-                        onValueChange={(newValue => this.setState({ check: newValue }))}
-                    />
+                        <CheckBox
+                            value={this.state.check}
+                            style={styles.checkBox}
+                            onValueChange={(newValue => this.setState({ check: newValue }))}
+                        />
                     </Shadow>
-                     </View>
-                     <View >
-                        <Text style={styles.returnText} >С возвращением клиента</Text>
-                    </View >
-                    
-                <View>
-
-                <View>
-                    <Button
-                    raised={true}
-                        title="Выполнить перенаправление"
-                        buttonStyle={{
-                            backgroundColor: "#41D38D",
-                            borderRadius: 8,
-                            width: widthPercentageToDP('70%'),
-                            height: heightPercentageToDP('4.5%')
-                          }}
-
-                          containerStyle={{
-                            alignSelf: "center",
-                            marginTop: heightPercentageToDP('4%'),
-                            marginBottom: heightPercentageToDP('2%'),
-                          }}
-              
-                          titleStyle={{
-                            fontSize: heightPercentageToDP('1.8%'),
-                            color: "#FFFFFF",
-                            textAlign: "center",
-                            alignItems: "center",
-                            fontWeight: "500",
-                            fontStyle: "normal",
-                            fontFamily: "Roboto"
-                          }}
-                        onPress={() => {
-                            this.checkPicker()
-                        }}
-                    />
                 </View>
+                <View >
+                    <Text style={styles.returnText} >С возвращением клиента</Text>
+                </View >
+
+                <View>
+
+                    <View>
+                        <Button
+                            raised={true}
+                            title="Выполнить перенаправление"
+                            buttonStyle={{
+                                backgroundColor: "#41D38D",
+                                borderRadius: 8,
+                                width: widthPercentageToDP('70%'),
+                                height: heightPercentageToDP('4.5%')
+                            }}
+
+                            containerStyle={{
+
+                                alignSelf: "center",
+                                marginTop: heightPercentageToDP('4%'),
+                                marginBottom: heightPercentageToDP('2%'),
+                            }}
+
+                            titleStyle={{
+                                fontSize: heightPercentageToDP('1.8%'),
+                                color: "#FFFFFF",
+                                textAlign: "center",
+                                alignItems: "center",
+                                fontWeight: "500",
+                                fontStyle: "normal",
+                                fontFamily: "Roboto"
+                            }}
+                            onPress={() => {
+                                this.checkPicker()
+                            }}
+                        />
+                    </View>
 
                     <Button
-                    raised={true}
+                        raised={true}
                         title="Отмена"
                         buttonStyle={{
                             backgroundColor: "rgba(255, 215, 112, 0.9)",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
                             height: heightPercentageToDP('4.5%')
-                          }}
+                        }}
 
-                          containerStyle={{
+                        containerStyle={{
                             alignSelf: "center",
                             marginBottom: heightPercentageToDP('2%'),
-                          }}
-              
-                          titleStyle={{
+                        }}
+
+                        titleStyle={{
                             fontSize: heightPercentageToDP('1.8%'),
                             color: "#FFFFFF",
                             textAlign: "center",
@@ -261,13 +262,13 @@ class RedirectCustomer extends Component {
                             fontWeight: "500",
                             fontStyle: "normal",
                             fontFamily: "Roboto"
-                          }}
+                        }}
                         onPress={() => {
                             this.props.navigation.navigate('CallClient')
                         }}
                     />
                 </View>
-                
+
 
             </View>
         )

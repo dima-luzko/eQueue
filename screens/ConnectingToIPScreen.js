@@ -117,20 +117,9 @@ class ConnectingToIP extends Component {
                                     </Shadow>
                                 </View>
                                 <View >
-                                <Shadow
-                                    style={{
-                                        shadowOffset: { width: 0, height: 2 },
-                                        shadowColor: "rgba(0, 0, 0, 0.25)",
-                                        shadowRadius: 4,
-                                        width: widthPercentageToDP('80%'),
-                                        borderRadius: 4,
-                                        height: heightPercentageToDP('4.5%'),
-                                        backgroundColor:"#F4F1F1",
-                                        marginTop: heightPercentageToDP('3%'),
-                                        marginLeft: widthPercentageToDP('0.9%')
-                                    }}
-                                >
+                              
                                     <Button
+                                    raised={true}
                                         title="Проверить соединение"
                                         buttonStyle={{
                                             backgroundColor: '#F4F1F1',
@@ -140,6 +129,7 @@ class ConnectingToIP extends Component {
                                         }}
 
                                         containerStyle={{
+                                            marginTop: heightPercentageToDP('3%'),
                                             alignSelf: "center"
                                         }}
 
@@ -155,7 +145,7 @@ class ConnectingToIP extends Component {
                                             this.checkServer()
                                         }}
                                     />
-                                    </Shadow>
+                                
                                 </View>
                             </View>
                         </DialogContent>

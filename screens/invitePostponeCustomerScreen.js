@@ -6,7 +6,8 @@ import { Button } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { postponePoolInfo } from '../action/getPosponedPoolInfoAction';
 import { invitePostponedCustomer } from '../action/invitePostponedCustomerAction'
-import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
+import { updateText, updateDisableButtom, updateImage, showPostponedTotalLength } from '../action/updateStateAction'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 
 
@@ -48,70 +49,63 @@ class InvitePostponeCustomer extends Component {
             PickerValueHolder: '',
             comment: "",
             textNumber: "",
-            customerId: 0
+            customerId: 0,
+            textCause: ""
 
         };
     }
 
     componentDidMount() {
         this.props.postponePoolInfo()
+        let queueLength = 0;
+        setTimeout(() => {
 
+            if (this.props.postponeCustomer.postponeCustomer && this.props.postponeCustomer.postponeCustomer.length > 0) {
+                queueLength = this.props.postponeCustomer.postponeCustomer.length
+                console.log("Общее количество отложенных клиентов в очереди: ", queueLength ? queueLength : "0")
+            }
+            this.props.showPostponedTotalLength(queueLength)
+
+        }, 100)
     }
-
-    // list() {
-    //     const { customer } = this.props.customer
-
-    //     if (customer && customer.length > 0) {
-
-    //         return (
-
-    //             <View>
-    //                 <Picker
-    //                     selectedValue={this.state.PickerValueHolder}
-    //                     onValueChange={(itemValue) => (this.setState({ PickerValueHolder: itemValue }))} >
-    //                     <Picker.Item label="Выберите пользователя..." value='default' />
-    //                     {customer.map((item, key) =>
-    //                         <Picker.Item
-    //                             label={item.prefix + item.number + " - " + item.to_service.name} value={item.prefix + item.number + " - " + item.to_service.name} key={item.id + ""} />
-    //                     )}
-    //                 </Picker>
-    //             </View>
-    //         )
-    //     }
-    // }
-
 
     list1() {
         const { postponeCustomer } = this.props.postponeCustomer
         if (postponeCustomer && postponeCustomer.length > 0) {
             return (
                 <View>
+
                     <ScrollView
                         style={{ height: heightPercentageToDP('42%') }}
                         horizontal={true}
                     >
+
                         <FlatList
+                            ListFooterComponent={<View><Text></Text></View>}
                             showsVerticalScrollIndicator={false}
                             data={postponeCustomer}
-                            keyExtractor = {item => item.id.toString()}
+                            keyExtractor={item => item.id.toString()}
                             renderItem={({ item }) =>
                                 <TouchableOpacity
                                     onPress={() => {
                                         this.setState({ textNumber: item.prefix + item.number + " - " + item.to_service.name }),
-                                            this.setState({ customerId: item.id + "" })
+                                            this.setState({ customerId: item.id + "" }),
+                                            this.setState({ textCause: item.post_status })
                                     }}
                                 >
+
+
                                     <View style={styles.driwer}>
-
                                         <Text style={styles.numberAndServiceText}>{item.prefix + item.number + " - " + item.to_service.name} </Text>
-
-                                        <Text style={styles.cause}>Причина: {item.post_status}</Text>
+                                        <Text numberOfLines={2} style={styles.cause}>{item.post_status}</Text>
                                     </View>
+
                                 </TouchableOpacity>
                             }
                         />
 
                     </ScrollView>
+
                 </View>
 
 
@@ -133,32 +127,94 @@ class InvitePostponeCustomer extends Component {
 
     render() {
         return (
-            <View >
+            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
                 <Bar />
-                <View style={styles.bottomAppBar}>
-                    <Text style={styles.clientText}>Выбран клиент: {this.state.textNumber} </Text>
+
+                <View>
+                    <Text style={styles.valueInQueue}>Общее количество отложеных клиентов в очереди: {this.props.posponedLength.posponedLength ? this.props.posponedLength.posponedLength : "0"}</Text>
                 </View>
 
-                {this.list1() ? this.list1() : <Text style={styles.postponeClientText}>Отложеных клиентов нету!</Text>}
+                <View style={styles.bottomAppBar}>
+                    <Shadow
+                        style={{
+                            shadowOffset: { width: 0, height: 2 },
+                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                            shadowRadius: 4,
+                            width: widthPercentageToDP('75%'),
+                            borderRadius: 8,
+                            height: heightPercentageToDP('12%'),
+                            alignSelf: "center",
+                            backgroundColor: "#41D38D",
+                        }}
+                    >
+                        <View>
+                            <Text numberOfLines={1} style={styles.chooseClientText}>{this.state.textNumber} </Text>
+                            <Text numberOfLines={3} style={styles.chooseClientText}>{this.state.textCause} </Text>
+
+                        </View>
+
+                    </Shadow>
+                </View>
+
+                <View style={{ height: heightPercentageToDP('40%') }}>
+                    {this.list1()}
+                </View>
+
 
                 <View style={{ marginTop: heightPercentageToDP('2%') }}>
+
                     <Button
-                        title="Отмена"
+                        raised={true}
+                        title="Вызвать клиента"
                         buttonStyle={{
-                            backgroundColor: 'red'
+                            backgroundColor: "#41D38D",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
                         }}
 
                         containerStyle={{
-                            width: widthPercentageToDP('25%'),
-                            marginLeft: widthPercentageToDP('20%'),
-
-
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
                         }}
 
                         titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white',
-                            height: heightPercentageToDP('3%')
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
+                        }}
+                        onPress={() => {
+                            this.check()
+                        }}
+                    />
+
+                    <Button
+                        raised={true}
+                        title="Отмена"
+                        buttonStyle={{
+                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
+                        }}
+
+                        containerStyle={{
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
+                        }}
+
+                        titleStyle={{
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: "#FFFFFF",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
                         }}
                         onPress={() => {
                             this.props.navigation.navigate('CallClient')
@@ -166,77 +222,84 @@ class InvitePostponeCustomer extends Component {
                     />
                 </View>
 
-                <View>
-                    <Button
-                        title="Вызвать"
-                        buttonStyle={{
-                            backgroundColor: 'red'
-                        }}
 
-                        containerStyle={{
-                            width: widthPercentageToDP('25%'),
-                            marginLeft: widthPercentageToDP('60%'),
-                            marginTop: heightPercentageToDP('-5%'),
-
-                        }}
-
-                        titleStyle={{
-                            fontSize: heightPercentageToDP('2%'),
-                            color: 'white'
-                        }}
-                        onPress={() => {
-                            this.check()
-                        }}
-                    />
-                </View>
-            </View>
+            </View >
         )
     }
 }
 
 const styles = StyleSheet.create({
 
+    valueInQueue: {
+        marginTop: heightPercentageToDP('5%'),
+        textAlign: "center",
+        fontSize: heightPercentageToDP('2.3%'),
+        fontFamily: "Roboto",
+        fontWeight: "normal",
+        fontStyle: "normal",
+        color: "#A1A0A0"
+    },
+
     bottomAppBar: {
-        width: widthPercentageToDP('85%'),
-        marginLeft: widthPercentageToDP('8%'),
-        backgroundColor: 'green',
-        height: heightPercentageToDP('8%'),
-        marginTop: heightPercentageToDP('10%'),
-        borderRadius: 12
+        width: widthPercentageToDP('75%'),
+        backgroundColor: "#41D38D",
+        height: heightPercentageToDP('12%'),
+        marginTop: heightPercentageToDP('6%'),
+        borderRadius: 8,
+        alignSelf: "center"
     },
 
     clientText: {
-        fontSize: heightPercentageToDP('2.5%'),
+        width: widthPercentageToDP('45%'),
+        fontSize: heightPercentageToDP('2%'),
         marginLeft: widthPercentageToDP('1.5%'),
-        marginTop: heightPercentageToDP('0.5%')
+        marginTop: heightPercentageToDP('0.5%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "500",
+        color: "#FFFFFF"
+    },
+
+    chooseClientText: {
+        width: widthPercentageToDP('50%'),
+        fontSize: heightPercentageToDP('2%'),
+        marginLeft: widthPercentageToDP('1.5%'),
+        marginTop: heightPercentageToDP('0.5%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "500",
+        color: "#FFFFFF"
     },
 
     driwer: {
-        backgroundColor: '#64ffda',
+        backgroundColor: "#E9E9E9",
         width: widthPercentageToDP('70%'),
-        marginLeft: widthPercentageToDP('17%'),
         marginTop: heightPercentageToDP('2%'),
-        height: heightPercentageToDP('15%'),
-        borderRadius: 12
+        height: heightPercentageToDP('10%'),
+        borderRadius: 12,
+        marginLeft: widthPercentageToDP('15%'),
+        elevation: 3
     },
 
     numberAndServiceText: {
-        fontSize: heightPercentageToDP('2.2%'),
+        fontSize: heightPercentageToDP('2%'),
         marginLeft: widthPercentageToDP('4.5%'),
-        marginTop: heightPercentageToDP('0.5%')
+        marginTop: heightPercentageToDP('0.5%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "500",
+        color: "#AFAFAF"
     },
 
     cause: {
-        fontSize: heightPercentageToDP('2.2%'),
+        width: widthPercentageToDP('45%'),
+        fontSize: heightPercentageToDP('2%'),
         marginLeft: widthPercentageToDP('4.5%'),
-        marginTop: heightPercentageToDP('0.5%')
-    },
-
-    postponeClientText: {
-        height: heightPercentageToDP('40%'),
-        fontSize: heightPercentageToDP('2.5%'),
-        alignSelf: 'center',
-        marginTop: heightPercentageToDP('2%')
+        marginTop: heightPercentageToDP('0.5%'),
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: "500",
+        color: "#AFAFAF"
     }
 
 
@@ -248,6 +311,7 @@ const mapStateToProps = state => {
         customer: state.customer,
         postponeCustomer: state.postponeCustomer,
         text: state.text,
+        totalMinutes: state.totalMinutes,
         image: state.image,
         disableButtonCallClient: state.disableButtonCallClient,
         disableButtonInvitePostponeCustomer: state.disableButtonInvitePostponeCustomer,
@@ -256,7 +320,8 @@ const mapStateToProps = state => {
         disableButtonRedirectClient: state.disableButtonRedirectClient,
         disableButtonPostponeClient: state.disableButtonPostponeClient,
         disableFinishClient: state.disableFinishClient,
-        disableButtonExit: state.disableButtonExit
+        disableButtonExit: state.disableButtonExit,
+        posponedLength: state.posponedLength
 
     };
 };
@@ -267,6 +332,7 @@ const mapDispatchToProps = dispatch => {
         invitePostponedCustomer: (userId, customerId) => dispatch(invitePostponedCustomer(userId, customerId)),
         updateText: (text) => dispatch(updateText(text)),
         updateImage: (image) => dispatch(updateImage(image)),
+        showPostponedTotalLength: (posponedLength) => dispatch(showPostponedTotalLength(posponedLength)),
         updateDisableButtom: (
             disableButtonCallClient,
             disableButtonInvitePostponeCustomer,

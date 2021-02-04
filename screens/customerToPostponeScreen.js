@@ -135,7 +135,7 @@ class CustomerToPostpone extends Component {
                                             fontFamily: "Roboto"
                                         }}
                                         onPress={() => {
-                                            this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes < 30 ? this.props.totalMinutes.totalMinutes += 5 : this.props.totalMinutes.totalMinutes),
+                                            this.props.changeTotalMinutes(this.props.totalMinutes.totalMinutes < 60 ? this.props.totalMinutes.totalMinutes += 5 : this.props.totalMinutes.totalMinutes),
                                                 console.log("Клиент отложен на: " + this.props.totalMinutes.totalMinutes + " минут")
                                         }}
                                     />
@@ -234,7 +234,8 @@ class CustomerToPostpone extends Component {
                             fontFamily: "Roboto"
                         }}
                         onPress={() => {
-                            this.postponeData()
+                            this.postponeData(),
+                            this.props.changeTotalMinutes(0)
                         }}
                     />
                 </View>
