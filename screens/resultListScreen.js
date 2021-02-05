@@ -7,7 +7,7 @@ import { getResultList } from '../action/resultListAction'
 import { getFinishCustomer } from '../action/callClientAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
 import { Row, Grid } from "react-native-easy-grid";
-import { Shadow } from 'react-native-neomorph-shadows';
+
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;

@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
 
   passwordText: {
     marginLeft: widthPercentageToDP('8%'),
-    fontSize: heightPercentageToDP('2%'),
+    fontSize: heightPercentageToDP('2.1%'),
     textAlign: "center"
   },
 

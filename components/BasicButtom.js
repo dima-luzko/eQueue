@@ -548,7 +548,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: heightPercentageToDP('2.5%'),
     color: "#A1A0A0",
-    marginLeft: widthPercentageToDP('8%'),
+    marginLeft: widthPercentageToDP('11%'),
     textAlign: "center"
   },
 
