@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image, Dimensions, PixelRatio, Alert, StatusBar } from 'react-native'
+import { View, StyleSheet, Image, Dimensions, PixelRatio, Alert, StatusBar, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { usersFetchData } from '../action/usersAction'
 import { Picker } from '@react-native-picker/picker'
-import { Input, Item } from 'native-base';
 import { Button } from 'react-native-elements'
 import { loggedUser } from '../action/loggedUserAction'
 import { getSelfServices } from '../action/selfServicesAction'
@@ -14,6 +13,7 @@ import DoubleClick from 'react-native-double-tap'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Shadow } from 'react-native-neomorph-shadows';
+import { Col, Grid } from "react-native-easy-grid"
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -93,22 +93,7 @@ class LoginScreen extends Component {
     if (users && users.length > 0) {
       return (
         <View style={styles.pickerStyle}>
-          <Picker
-            style={styles.pickerText}
-            selectedValue={this.props.userSelected.userSelected}
-            onValueChange={(itemValue) => this.props.userState(itemValue)} >
-            <Picker.Item label="Выберите пользователя..." value='default' />
-            {users.map((item, key) =>
-              <Picker.Item
-                label={item.name} value={item.id} key={key} />
-            )}
-          </Picker>
-        </View>
-      )
-    } else {
-      return (
-        <View style={styles.pickerStyle}>
-          {/* <Shadow
+          <Shadow
             inner
             style={{
               shadowOffset: { width: 2, height: 2 },
@@ -117,19 +102,45 @@ class LoginScreen extends Component {
               width: widthPercentageToDP('72%'),
               borderRadius: 8,
               height: heightPercentageToDP('4.5%'),
-               justifyContent: "center",
-              
+              justifyContent: "center",
+              paddingRight: heightPercentageToDP('2%'),
+              paddingLeft: heightPercentageToDP('5%'),
             }}
-
-            
-          > */}
-            
+          >
+            <Picker
+              style={styles.pickerText}
+              selectedValue={this.props.userSelected.userSelected}
+              onValueChange={(itemValue) => this.props.userState(itemValue)} >
+              <Picker.Item label="Выберите пользователя..." value='default' />
+              {users.map((item, key) =>
+                <Picker.Item
+                  label={item.name} value={item.id} key={key} />
+              )}
+            </Picker>
+          </Shadow>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.pickerStyle}>
+          <Shadow
+            inner
+            style={{
+              shadowOffset: { width: 2, height: 2 },
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowRadius: 2,
+              width: widthPercentageToDP('72%'),
+              borderRadius: 8,
+              height: heightPercentageToDP('4.5%'),
+              justifyContent: "center"
+            }}
+          >
             <Picker
               style={styles.pickerText}
             >
               <Picker.Item label="Выберите пользователя..." value='default' />
             </Picker>
-          {/* </Shadow> */}
+          </Shadow>
         </View>
       )
     }
@@ -165,41 +176,64 @@ class LoginScreen extends Component {
 
             {this.renderPicker()}
 
-            <Item style={styles.passwordStyle}>
+            <View style={styles.passwordStyle}>
 
-              <Input
-                maxLength={32}
-                value={this.props.password.password}
-                onChangeText={(value) => this.props.passwordState(value)}
-                style={styles.passwordText}
-                placeholder="Пароль..."
-                placeholderTextColor="#A2A0A0"
-                secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
-              />
-
-
-              <TouchableOpacity
-                onPress={this.updateSecurityTextEntry}
+              <Shadow
+                inner
+                style={{
+                  shadowOffset: { width: 2, height: 2 },
+                  shadowColor: "rgba(0, 0, 0, 0.25)",
+                  shadowRadius: 2,
+                  width: widthPercentageToDP('72%'),
+                  borderRadius: 8,
+                  height: heightPercentageToDP('5%')
+                }}
               >
-                {this.props.secureTextEntry.secureTextEntry ?
-                  <EyeIcon
-                    name="eye-closed"
-                    size={1.5 * heightPercentageToDP("2%")}
-                    color="rgba(188, 182, 185, 0.7)"
-                    style={{
-                      paddingRight: heightPercentageToDP('2%')
-                    }} />
-                  :
-                  <EyeIcon
-                    name="eye"
-                    size={1.5 * heightPercentageToDP("2%")}
-                    color="rgba(188, 182, 185, 0.7)"
-                    style={{
-                      paddingRight: heightPercentageToDP('2%')
-                    }} />
-                }
-              </TouchableOpacity>
-            </Item>
+                <Grid>
+                  <Col style={{ width: widthPercentageToDP('58%') }}>
+                    <TextInput
+                      maxLength={32}
+                      value={this.props.password.password}
+                      onChangeText={(value) => this.props.passwordState(value)}
+                      style={styles.passwordText}
+                      placeholder="Пароль..."
+                      placeholderTextColor="#A2A0A0"
+                      secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
+                    />
+                  </Col>
+                  <Col >
+                    <TouchableOpacity
+                      style={{
+                        paddingTop: heightPercentageToDP('1%'),
+                        alignItems: "center",
+                        marginRight: widthPercentageToDP('1.7%')
+                      }}
+                      onPress={this.updateSecurityTextEntry}
+                    >
+
+                      {this.props.secureTextEntry.secureTextEntry ?
+
+                        <EyeIcon
+                          name="eye-closed"
+                          size={1.5 * heightPercentageToDP("2%")}
+                          color="rgba(188, 182, 185, 0.7)"
+                        />
+                        :
+                        <EyeIcon
+                          name="eye"
+                          size={1.5 * heightPercentageToDP("2%")}
+                          color="rgba(188, 182, 185, 0.7)"
+                        />
+                      }
+
+                    </TouchableOpacity>
+                  </Col>
+                </Grid>
+
+
+
+              </Shadow>
+            </View>
 
             <Button
               raised={true}
@@ -212,7 +246,7 @@ class LoginScreen extends Component {
               }}
 
               containerStyle={{
-                alignItems:"center"
+                alignItems: "center"
               }}
 
               titleStyle={{
@@ -252,9 +286,10 @@ const styles = StyleSheet.create({
   },
 
   passwordText: {
-    marginLeft: widthPercentageToDP('8%'),
     fontSize: heightPercentageToDP('2.1%'),
-    textAlign: "center"
+    alignItems: "flex-end",
+    textAlign: "center",
+    paddingLeft: widthPercentageToDP('15%')
   },
 
   pickerStyle: {
@@ -263,9 +298,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: heightPercentageToDP('4.5%'),
     marginBottom: heightPercentageToDP('2.5%'),
-    paddingRight: heightPercentageToDP('1.7%'),
-    paddingLeft: heightPercentageToDP('5%'),
-    justifyContent: "center"
+
   },
 
   pickerText: {
