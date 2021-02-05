@@ -4,7 +4,8 @@ import Bar from '../components/appbar'
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { changeFlexPriority } from '../action/changeFlexPriorityAction'
-import { Col, Grid } from "react-native-easy-grid";
+import { Col, Grid } from "react-native-easy-grid"
+import { Shadow } from 'react-native-neomorph-shadows'
 
 
 
@@ -89,29 +90,70 @@ class ChangeFlexPriority extends Component {
                                     this.setState({ selectService: item.service.id })
                                 }}
                             >
+                                {item.service.id === this.state.selectService
 
-                                <View
-                                    style={{
-                                        backgroundColor: item.service.id === this.state.selectService ? "#41D38D" : "#E9E9E9",
-                                        padding: heightPercentageToDP('2%'),
-                                        marginVertical: heightPercentageToDP('1%'),
-                                        width: widthPercentageToDP('35%'),
-                                        height: heightPercentageToDP('10%'),
-                                        marginLeft: widthPercentageToDP('8%'),
-                                        borderRadius: 8,
-                                        justifyContent: "center",
-                                        elevation: 3
-                                    }}
-                                >
-                                    <Text style={{
-                                        fontSize: heightPercentageToDP('2%'),
-                                        color: item.service.id === this.state.selectService ? "#FFFFFF" : "#BABABA",
-                                        fontWeight: "500",
-                                        fontFamily: "Roboto",
-                                        alignItems: "center",
-                                        textAlign: "center"
-                                    }}>{item.service.name} </Text>
-                                </View>
+                                    ?
+                                    <View
+                                        style={{
+                                            backgroundColor: item.service.id === this.state.selectService ? "#41D38D" : "#E9E9E9",
+                                            padding: heightPercentageToDP('2%'),
+                                            marginVertical: heightPercentageToDP('1%'),
+                                            width: widthPercentageToDP('35%'),
+                                            height: heightPercentageToDP('10%'),
+                                            marginLeft: widthPercentageToDP('8%'),
+                                            borderRadius: 8,
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <Shadow
+                                            inner
+                                            style={{
+                                                shadowOffset: { width: 0, height: 2 },
+                                                shadowColor: "rgba(0, 0, 0, 0.25)",
+                                                shadowRadius: 4,
+                                                width: widthPercentageToDP('35%'),
+                                                borderRadius: 8,
+                                                justifyContent: "center",
+                                                marginLeft: widthPercentageToDP('-3.5%'),
+                                                height: heightPercentageToDP('10%')
+                                            }}
+                                        >
+
+                                            <Text style={{
+                                                fontSize: heightPercentageToDP('2%'),
+                                                color: item.service.id === this.state.selectService ? "#FFFFFF" : "#BABABA",
+                                                fontWeight: "500",
+                                                fontFamily: "Roboto",
+                                                alignItems: "center",
+                                                textAlign: "center"
+                                            }}>{item.service.name} </Text>
+                                        </Shadow>
+                                    </View>
+                                    :
+
+                                    <View
+                                        style={{
+                                            backgroundColor: item.service.id === this.state.selectService ? "#41D38D" : "#E9E9E9",
+                                            padding: heightPercentageToDP('2%'),
+                                            marginVertical: heightPercentageToDP('1%'),
+                                            width: widthPercentageToDP('35%'),
+                                            height: heightPercentageToDP('10%'),
+                                            marginLeft: widthPercentageToDP('8%'),
+                                            borderRadius: 8,
+                                            justifyContent: "center",
+                                            elevation: 3
+                                        }}
+                                    >
+                                        <Text style={{
+                                            fontSize: heightPercentageToDP('2%'),
+                                            color: item.service.id === this.state.selectService ? "#FFFFFF" : "#BABABA",
+                                            fontWeight: "500",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center",
+                                            textAlign: "center"
+                                        }}>{item.service.name} </Text>
+                                    </View>
+                                }
                             </TouchableOpacity>
 
                         }
@@ -136,30 +178,74 @@ class ChangeFlexPriority extends Component {
                                 this.setState({ selected: item.id })
                             }}
                         >
-                            <View
-                                style={{
-                                    backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
-                                    padding: heightPercentageToDP('2%'),
-                                    marginVertical: heightPercentageToDP('1%'),
-                                    width: widthPercentageToDP('35%'),
-                                    height: heightPercentageToDP('10%'),
-                                    marginLeft: widthPercentageToDP('8%'),
-                                    borderRadius: 8,
-                                    justifyContent: "center",
-                                    elevation: 3
-                                }}
-                            >
 
-                                <Text style={{
-                                    fontSize: heightPercentageToDP('2%'),
-                                    color: item.id === this.state.selected ? "#FFFFFF" : "#BABABA",
-                                    fontWeight: "500",
-                                    fontFamily: "Roboto",
-                                    alignItems: "center",
-                                    textAlign: "center"
-                                }}>{item.name} </Text>
+                            {item.id === this.state.selected
 
-                            </View>
+                                ?
+                                <View
+                                    style={{
+                                        backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
+                                        padding: heightPercentageToDP('2%'),
+                                        marginVertical: heightPercentageToDP('1%'),
+                                        width: widthPercentageToDP('35%'),
+                                        height: heightPercentageToDP('10%'),
+                                        marginLeft: widthPercentageToDP('8%'),
+                                        borderRadius: 8,
+                                        justifyContent: "center"
+                                    }}
+                                >
+
+                                    <Shadow
+                                        inner
+                                        style={{
+                                            shadowOffset: { width: 0, height: 2 },
+                                            shadowColor: "rgba(0, 0, 0, 0.25)",
+                                            shadowRadius: 4,
+                                            width: widthPercentageToDP('35%'),
+                                            borderRadius: 8,
+                                            justifyContent: "center",
+                                            marginLeft: widthPercentageToDP('-3.5%'),
+                                            height: heightPercentageToDP('10%')
+                                        }}
+                                    >
+
+                                        <Text style={{
+                                            fontSize: heightPercentageToDP('2%'),
+                                            color: item.id === this.state.selected ? "#FFFFFF" : "#BABABA",
+                                            fontWeight: "500",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center",
+                                            textAlign: "center"
+                                        }}>{item.name} </Text>
+                                    </Shadow>
+                                </View>
+                                :
+                                <View
+                                    style={{
+                                        backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
+                                        padding: heightPercentageToDP('2%'),
+                                        marginVertical: heightPercentageToDP('1%'),
+                                        width: widthPercentageToDP('35%'),
+                                        height: heightPercentageToDP('10%'),
+                                        marginLeft: widthPercentageToDP('8%'),
+                                        borderRadius: 8,
+                                        justifyContent: "center",
+                                        elevation: 3
+                                    }}
+                                >
+
+                                    <Text style={{
+                                        fontSize: heightPercentageToDP('2%'),
+                                        color: item.id === this.state.selected ? "#FFFFFF" : "#BABABA",
+                                        fontWeight: "500",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center",
+                                        textAlign: "center"
+                                    }}>{item.name} </Text>
+
+                                </View>
+                            }
+
                         </TouchableOpacity>
                     }
                     keyExtractor={(item) => item.id}

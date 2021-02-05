@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { postponePoolInfo } from '../action/getPosponedPoolInfoAction';
 import { invitePostponedCustomer } from '../action/invitePostponedCustomerAction'
 import { updateText, updateDisableButtom, updateImage, showPostponedTotalLength } from '../action/updateStateAction'
+import { Shadow } from 'react-native-neomorph-shadows';
 
 
 
@@ -48,8 +49,7 @@ class InvitePostponeCustomer extends Component {
             PickerValueHolder: '',
             comment: "",
             textNumber: "",
-            customerId: 0,
-            data: undefined
+            customerId: 0
         };
     }
 
@@ -86,45 +86,100 @@ class InvitePostponeCustomer extends Component {
                             renderItem={({ item }) =>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        this.setState({data: postponeCustomer})
+                                        this.setState({ data: postponeCustomer })
                                         this.setState({ textNumber: item.prefix + item.number + " - " + item.to_service.name }),
                                             this.setState({ customerId: item.id + "" })
                                     }}
                                 >
 
-                                    <View style={{
-                                        backgroundColor: item.id + "" === this.state.customerId ? "#41D38D" :"#E9E9E9",
-                                        width: item.id + "" === this.state.customerId ? widthPercentageToDP('75%') : widthPercentageToDP('70%'),
-                                        marginTop: heightPercentageToDP('2%'),
-                                        height: heightPercentageToDP('10%'),
-                                        borderRadius: 12,
-                                        marginLeft: item.id + "" === this.state.customerId ? widthPercentageToDP('13%') : widthPercentageToDP('15%'),
-                                        elevation: 3
-                                    }}
-                                    
-                                    >
-                                        <Text numberOfLines={1}
-                                         style={{
-                                            fontSize: heightPercentageToDP('2%'),
-                                            marginLeft: widthPercentageToDP('4.5%'),
-                                            marginTop: heightPercentageToDP('0.5%'),
-                                            fontFamily: "Roboto",
-                                            fontStyle: "normal",
-                                            fontWeight: "500",
-                                            color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF",
-                                            textAlign: "center"
-                                         }}>{item.prefix + item.number + " - " + item.to_service.name} </Text>
-                                        <Text numberOfLines={2} 
-                                        style={{
-                                            fontSize: heightPercentageToDP('2%'),
-                                            marginLeft: widthPercentageToDP('4.5%'),
-                                            marginTop: heightPercentageToDP('0.5%'),
-                                            fontFamily: "Roboto",
-                                            fontStyle: "normal",
-                                            fontWeight: "500",
-                                            color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF"
-                                        }}>{item.post_status}</Text>
-                                    </View>
+                                    {item.id + "" === this.state.customerId
+
+                                        ?
+
+                                        <View style={{
+                                            backgroundColor: item.id + "" === this.state.customerId ? "#41D38D" : "#E9E9E9",
+                                            width: item.id + "" === this.state.customerId ? widthPercentageToDP('75%') : widthPercentageToDP('70%'),
+                                            marginTop: heightPercentageToDP('2%'),
+                                            height: heightPercentageToDP('10%'),
+                                            borderRadius: 12,
+                                            marginLeft: item.id + "" === this.state.customerId ? widthPercentageToDP('13%') : widthPercentageToDP('15%')
+                                        }}
+
+                                        >
+                                            <Shadow
+                                                inner
+                                                style={{
+                                                    shadowOffset: { width: 0, height: 2 },
+                                                    shadowColor: "rgba(0, 0, 0, 0.25)",
+                                                    shadowRadius: 4,
+                                                    width: widthPercentageToDP('75%'),
+                                                    borderRadius: 12,
+                                                    height: heightPercentageToDP('10%'),
+                                                }}
+                                            >
+
+                                                <Text numberOfLines={1}
+                                                    style={{
+                                                        fontSize: heightPercentageToDP('2%'),
+                                                        marginLeft: widthPercentageToDP('4.5%'),
+                                                        marginTop: heightPercentageToDP('0.5%'),
+                                                        fontFamily: "Roboto",
+                                                        fontStyle: "normal",
+                                                        fontWeight: "500",
+                                                        color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF",
+                                                        textAlign: "center"
+                                                    }}>{item.prefix + item.number + " - " + item.to_service.name} </Text>
+                                                <Text numberOfLines={2}
+                                                    style={{
+                                                        fontSize: heightPercentageToDP('2%'),
+                                                        marginLeft: widthPercentageToDP('4.5%'),
+                                                        marginTop: heightPercentageToDP('0.5%'),
+                                                        fontFamily: "Roboto",
+                                                        fontStyle: "normal",
+                                                        fontWeight: "500",
+                                                        color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF"
+                                                    }}>{item.post_status}</Text>
+                                            </Shadow>
+                                        </View>
+
+                                        :
+
+                                        <View style={{
+                                            backgroundColor: item.id + "" === this.state.customerId ? "#41D38D" : "#E9E9E9",
+                                            width: item.id + "" === this.state.customerId ? widthPercentageToDP('75%') : widthPercentageToDP('70%'),
+                                            marginTop: heightPercentageToDP('2%'),
+                                            height: heightPercentageToDP('10%'),
+                                            borderRadius: 12,
+                                            marginLeft: item.id + "" === this.state.customerId ? widthPercentageToDP('13%') : widthPercentageToDP('15%'),
+                                            elevation: 3
+                                        }}
+
+                                        >
+                                            <Text numberOfLines={1}
+                                                style={{
+                                                    fontSize: heightPercentageToDP('2%'),
+                                                    marginLeft: widthPercentageToDP('4.5%'),
+                                                    marginTop: heightPercentageToDP('0.5%'),
+                                                    fontFamily: "Roboto",
+                                                    fontStyle: "normal",
+                                                    fontWeight: "500",
+                                                    color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF",
+                                                    textAlign: "center"
+                                                }}>{item.prefix + item.number + " - " + item.to_service.name} </Text>
+                                            <Text numberOfLines={2}
+                                                style={{
+                                                    fontSize: heightPercentageToDP('2%'),
+                                                    marginLeft: widthPercentageToDP('4.5%'),
+                                                    marginTop: heightPercentageToDP('0.5%'),
+                                                    fontFamily: "Roboto",
+                                                    fontStyle: "normal",
+                                                    fontWeight: "500",
+                                                    color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF"
+                                                }}>{item.post_status}</Text>
+                                        </View>
+
+                                    }
+
 
                                 </TouchableOpacity>
                             }
@@ -160,47 +215,47 @@ class InvitePostponeCustomer extends Component {
                     <Text style={styles.valueInQueue}>Общее количество отложеных клиентов в очереди: {this.props.posponedLength.posponedLength ? this.props.posponedLength.posponedLength : "0"}</Text>
                 </View>
 
-                
+
 
                 <View style={{ height: heightPercentageToDP('52%') }}>
                     {this.postponedClientList()}
                 </View>
 
                 <View style={{ marginTop: heightPercentageToDP('2%') }}>
-                    
-                        <Button
+
+                    <Button
                         disabled={this.props.posponedLength.posponedLength ? false : true}
-                            raised={true}
-                            title="Вызвать клиента"
-                            buttonStyle={{
-                                backgroundColor: "#41D38D",
-                                borderRadius: 8,
-                                width: widthPercentageToDP('70%'),
-                                height: heightPercentageToDP('4.5%')
-                            }}
+                        raised={true}
+                        title="Вызвать клиента"
+                        buttonStyle={{
+                            backgroundColor: "#41D38D",
+                            borderRadius: 8,
+                            width: widthPercentageToDP('70%'),
+                            height: heightPercentageToDP('4.5%')
+                        }}
 
-                            containerStyle={{
-                                alignSelf: "center",
-                                marginBottom: heightPercentageToDP('2%'),
-                            }}
+                        containerStyle={{
+                            alignSelf: "center",
+                            marginBottom: heightPercentageToDP('2%'),
+                        }}
 
-                            titleStyle={{
-                                fontSize: heightPercentageToDP('1.8%'),
-                                color: this.props.posponedLength.posponedLength ? "#FFFFFF" : "#B6B6B6",
-                                textAlign: "center",
-                                alignItems: "center",
-                                fontWeight: "500",
-                                fontStyle: "normal",
-                                fontFamily: "Roboto"
-                            }}
-                            onPress={() => {
-                                this.check()
-                            }}
-                        />
+                        titleStyle={{
+                            fontSize: heightPercentageToDP('1.8%'),
+                            color: this.props.posponedLength.posponedLength ? "#FFFFFF" : "#B6B6B6",
+                            textAlign: "center",
+                            alignItems: "center",
+                            fontWeight: "500",
+                            fontStyle: "normal",
+                            fontFamily: "Roboto"
+                        }}
+                        onPress={() => {
+                            this.check()
+                        }}
+                    />
 
                     <TouchableOpacity>
                         <Button
-                        
+
                             raised={true}
                             title="Отмена"
                             buttonStyle={{

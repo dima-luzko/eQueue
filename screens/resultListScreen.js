@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import { getResultList } from '../action/resultListAction'
 import { getFinishCustomer } from '../action/callClientAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
-import { Row, Grid } from "react-native-easy-grid";
+import { Row, Grid } from "react-native-easy-grid"
+import { Shadow } from 'react-native-neomorph-shadows'
 
 
 const widthPercentageToDP = widthPercent => {
@@ -79,19 +80,63 @@ class ResultList extends Component {
                                     this.setState({ selected: item.id })
                                 }}
                             >
-                                <View
-                                    style={{
-                                        backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        width: widthPercentageToDP('65%'),
-                                        borderRadius: 8,
-                                        marginTop: heightPercentageToDP('3%'),
-                                        height: heightPercentageToDP('4.5%'),
-                                        marginLeft: widthPercentageToDP('18%'),
-                                        elevation:3
-                                    }}
-                                >
+                                {item.id === this.state.selected
+
+                                    ?
+
+                                    <View
+                                        style={{
+                                            backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            width: widthPercentageToDP('65%'),
+                                            borderRadius: 8,
+                                            marginTop: heightPercentageToDP('3%'),
+                                            height: heightPercentageToDP('4.5%'),
+                                            marginLeft: widthPercentageToDP('18%')
+                                        }}
+                                    >
+                                        <Shadow
+                                            inner
+                                            style={{
+                                                shadowOffset: { width: 0, height: 2 },
+                                                shadowColor: "rgba(0, 0, 0, 0.25)",
+                                                shadowRadius: 4,
+                                                width: widthPercentageToDP('65%'),
+                                                borderRadius: 8,
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                height: heightPercentageToDP('4.5%')
+                                            }}
+                                        >
+                                            <Text style={{
+                                                fontSize: heightPercentageToDP('2%'),
+                                                color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
+                                                fontWeight: "500",
+                                                fontFamily: "Roboto",
+                                                alignItems: "center",
+                                                textAlign: "center"
+
+                                            }}>{item.name} </Text>
+                                        </Shadow>
+                                    </View>
+
+                                    :
+
+                                    <View
+                                        style={{
+                                            backgroundColor: item.id === this.state.selected ? "#41D38D" : "#E9E9E9",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            width: widthPercentageToDP('65%'),
+                                            borderRadius: 8,
+                                            marginTop: heightPercentageToDP('3%'),
+                                            height: heightPercentageToDP('4.5%'),
+                                            marginLeft: widthPercentageToDP('18%'),
+                                            elevation: 3
+                                        }}
+                                    >
+
                                         <Text style={{
                                             fontSize: heightPercentageToDP('2%'),
                                             color: item.id === this.state.selected ? "#FFFFFF" : '#AFAFAF',
@@ -101,7 +146,11 @@ class ResultList extends Component {
                                             textAlign: "center"
 
                                         }}>{item.name} </Text>
-                                </View>
+
+                                    </View>
+                                }
+
+
                             </TouchableOpacity>
                         }
                     />
