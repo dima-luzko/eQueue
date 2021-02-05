@@ -74,7 +74,7 @@ class CallClient extends Component {
       }
       this.props.showTotalLength(queueLength)
 
-    }, 100)
+    }, 200)
   }
 
   changeText() {
