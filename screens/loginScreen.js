@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Image, Dimensions, PixelRatio, Alert, StatusBar, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { usersFetchData } from '../action/usersAction'
-import { Picker } from '@react-native-picker/picker'
 import { Button } from 'react-native-elements'
 import { loggedUser } from '../action/loggedUserAction'
 import { getSelfServices } from '../action/selfServicesAction'
@@ -14,6 +13,8 @@ import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Shadow } from 'react-native-neomorph-shadows';
 import { Col, Grid } from "react-native-easy-grid"
+import RNPickerSelect from 'react-native-picker-select';
+import PickerIcon from 'react-native-vector-icons/FontAwesome5'
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -33,6 +34,13 @@ export {
 };
 
 class LoginScreen extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      pickerValue: undefined
+    };
+  }
 
   errorPasswordAlert() {
     Alert.alert(
@@ -93,6 +101,7 @@ class LoginScreen extends Component {
     if (users && users.length > 0) {
       return (
         <View style={styles.pickerStyle}>
+
           <Shadow
             inner
             style={{
@@ -101,22 +110,30 @@ class LoginScreen extends Component {
               shadowRadius: 2,
               width: widthPercentageToDP('72%'),
               borderRadius: 8,
-              height: heightPercentageToDP('4.5%'),
-              justifyContent: "center",
-              paddingRight: heightPercentageToDP('2%'),
-              paddingLeft: heightPercentageToDP('5%'),
+              height: heightPercentageToDP('4.5%')
             }}
           >
-            <Picker
-              style={styles.pickerText}
-              selectedValue={this.props.userSelected.userSelected}
-              onValueChange={(itemValue) => this.props.userState(itemValue)} >
-              <Picker.Item label="Выберите пользователя..." value='default' />
-              {users.map((item, key) =>
-                <Picker.Item
-                  label={item.name} value={item.id} key={key} />
-              )}
-            </Picker>
+            <RNPickerSelect
+              value={this.props.userSelected.userSelected}
+              style={{ ...pickerSelectStyles }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => {
+                return <PickerIcon
+                  style={{ paddingTop: heightPercentageToDP('0.7%'), marginRight: widthPercentageToDP('2.5%') }}
+                  name="angle-down"
+                  size={1.5 * heightPercentageToDP("2%")}
+                  color="rgba(188, 182, 185, 0.7)"
+                />
+              }}
+              placeholder={{}}
+              onValueChange={(itemValue) => this.props.userState(itemValue)}
+              items={
+                users.map(item => ({
+                  label: item.name,
+                  value: item.id
+                }))
+              }
+            />
           </Shadow>
         </View>
       )
@@ -131,15 +148,27 @@ class LoginScreen extends Component {
               shadowRadius: 2,
               width: widthPercentageToDP('72%'),
               borderRadius: 8,
-              height: heightPercentageToDP('4.5%'),
-              justifyContent: "center"
+              height: heightPercentageToDP('4.5%')
             }}
           >
-            <Picker
-              style={styles.pickerText}
-            >
-              <Picker.Item label="Выберите пользователя..." value='default' />
-            </Picker>
+            <RNPickerSelect
+              value={this.state.pickerValue}
+              style={{ ...pickerSelectStyles }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => {
+                return <PickerIcon
+                  style={{ paddingTop: heightPercentageToDP('0.7%'), marginRight: widthPercentageToDP('2.5%') }}
+                  name="angle-down"
+                  size={1.5 * heightPercentageToDP("2%")}
+                  color="rgba(188, 182, 185, 0.7)"
+                />
+              }}
+              placeholder={{}}
+              onValueChange={(value) => (console.log(value), this.setState({ pickerValue: value }))}
+              items={[
+                { label: "Выберите пользователя... ", value: null }
+              ]}
+            />
           </Shadow>
         </View>
       )
@@ -177,7 +206,6 @@ class LoginScreen extends Component {
             {this.renderPicker()}
 
             <View style={styles.passwordStyle}>
-
               <Shadow
                 inner
                 style={{
@@ -190,7 +218,7 @@ class LoginScreen extends Component {
                 }}
               >
                 <Grid>
-                  <Col style={{ width: widthPercentageToDP('58%') }}>
+                  <Col size={10}>
                     <TextInput
                       maxLength={32}
                       value={this.props.password.password}
@@ -201,18 +229,16 @@ class LoginScreen extends Component {
                       secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
                     />
                   </Col>
-                  <Col >
+                  <Col style={{ paddingRight: widthPercentageToDP('0.8%') }}>
                     <TouchableOpacity
                       style={{
                         paddingTop: heightPercentageToDP('1%'),
-                        alignItems: "center",
-                        marginRight: widthPercentageToDP('1.7%')
+                        alignItems: "center"
                       }}
                       onPress={this.updateSecurityTextEntry}
                     >
-
-                      {this.props.secureTextEntry.secureTextEntry ?
-
+                      {this.props.secureTextEntry.secureTextEntry
+                        ?
                         <EyeIcon
                           name="eye-closed"
                           size={1.5 * heightPercentageToDP("2%")}
@@ -229,9 +255,6 @@ class LoginScreen extends Component {
                     </TouchableOpacity>
                   </Col>
                 </Grid>
-
-
-
               </Shadow>
             </View>
 
@@ -250,7 +273,7 @@ class LoginScreen extends Component {
               }}
 
               titleStyle={{
-                fontSize: heightPercentageToDP('2%'),
+                fontSize: heightPercentageToDP('2.1%'),
                 color: '#A1A0A0'
               }}
 
@@ -287,9 +310,9 @@ const styles = StyleSheet.create({
 
   passwordText: {
     fontSize: heightPercentageToDP('2.1%'),
-    alignItems: "flex-end",
     textAlign: "center",
-    paddingLeft: widthPercentageToDP('15%')
+    paddingLeft: widthPercentageToDP('10%'),
+    color: "#A2A0A0"
   },
 
   pickerStyle: {
@@ -297,14 +320,20 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.7)",
     borderRadius: 8,
     height: heightPercentageToDP('4.5%'),
-    marginBottom: heightPercentageToDP('2.5%'),
-
-  },
-
-  pickerText: {
-    color: "#A2A0A0"
+    marginBottom: heightPercentageToDP('2.5%')
   }
 });
+
+const pickerSelectStyles = StyleSheet.create({
+
+  inputAndroid: {
+    fontSize: heightPercentageToDP('2.1%'),
+    textAlign: "center",
+    paddingVertical: heightPercentageToDP('1%'),
+    color: "#A2A0A0"
+  }
+})
+
 
 const mapStateToProps = state => {
   return {
@@ -331,5 +360,3 @@ const mapDispatchToProps = dispatch => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
-
-
