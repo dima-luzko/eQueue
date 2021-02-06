@@ -125,7 +125,7 @@ class LoginScreen extends Component {
                   color="rgba(188, 182, 185, 0.7)"
                 />
               }}
-              placeholder={{}}
+              placeholder={{label: "Выберите пользователя... ", value: null}}
               onValueChange={(itemValue) => this.props.userState(itemValue)}
               items={
                 users.map(item => ({
@@ -331,7 +331,10 @@ const pickerSelectStyles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: heightPercentageToDP('1%'),
     color: "#A2A0A0"
-  }
+  },
+  placeholder: {
+      color: "#AFAFAF"
+    }
 })
 
 

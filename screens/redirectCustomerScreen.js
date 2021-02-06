@@ -2,13 +2,14 @@ import { Text } from 'native-base'
 import React, { Component } from 'react'
 import { View, StyleSheet, PixelRatio, Dimensions, TextInput, Alert } from 'react-native'
 import Bar from '../components/appbar'
-import { Picker } from '@react-native-picker/picker'
 import CheckBox from '@react-native-community/checkbox'
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { getServices } from '../action/getServicesAction'
 import { redirectCustomer } from '../action/redirectCustomerAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
+import RNPickerSelect from 'react-native-picker-select';
+import PickerIcon from 'react-native-vector-icons/FontAwesome5'
 import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
@@ -69,18 +70,27 @@ class RedirectCustomer extends Component {
                             alignSelf: "center"
                         }}
                     >
-                        <Picker
-                            style={styles.pickerText}
-                            selectedValue={this.state.PickerValueHolder}
-                            onValueChange={(itemValue, itemIndex) => (console.log(itemValue), this.setState({ PickerValueHolder: itemValue }))} >
-                            <Picker.Item label="Выбрать услугу..." value='default' />
-                            {this.props.services.services.inner_services.map((item, key) =>
-                                <Picker.Item
-                                    label={item.name}
-                                    value={item.id}
-                                    key={key} />
-                            )}
-                        </Picker>
+                        <RNPickerSelect
+                            value={this.state.PickerValueHolder}
+                            style={{ ...pickerSelectStyles }}
+                            useNativeAndroidPickerStyle={false}
+                            Icon={() => {
+                                return <PickerIcon
+                                    style={{ paddingTop: heightPercentageToDP('0.7%'), marginRight: widthPercentageToDP('2.5%') }}
+                                    name="angle-down"
+                                    size={1.5 * heightPercentageToDP("2%")}
+                                    color="rgba(188, 182, 185, 0.7)"
+                                />
+                            }}
+                            placeholder={{ label: "Выбрать услугу... ", value: null }}
+                            onValueChange={(itemValue, itemIndex) => (console.log(itemValue), this.setState({ PickerValueHolder: itemValue }))}
+                            items={
+                                this.props.services.services.inner_services.map(item => ({
+                                    label: item.name,
+                                    value: item.id
+                                }))
+                            }
+                        />
                     </Shadow>
                 </View>
             )
@@ -100,11 +110,24 @@ class RedirectCustomer extends Component {
                             alignSelf: "center"
                         }}
                     >
-                        <Picker
-                            style={styles.pickerText}
-                        >
-                            <Picker.Item label="Выбрать услугу..." value='default' />
-                        </Picker>
+                        <RNPickerSelect
+                            value={this.state.pickerValue}
+                            style={{ ...pickerSelectStyles }}
+                            useNativeAndroidPickerStyle={false}
+                            Icon={() => {
+                                return <PickerIcon
+                                    style={{ paddingTop: heightPercentageToDP('0.7%'), marginRight: widthPercentageToDP('2.5%') }}
+                                    name="angle-down"
+                                    size={1.5 * heightPercentageToDP("2%")}
+                                    color="rgba(188, 182, 185, 0.7)"
+                                />
+                            }}
+                            placeholder={{}}
+                            onValueChange={(value) => (console.log(value), this.setState({ pickerValue: value }))}
+                            items={[
+                                { label: "Выбрать услугу... ", value: null }
+                            ]}
+                        />
                     </Shadow>
                 </View>
             )
@@ -341,6 +364,19 @@ const styles = StyleSheet.create({
     }
 
 })
+
+const pickerSelectStyles = StyleSheet.create({
+
+    inputAndroid: {
+      fontSize: heightPercentageToDP('2.1%'),
+      textAlign: "center",
+      paddingVertical: heightPercentageToDP('1%'),
+      color: "#AFAFAF"
+    },
+    placeholder: {
+        color: "#AFAFAF"
+      }
+  })
 
 const mapStateToProps = state => {
     return {
