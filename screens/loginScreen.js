@@ -214,7 +214,8 @@ class LoginScreen extends Component {
                   shadowRadius: 2,
                   width: widthPercentageToDP('72%'),
                   borderRadius: 8,
-                  height: heightPercentageToDP('5%')
+                  height: heightPercentageToDP('4.5%'),
+                  paddingLeft: widthPercentageToDP('10%')
                 }}
               >
                 <Grid>
@@ -311,8 +312,8 @@ const styles = StyleSheet.create({
   passwordText: {
     fontSize: heightPercentageToDP('2.1%'),
     textAlign: "center",
-    paddingLeft: widthPercentageToDP('10%'),
-    color: "#A2A0A0"
+   // paddingLeft: widthPercentageToDP('10%'),
+    color: "#A2A0A0",
   },
 
   pickerStyle: {

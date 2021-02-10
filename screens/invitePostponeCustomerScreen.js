@@ -121,7 +121,6 @@ class InvitePostponeCustomer extends Component {
                                                 <Text numberOfLines={1}
                                                     style={{
                                                         fontSize: heightPercentageToDP('2%'),
-                                                        marginLeft: widthPercentageToDP('4.5%'),
                                                         marginTop: heightPercentageToDP('0.5%'),
                                                         fontFamily: "Roboto",
                                                         fontStyle: "normal",
@@ -158,7 +157,6 @@ class InvitePostponeCustomer extends Component {
                                             <Text numberOfLines={1}
                                                 style={{
                                                     fontSize: heightPercentageToDP('2%'),
-                                                    marginLeft: widthPercentageToDP('4.5%'),
                                                     marginTop: heightPercentageToDP('0.5%'),
                                                     fontFamily: "Roboto",
                                                     fontStyle: "normal",

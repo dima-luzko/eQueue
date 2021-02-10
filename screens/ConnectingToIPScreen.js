@@ -35,7 +35,7 @@ class ConnectingToIP extends Component {
             "Ошибка",
             "Сначала необходимо ввести ip - адресс сервера!",
             [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
+                { text: "OK", onPress: () => this.setState({dialogVisible: true}) }
             ],
             { cancelable: false }
         );
@@ -65,7 +65,7 @@ class ConnectingToIP extends Component {
                         this.props.navigation.navigate("ServerNoConnection")
                         console.error("Нет соединения с сервером!");
                     }
-                }, 100);
+                }, 300);
             }
             else {
                 this.errorInputIPAlert()

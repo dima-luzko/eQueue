@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, StatusBar, Alert, Image } from 'react-native'
+import { View, StyleSheet, PixelRatio, Dimensions, StatusBar, Alert, Image, Text } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
@@ -51,29 +51,28 @@ class SplashScreen extends Component {
     render() {
         return (
             <LinearGradient
-                colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+                colors={["rgba(255, 141, 161, 1) 0%", "rgba(152, 164, 227, 1) 100%"]}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 1 }}
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                <View style={styles.container}>
                     <Image
+                        resizeMode="contain"
                         style={styles.logo}
                         source={
                             require('../images/logo_equeue.png')
                         }
                     />
-                    <View style={{ height: heightPercentageToDP('5%') }}>
+                   
                         <Image
+                            resizeMode="contain"
                             style={styles.logoHorizont}
                             source={
                                 require('../images/logo_horizont.png')
                             }
                         />
-                    </View>
-
-                </View>
+                        <Text style={styles.fromText}>from</Text>
             </LinearGradient>
         )
     }
@@ -81,20 +80,34 @@ class SplashScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center'
-    },
 
     logo: {
         marginTop: heightPercentageToDP('43%'),
-        width: widthPercentageToDP('52%'),
-        height: heightPercentageToDP('10%')
+        position: "absolute",
+        alignSelf: "center",
+        height: heightPercentageToDP('8%'),
+        marginLeft: widthPercentageToDP('10%'),
+
     },
     logoHorizont: {
-        marginTop: heightPercentageToDP('35%'),
-        // width: widthPercentageToDP('34.5%'),
-        //  height: heightPercentageToDP('8.7%')
+        marginTop: heightPercentageToDP('90%'),
+        position: "absolute",
+        height: heightPercentageToDP('2%'),
+        marginLeft: widthPercentageToDP('1%'),
+        alignSelf: "center"
+    },
+    fromText: {
+        fontFamily: "Roboto",
+        textAlign: 'center',
+        fontSize: heightPercentageToDP('3%'),
+        fontStyle: "normal",
+        color: "#FFFFFF",
+        fontWeight: "normal",
+        position: "absolute",
+        marginTop: heightPercentageToDP('85%'),
+        alignSelf: "center"
     }
+
 });
 
 const mapStateToProps = state => {
