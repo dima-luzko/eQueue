@@ -60,7 +60,6 @@ class ChangeFlexPriority extends Component {
         this.state = {
             selected: null,
             selectService: null
-
         };
     }
 
@@ -168,6 +167,7 @@ class ChangeFlexPriority extends Component {
         return (
             <View>
                 <FlatList
+
                     ListFooterComponent={<View><Text></Text></View>}
                     showsVerticalScrollIndicator={false}
                     data={DATA}
@@ -275,6 +275,7 @@ class ChangeFlexPriority extends Component {
                 <View style={{ marginTop: heightPercentageToDP('2%') }}>
 
                     <Button
+                        disabled={this.state.selectService ? false : true}
                         raised={true}
                         title="Изменить приоритет"
                         buttonStyle={{
@@ -307,7 +308,7 @@ class ChangeFlexPriority extends Component {
                         raised={true}
                         title="Отмена"
                         buttonStyle={{
-                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            backgroundColor: "#E9E9E9",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
                             height: heightPercentageToDP('4.5%')
@@ -320,7 +321,7 @@ class ChangeFlexPriority extends Component {
 
                         titleStyle={{
                             fontSize: heightPercentageToDP('1.8%'),
-                            color: "#FFFFFF",
+                            color: "#B6B6B6",
                             textAlign: "center",
                             alignItems: "center",
                             fontWeight: "500",

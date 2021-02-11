@@ -35,7 +35,7 @@ class ConnectingToIP extends Component {
             "Ошибка",
             "Сначала необходимо ввести ip - адресс сервера!",
             [
-                { text: "OK", onPress: () => this.setState({dialogVisible: true}) }
+                { text: "OK", onPress: () => this.setState({ dialogVisible: true }) }
             ],
             { cancelable: false }
         );
@@ -76,7 +76,7 @@ class ConnectingToIP extends Component {
     render() {
         return (
             <LinearGradient
-                colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+                colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 1 }}
                 style={{ flex: 1 }}
@@ -117,9 +117,9 @@ class ConnectingToIP extends Component {
                                     </Shadow>
                                 </View>
                                 <View >
-                              
+
                                     <Button
-                                    raised={true}
+                                        raised={true}
                                         title="Проверить соединение"
                                         buttonStyle={{
                                             backgroundColor: '#F4F1F1',
@@ -145,7 +145,7 @@ class ConnectingToIP extends Component {
                                             this.checkServer()
                                         }}
                                     />
-                                
+
                                 </View>
                             </View>
                         </DialogContent>

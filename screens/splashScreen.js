@@ -51,28 +51,28 @@ class SplashScreen extends Component {
     render() {
         return (
             <LinearGradient
-                colors={["rgba(255, 141, 161, 1) 0%", "rgba(152, 164, 227, 1) 100%"]}
+                colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 1 }}
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                    <Image
-                        resizeMode="contain"
-                        style={styles.logo}
-                        source={
-                            require('../images/logo_equeue.png')
-                        }
-                    />
-                   
-                        <Image
-                            resizeMode="contain"
-                            style={styles.logoHorizont}
-                            source={
-                                require('../images/logo_horizont.png')
-                            }
-                        />
-                        <Text style={styles.fromText}>from</Text>
+                <Image
+                    resizeMode="contain"
+                    style={styles.logo}
+                    source={
+                        require('../images/logo_equeue.png')
+                    }
+                />
+
+                <Image
+                    resizeMode="contain"
+                    style={styles.logoHorizont}
+                    source={
+                        require('../images/logo_horizont.png')
+                    }
+                />
+                <Text style={styles.fromText}>from</Text>
             </LinearGradient>
         )
     }

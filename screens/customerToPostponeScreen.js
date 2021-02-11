@@ -146,7 +146,6 @@ class CustomerToPostpone extends Component {
                     </Grid>
                 </View>
 
-
                 <View style={styles.inputStyle}>
                     <Shadow
                         inner
@@ -174,10 +173,6 @@ class CustomerToPostpone extends Component {
                     </Shadow>
                 </View>
 
-
-
-
-
                 <View style={styles.checkBoxStyle}>
                     <Shadow
                         inner
@@ -200,10 +195,7 @@ class CustomerToPostpone extends Component {
                     </Shadow>
                 </View>
 
-
-
                 <View >
-
                     <Text style={styles.asForMeText} >Только для меня</Text>
                 </View >
 
@@ -245,7 +237,7 @@ class CustomerToPostpone extends Component {
                         raised={true}
                         title="Отмена"
                         buttonStyle={{
-                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            backgroundColor: "#E9E9E9",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
                             height: heightPercentageToDP('4.5%')
@@ -258,7 +250,7 @@ class CustomerToPostpone extends Component {
 
                         titleStyle={{
                             fontSize: heightPercentageToDP('1.8%'),
-                            color: "#FFFFFF",
+                            color: "#AFAFAF",
                             textAlign: "center",
                             alignItems: "center",
                             fontWeight: "500",
@@ -327,7 +319,7 @@ const styles = StyleSheet.create({
 
     asForMeText: {
         marginLeft: widthPercentageToDP('17.5%'),
-        marginTop: heightPercentageToDP('-3.7%'),
+        marginTop: heightPercentageToDP('-3.65%'),
         fontSize: heightPercentageToDP('1.9%'),
         fontFamily: "Roboto",
         fontStyle: "normal",

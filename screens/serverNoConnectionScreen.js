@@ -37,13 +37,13 @@ class ServerNoConnection extends Component {
     render() {
         return (
             <LinearGradient
-                colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+                colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 1 }}
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                <View  style={{ backgroundColor: "#FFFFFF"}}>
+                <View style={{ backgroundColor: "#FFFFFF" }}>
                     <Dialog
                         visible={this.state.visiable}
                     >
@@ -54,7 +54,7 @@ class ServerNoConnection extends Component {
                                 <Text style={styles.textNotConnection}>Нет соединения с сервером!</Text>
                             </View>
                             <View >
-                            <Shadow
+                                <Shadow
                                     style={{
                                         shadowOffset: { width: 0, height: 2 },
                                         shadowColor: "rgba(253, 174, 190, 0.7)",
@@ -62,36 +62,36 @@ class ServerNoConnection extends Component {
                                         width: widthPercentageToDP('38%'),
                                         borderRadius: 4,
                                         height: heightPercentageToDP('5%'),
-                                        backgroundColor:"#FDAEBE",
-                                        marginLeft:widthPercentageToDP('22%')
+                                        backgroundColor: "#FDAEBE",
+                                        marginLeft: widthPercentageToDP('22%')
                                     }}
                                 >
-                                <Button
-                                    title="Попробовать снова"
-                                    buttonStyle={{
-                                        backgroundColor: "#FDAEBE",
-                                        borderRadius: 4,
-                                        height: heightPercentageToDP('5%'),
-                                        width: widthPercentageToDP('38%')
-                                    }}
+                                    <Button
+                                        title="Попробовать снова"
+                                        buttonStyle={{
+                                            backgroundColor: "#FDAEBE",
+                                            borderRadius: 4,
+                                            height: heightPercentageToDP('5%'),
+                                            width: widthPercentageToDP('38%')
+                                        }}
 
-                                    containerStyle={{
-                                        alignSelf: "center"
-                                    }}
+                                        containerStyle={{
+                                            alignSelf: "center"
+                                        }}
 
-                                    titleStyle={{
-                                        fontSize: heightPercentageToDP('1.67%'),
-                                        color: '#FFFFFF',
-                                        fontWeight: "bold",
-                                        fontFamily: "Roboto",
-                                        alignItems: "center"
-                                    }}
-                                    onPress={() => {
-                                        this.props.selectIpAddress(""),
-                                            this.setState({ visiable: false }),
-                                            this.props.navigation.replace("ConnectingToIP")
-                                    }}
-                                />
+                                        titleStyle={{
+                                            fontSize: heightPercentageToDP('1.67%'),
+                                            color: '#FFFFFF',
+                                            fontWeight: "bold",
+                                            fontFamily: "Roboto",
+                                            alignItems: "center"
+                                        }}
+                                        onPress={() => {
+                                            this.props.selectIpAddress(""),
+                                                this.setState({ visiable: false }),
+                                                this.props.navigation.replace("ConnectingToIP")
+                                        }}
+                                    />
                                 </Shadow>
                             </View>
                         </DialogContent>

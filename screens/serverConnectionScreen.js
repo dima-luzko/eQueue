@@ -38,13 +38,13 @@ class ServerConnection extends Component {
     render() {
         return (
             <LinearGradient
-                colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+                colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 1 }}
                 style={{ flex: 1 }}
             >
                 <StatusBar translucent={true} backgroundColor={'transparent'} />
-                <View style={{ backgroundColor: "#FFFFFF"}}>
+                <View style={{ backgroundColor: "#FFFFFF" }}>
                     <Dialog
                         visible={this.state.visiable}
                     >
@@ -64,8 +64,8 @@ class ServerConnection extends Component {
                                         width: widthPercentageToDP('38%'),
                                         borderRadius: 4,
                                         height: heightPercentageToDP('5%'),
-                                        backgroundColor:"#41D38D",
-                                        marginLeft:widthPercentageToDP('22%')
+                                        backgroundColor: "#41D38D",
+                                        marginLeft: widthPercentageToDP('22%')
                                     }}
                                 >
                                     <Button
@@ -96,7 +96,7 @@ class ServerConnection extends Component {
                                                 this.setState({ visiable: false })
                                         }}
                                     />
-                                    </Shadow>
+                                </Shadow>
                             </View>
                         </DialogContent>
                     </Dialog>
@@ -107,13 +107,13 @@ class ServerConnection extends Component {
 }
 
 const styles = StyleSheet.create({
-                    dialogStyle: {
-                    width: widthPercentageToDP('90%'),
+    dialogStyle: {
+        width: widthPercentageToDP('90%'),
         height: heightPercentageToDP('25%')
     },
 
     textConnection: {
-                    textAlign: 'center',
+        textAlign: 'center',
         fontWeight: "bold",
         fontSize: heightPercentageToDP('2.3%'),
         color: '#A1A0A0',
@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-                    ipAddress: state.ipAddress
+        ipAddress: state.ipAddress
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-                    selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
+        selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
         passwordState: (password) => dispatch(passwordState(password)),
         userState: (userSelected) => dispatch(userState(userSelected)),
         showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),

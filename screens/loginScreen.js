@@ -125,7 +125,7 @@ class LoginScreen extends Component {
                   color="rgba(188, 182, 185, 0.7)"
                 />
               }}
-              placeholder={{label: "Выберите пользователя... ", value: null}}
+              placeholder={{ label: "Выберите пользователя... ", value: null }}
               onValueChange={(itemValue) => this.props.userState(itemValue)}
               items={
                 users.map(item => ({
@@ -182,7 +182,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <LinearGradient
-        colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+        colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 1 }}
         style={{ flex: 1 }}
@@ -214,48 +214,47 @@ class LoginScreen extends Component {
                   shadowRadius: 2,
                   width: widthPercentageToDP('72%'),
                   borderRadius: 8,
-                  height: heightPercentageToDP('4.5%'),
-                  paddingLeft: widthPercentageToDP('10%')
+                  height: heightPercentageToDP('4.5%')
                 }}
               >
-                <Grid>
-                  <Col size={10}>
-                    <TextInput
-                      maxLength={32}
-                      value={this.props.password.password}
-                      onChangeText={(value) => this.props.passwordState(value)}
-                      style={styles.passwordText}
-                      placeholder="Пароль..."
-                      placeholderTextColor="#A2A0A0"
-                      secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
-                    />
-                  </Col>
-                  <Col style={{ paddingRight: widthPercentageToDP('0.8%') }}>
-                    <TouchableOpacity
-                      style={{
-                        paddingTop: heightPercentageToDP('1%'),
-                        alignItems: "center"
-                      }}
-                      onPress={this.updateSecurityTextEntry}
-                    >
-                      {this.props.secureTextEntry.secureTextEntry
-                        ?
-                        <EyeIcon
-                          name="eye-closed"
-                          size={1.5 * heightPercentageToDP("2%")}
-                          color="rgba(188, 182, 185, 0.7)"
-                        />
-                        :
-                        <EyeIcon
-                          name="eye"
-                          size={1.5 * heightPercentageToDP("2%")}
-                          color="rgba(188, 182, 185, 0.7)"
-                        />
-                      }
+              <Grid>
+                <Col size={10}>
+                  <TextInput
+                    maxLength={32}
+                    value={this.props.password.password}
+                    onChangeText={(value) => this.props.passwordState(value)}
+                    style={styles.passwordText}
+                    placeholder="Пароль..."
+                    placeholderTextColor="#A2A0A0"
+                    secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
+                  />
+                </Col>
+                <Col style={{ paddingRight: widthPercentageToDP('0.8%') }}>
+                  <TouchableOpacity
+                    style={{
+                      paddingTop: heightPercentageToDP('1%'),
+                      alignItems: "center"
+                    }}
+                    onPress={this.updateSecurityTextEntry}
+                  >
+                    {this.props.secureTextEntry.secureTextEntry
+                      ?
+                      <EyeIcon
+                        name="eye-closed"
+                        size={1.5 * heightPercentageToDP("2%")}
+                        color="rgba(188, 182, 185, 0.7)"
+                      />
+                      :
+                      <EyeIcon
+                        name="eye"
+                        size={1.5 * heightPercentageToDP("2%")}
+                        color="rgba(188, 182, 185, 0.7)"
+                      />
+                    }
 
-                    </TouchableOpacity>
-                  </Col>
-                </Grid>
+                  </TouchableOpacity>
+                </Col>
+              </Grid>
               </Shadow>
             </View>
 
@@ -312,8 +311,9 @@ const styles = StyleSheet.create({
   passwordText: {
     fontSize: heightPercentageToDP('2.1%'),
     textAlign: "center",
-   // paddingLeft: widthPercentageToDP('10%'),
+    paddingLeft: widthPercentageToDP('10%'),
     color: "#A2A0A0",
+    height: heightPercentageToDP('5%')
   },
 
   pickerStyle: {
@@ -334,8 +334,8 @@ const pickerSelectStyles = StyleSheet.create({
     color: "#A2A0A0"
   },
   placeholder: {
-      color: "#AFAFAF"
-    }
+    color: "#AFAFAF"
+  }
 })
 
 

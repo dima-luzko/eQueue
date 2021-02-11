@@ -27,7 +27,7 @@ class Bar extends Component {
   render() {
     return (
       <LinearGradient
-        colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+      colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 1 }}
       >
@@ -38,7 +38,7 @@ class Bar extends Component {
             height: heightPercentageToDP('8%'),
             marginTop: heightPercentageToDP('4%'),
             borderBottomWidth: 1,
-            borderBottomColor: "#BA5FA6"
+            borderBottomColor: "#8C98D3"
 
           }}
         >

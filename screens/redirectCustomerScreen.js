@@ -232,7 +232,7 @@ class RedirectCustomer extends Component {
                     <View>
                         <Button
                             raised={true}
-                            title="Выполнить перенаправление"
+                            title="Перенаправить клиента"
                             buttonStyle={{
                                 backgroundColor: "#41D38D",
                                 borderRadius: 8,
@@ -266,7 +266,7 @@ class RedirectCustomer extends Component {
                         raised={true}
                         title="Отмена"
                         buttonStyle={{
-                            backgroundColor: "rgba(255, 215, 112, 0.9)",
+                            backgroundColor: "#E9E9E9",
                             borderRadius: 8,
                             width: widthPercentageToDP('70%'),
                             height: heightPercentageToDP('4.5%')
@@ -279,7 +279,7 @@ class RedirectCustomer extends Component {
 
                         titleStyle={{
                             fontSize: heightPercentageToDP('1.8%'),
-                            color: "#FFFFFF",
+                            color: "#AFAFAF",
                             textAlign: "center",
                             alignItems: "center",
                             fontWeight: "500",
