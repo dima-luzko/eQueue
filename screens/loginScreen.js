@@ -273,7 +273,7 @@ class LoginScreen extends Component {
               }}
 
               titleStyle={{
-                fontSize: heightPercentageToDP('2.1%'),
+                fontSize: heightPercentageToDP('2%'),
                 color: '#A1A0A0'
               }}
 
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
   },
 
   passwordText: {
-    fontSize: heightPercentageToDP('2.1%'),
+    fontSize: heightPercentageToDP('2%'),
     textAlign: "center",
     paddingLeft: widthPercentageToDP('10%'),
     color: "#A2A0A0",
