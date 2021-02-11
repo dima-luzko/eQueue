@@ -313,7 +313,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingLeft: widthPercentageToDP('10%'),
     color: "#A2A0A0",
-    height: heightPercentageToDP('5%')
+    height: heightPercentageToDP('5.6%'),
+    paddingTop: heightPercentageToDP('0.5%')
   },
 
   pickerStyle: {
