@@ -69,7 +69,7 @@ class LoginScreen extends Component {
     users.forEach(user => {
       if (this.props.userSelected.userSelected === user.id)
         if (this.props.password.password === user.password || user.password === "") {
-          this.props.navigation.navigate('CallClient')
+          this.props.navigation.replace('CallClient')
           this.props.loggedUser(user)
         } else {
           this.errorPasswordAlert()
@@ -79,20 +79,22 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.props.usersFetchData()
-    // this.check()
+    this.check()
   }
 
   check() {
     setInterval(() => {
       this.props.checkServerState(this.props.ipAddress.ipAddress)
-      setTimeout(() => {
+      // setTimeout(() => {
         if (this.props.server.server) {
           console.log("Соединение с сервером установлено!")
         } else {
-          console.error("Нет соединения с сервером!")
+          console.log("Нет соединения с сервером!")
           this.props.navigation.navigate("ErrorConnectToServer")
         }
-      }, 100);
+      // }, 200);
+        
+
     }, 2000);
   }
 

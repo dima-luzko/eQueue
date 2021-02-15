@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
-import { passwordState, userState, showPassword } from '../action/updateStateAction'
+import { passwordState, userState, showPassword} from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
@@ -134,7 +134,7 @@ const mapDispatchToProps = dispatch => {
         selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
         passwordState: (password) => dispatch(passwordState(password)),
         userState: (userSelected) => dispatch(userState(userSelected)),
-        showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
+        showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ServerConnection); 

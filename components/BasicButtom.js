@@ -185,13 +185,6 @@ class CallClient extends Component {
 
             }}
           >
-            <TouchableOpacity
-              disabled={this.props.disableButtonExit.disableButtonExit}
-              onPress={() => {
-                this.props.navigation.navigate('ChangeFlexPriority')
-              }}
-            >
-
               <UserIcon
                 name="user-circle-o"
                 size={2 * heightPercentageToDP("3%")}
@@ -200,8 +193,8 @@ class CallClient extends Component {
                   marginLeft: widthPercentageToDP('2%')
                 }}
               />
+              
 
-            </TouchableOpacity>
             <Appbar.Content
               titleStyle={{
                 fontSize: heightPercentageToDP('2.5%'),
@@ -223,7 +216,7 @@ class CallClient extends Component {
             <TouchableOpacity
               disabled={this.props.disableButtonExit.disableButtonExit}
               onPress={() => {
-                this.props.navigation.replace('LoginScreen'),
+                this.props.navigation.navigate('LoginScreen'),
                   this.props.userState(""),
                   this.props.passwordState(""),
                   this.props.showPassword(true)
