@@ -7,7 +7,7 @@ import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
-import { Shadow } from 'react-native-neomorph-shadows';
+import { selectIpAddress } from '../action/updateStateAction'
 import { UIActivityIndicator } from 'react-native-indicators';
 
 const widthPercentageToDP = widthPercent => {
@@ -61,7 +61,11 @@ class ErrorConnectToServer extends Component {
     }
 
     checkServer() {
-        this.setState({ text: 2, buttom: 2 })
+    //     setTimeout(() => {
+            
+        
+        // this.setState({ text: 2, buttom: 2 })
+    // }, 400);
         setTimeout(() => {
             setInterval(() => {
                 this.props.checkServerState(this.props.ipAddress.ipAddress)
@@ -136,6 +140,7 @@ class ErrorConnectToServer extends Component {
                                     }}
                                     onPress={() => {
                                         this.setState({ visiable: false })
+                                        //this.props.selectIpAddress('192.168.0.128')
                                         this.props.navigation.navigate("ConnectingToIP")
                                     }}
                                 />
@@ -251,6 +256,7 @@ const mapDispatchToProps = dispatch => {
         passwordState: (password) => dispatch(passwordState(password)),
         userState: (userSelected) => dispatch(userState(userSelected)),
         showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
+        selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ErrorConnectToServer); 
