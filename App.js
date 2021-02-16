@@ -58,11 +58,6 @@ export default class App extends Component {
               component={ServerNoConnection} />
 
             <Stack.Screen
-              name="ActivityIndicatorScreen"
-              component={ActivityIndicatorScreen}
-            />
-
-            <Stack.Screen
               name="LoginScreen"
               component={LoginScreen} />
 
