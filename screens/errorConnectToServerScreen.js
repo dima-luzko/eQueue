@@ -136,7 +136,7 @@ class ErrorConnectToServer extends Component {
                                     }}
                                     onPress={() => {
                                         this.setState({ visiable: false })
-                                        this.props.navigation.replace("ConnectingToIP")
+                                        this.props.navigation.navigate("ConnectingToIP")
                                     }}
                                 />
                             </Col>
