@@ -17,7 +17,6 @@ import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
 import UserIcon from 'react-native-vector-icons/FontAwesome'
 
-
 const Export = function (props) {
   const navigation = useNavigation();
 
@@ -142,7 +141,7 @@ class CallClient extends Component {
         states.showTotalLength(len)
         console.log("+++++++ " + len);
       });
-    }, (error) => {
+    }, () => {
       timeoutCounter++;
 
       if (timeoutCounter < maxTimeoutCounter) {
@@ -485,9 +484,7 @@ class CallClient extends Component {
   };
 }
 
-
 const styles = StyleSheet.create({
-
   userIcon: {
     marginLeft: widthPercentageToDP('2%'),
     width: widthPercentageToDP('9.5%'),
@@ -559,8 +556,6 @@ const styles = StyleSheet.create({
     marginTop: heightPercentageToDP('1%'),
     marginLeft: widthPercentageToDP('35%')
   }
-
-
 });
 
 const mapStateToProps = state => {
@@ -570,7 +565,6 @@ const mapStateToProps = state => {
     selfServices: state.selfServices,
     text: state.text,
     image: state.image,
-
     disableButtonCallClient: state.disableButtonCallClient,
     disableButtonInvitePostponeCustomer: state.disableButtonInvitePostponeCustomer,
     disableButtonClientNotEnter: state.disableButtonClientNotEnter,

@@ -1,5 +1,5 @@
 import { GET_RESULT_LIST_URL } from '../constants/url'
-import {store} from '../App'
+import { store } from '../App'
 
 export const result = resultList => {
     return {

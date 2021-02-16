@@ -39,7 +39,6 @@ class Bar extends Component {
             marginTop: heightPercentageToDP('4%'),
             borderBottomWidth: 1,
             borderBottomColor: "#8C98D3"
-
           }}
         >
           <UserIcon
@@ -75,26 +74,22 @@ class Bar extends Component {
 }
 
 const styles = StyleSheet.create({
-
   userIcon: {
     marginLeft: widthPercentageToDP('2%'),
     width: widthPercentageToDP('9.5%'),
     height: heightPercentageToDP('5.2%')
   }
-
 });
-
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     loggedUser: (user) => dispatch(loggedUser(user))
-
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Bar);

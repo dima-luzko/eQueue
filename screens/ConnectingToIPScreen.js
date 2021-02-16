@@ -9,7 +9,6 @@ import { selectIpAddress } from '../action/updateStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Shadow } from 'react-native-neomorph-shadows';
 
-
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
     // Convert string input to decimal number
@@ -26,7 +25,6 @@ export {
     widthPercentageToDP,
     heightPercentageToDP
 };
-
 
 class ConnectingToIP extends Component {
 
@@ -159,7 +157,6 @@ class ConnectingToIP extends Component {
 
 
 const styles = StyleSheet.create({
-
     dialogStyle: {
         width: widthPercentageToDP('90%'),
         height: heightPercentageToDP('25%')

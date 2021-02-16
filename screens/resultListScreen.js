@@ -9,7 +9,6 @@ import { updateText, updateDisableButtom, updateImage } from '../action/updateSt
 import { Row, Grid } from "react-native-easy-grid"
 import { Shadow } from 'react-native-neomorph-shadows'
 
-
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
     // Convert string input to decimal number
@@ -26,7 +25,6 @@ export {
     widthPercentageToDP,
     heightPercentageToDP
 };
-
 
 class ResultList extends Component {
 
@@ -190,15 +188,10 @@ class ResultList extends Component {
                                     width: widthPercentageToDP('65%'),
                                     borderRadius: 8,
                                     height: heightPercentageToDP('4.5%'),
-
                                 }}
                                 containerStyle={{
                                     marginLeft: widthPercentageToDP('18%')
                                 }}
-
-
-
-
                                 titleStyle={{
                                     fontSize: heightPercentageToDP('2%'),
                                     color: '#AFAFAF',

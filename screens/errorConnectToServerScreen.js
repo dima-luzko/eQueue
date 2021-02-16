@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react-native'
-import Dialog, { DialogContent, DialogTitle } from 'react-native-popup-dialog';
+import Dialog, { DialogContent} from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
-import { passwordState, userState, showPassword } from '../action/updateStateAction'
+import { passwordState, userState, showPassword} from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
+import { UIActivityIndicator } from 'react-native-indicators';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -26,9 +27,7 @@ export {
     heightPercentageToDP
 };
 
-
 class ErrorConnectToServer extends Component {
-
 
     constructor(props) {
         super(props);
@@ -40,7 +39,6 @@ class ErrorConnectToServer extends Component {
     }
 
     componentDidMount() {
-
         this.checkServer()
     }
 
@@ -55,24 +53,28 @@ class ErrorConnectToServer extends Component {
                 return (
                     <Text style={styles.textConnection}>Соединение с сервером установлено!</Text>
                 )
+            case 2:
+                return (
+                    <Text style={styles.textConnection}>Проверка соединения с сервером...</Text>
+                )
         }
     }
 
     checkServer() {
-        setInterval(() => {
-            setTimeout(() => {
+        this.setState({ text: 2, buttom: 2 })
+        setTimeout(() => {
+            setInterval(() => {
                 this.props.checkServerState(this.props.ipAddress.ipAddress)
                 setTimeout(() => {
-
                     if (this.props.server.server) {
                         this.setState({ text: 1, buttom: 1 })
-                    } else {
+                    }
+                    else {
                         this.setState({ text: 0, buttom: 0 })
                     }
-                }, 100);
-            }, 300);
-        }, 2000);
-
+                }, 1200);
+            }, 2000);
+        }, 600);
     }
 
     changeButtom() {
@@ -125,8 +127,7 @@ class ErrorConnectToServer extends Component {
                                         width: widthPercentageToDP('40%'),
                                         borderRadius: 4,
                                         height: heightPercentageToDP('5%'),
-                                        backgroundColor: "rgba(253, 174, 190, 0.7)",
-
+                                        backgroundColor: "rgba(253, 174, 190, 0.7)"
                                     }}
                                 >
                                     <Button
@@ -137,7 +138,6 @@ class ErrorConnectToServer extends Component {
                                             width: widthPercentageToDP('40%'),
                                             height: heightPercentageToDP('5%'),
                                         }}
-
 
                                         titleStyle={{
                                             fontSize: heightPercentageToDP('1.67%'),
@@ -199,6 +199,10 @@ class ErrorConnectToServer extends Component {
                             }}
                         />
                     </Shadow>
+                )
+            case 2:
+                return (
+                    <UIActivityIndicator color="#A1A0A0" size={2 * heightPercentageToDP('2%')} />
                 )
         }
     }

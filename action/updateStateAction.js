@@ -12,25 +12,23 @@ export const changeImage = image => {
     }
 }
 
-
 export const inputPassword = password => {
     return {
-        type : "PASSWORD",
+        type: "PASSWORD",
         password
     }
 }
 
-
 export const secureText = secureTextEntry => {
     return {
-        type : "SECURE_TEXT_ENTRY",
+        type: "SECURE_TEXT_ENTRY",
         secureTextEntry
     }
 }
 
 export const selectUser = userSelected => {
     return {
-        type : "SELECT_USER",
+        type: "SELECT_USER",
         userSelected
     }
 }
@@ -61,14 +59,14 @@ export const changeDisableButtom = (
 
 export const inputIpAdress = ipAddress => {
     return {
-        type : "INPUT_IP_ADDRESS",
+        type: "INPUT_IP_ADDRESS",
         ipAddress
     }
 }
 
-export const socketData = socket =>{
+export const socketData = socket => {
     return {
-        type : "GET_SOCKET_DATA",
+        type: "GET_SOCKET_DATA",
         socket
     }
 }
@@ -79,9 +77,9 @@ export const getSocketData = (socket) => {
     }
 }
 
-export const totalMinutesToPostponeClient = totalMinutes =>{
+export const totalMinutesToPostponeClient = totalMinutes => {
     return {
-        type : "TOTAL_MINUTES",
+        type: "TOTAL_MINUTES",
         totalMinutes
     }
 }
@@ -92,9 +90,9 @@ export const changeTotalMinutes = (totalMinutes) => {
     }
 }
 
-export const total = totalLength =>{
+export const total = totalLength => {
     return {
-        type : "TOTAL_LENGTH",
+        type: "TOTAL_LENGTH",
         totalLength
     }
 }
@@ -105,9 +103,9 @@ export const showTotalLength = (totalLength) => {
     }
 }
 
-export const postponedTotal = posponedLength =>{
+export const postponedTotal = posponedLength => {
     return {
-        type : "POSTPONED_TOTAL_LENGTH",
+        type: "POSTPONED_TOTAL_LENGTH",
         posponedLength
     }
 }
@@ -117,8 +115,6 @@ export const showPostponedTotalLength = (posponedLength) => {
         dispatch(postponedTotal(posponedLength))
     }
 }
-
-
 
 export const selectIpAddress = (ipAddress) => {
     return (dispatch) => {

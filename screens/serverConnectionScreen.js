@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
-import { passwordState, userState, showPassword} from '../action/updateStateAction'
+import { passwordState, userState, showPassword } from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {

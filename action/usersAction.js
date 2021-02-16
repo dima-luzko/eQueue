@@ -1,7 +1,6 @@
 import { GET_USERS_URL } from '../constants/url'
 import { store } from '../App'
 
-
 export const getDataSuccess = users => {
     return {
         type: "USERS_FETCHING_DATA_SUCCESS",
@@ -24,5 +23,5 @@ export const usersFetchData = () => {
             .then((json) => {
                 dispatch(getDataSuccess(json))
             })
-        }
+    }
 }

@@ -24,7 +24,6 @@ export {
     heightPercentageToDP
 };
 
-
 class ServerNoConnection extends Component {
 
     constructor(props) {
@@ -115,8 +114,7 @@ const styles = StyleSheet.create({
         color: '#A1A0A0',
         marginTop: heightPercentageToDP('7%'),
         marginBottom: heightPercentageToDP('4%')
-    },
-
+    }
 });
 
 const mapStateToProps = state => {

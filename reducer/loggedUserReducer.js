@@ -1,4 +1,4 @@
-import { LOGGED_USER , CHANGE_FLEX_PRIORITY} from '../constants/constants'
+import { LOGGED_USER, CHANGE_FLEX_PRIORITY } from '../constants/constants'
 
 const initialState = {
     user: {},
@@ -12,7 +12,7 @@ export default loggedUserReducer = (state = initialState, action) => {
                 ...state,
                 user: action.user
             }
-            case CHANGE_FLEX_PRIORITY:
+        case CHANGE_FLEX_PRIORITY:
             return {
                 ...state,
                 changeFlexPriority: action.changeFlexPriority

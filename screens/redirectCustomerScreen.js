@@ -29,7 +29,6 @@ export {
     heightPercentageToDP
 };
 
-
 class RedirectCustomer extends Component {
 
     showAlert() {
@@ -53,7 +52,6 @@ class RedirectCustomer extends Component {
     }
 
     servicesPicker() {
-
         if (this.props.services.services.inner_services) {
             return (
                 <View style={styles.pickerStyle}>
@@ -164,7 +162,6 @@ class RedirectCustomer extends Component {
             this.showAlert()
         }
     }
-
 
     render() {
         return (
@@ -291,8 +288,6 @@ class RedirectCustomer extends Component {
                         }}
                     />
                 </View>
-
-
             </View>
         )
     }
@@ -368,15 +363,15 @@ const styles = StyleSheet.create({
 const pickerSelectStyles = StyleSheet.create({
 
     inputAndroid: {
-      fontSize: heightPercentageToDP('2.1%'),
-      textAlign: "center",
-      paddingVertical: heightPercentageToDP('1%'),
-      color: "#AFAFAF"
+        fontSize: heightPercentageToDP('2.1%'),
+        textAlign: "center",
+        paddingVertical: heightPercentageToDP('1%'),
+        color: "#AFAFAF"
     },
     placeholder: {
         color: "#AFAFAF"
-      }
-  })
+    }
+})
 
 const mapStateToProps = state => {
     return {

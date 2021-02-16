@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import reducer from './reducer'
@@ -14,6 +14,7 @@ import ConnectingToIP from './screens/ConnectingToIPScreen'
 import ErrorConnectToServer from './screens/errorConnectToServerScreen'
 import ServerNoConnection from './screens/serverNoConnectionScreen'
 import ServerConnection from './screens/serverConnectionScreen'
+import ActivityIndicatorScreen from './screens/activityIndicatorScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -56,6 +57,11 @@ export default class App extends Component {
             <Stack.Screen
               name="ServerNoConnection"
               component={ServerNoConnection} />
+
+            <Stack.Screen
+              name="ActivityIndicatorScreen"
+              component={ActivityIndicatorScreen}
+            />
 
             <Stack.Screen
               name="LoginScreen"

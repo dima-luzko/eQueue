@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, StatusBar, Alert, Image, Text } from 'react-native'
+import { StyleSheet, PixelRatio, Dimensions, StatusBar, Alert, Image, Text } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
-
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -23,7 +22,6 @@ export {
     widthPercentageToDP,
     heightPercentageToDP
 };
-
 
 class SplashScreen extends Component {
 
@@ -78,7 +76,6 @@ class SplashScreen extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
 
     logo: {
@@ -107,7 +104,6 @@ const styles = StyleSheet.create({
         marginTop: heightPercentageToDP('85%'),
         alignSelf: "center"
     }
-
 });
 
 const mapStateToProps = state => {

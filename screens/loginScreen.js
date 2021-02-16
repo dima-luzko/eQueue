@@ -85,16 +85,12 @@ class LoginScreen extends Component {
   check() {
     setInterval(() => {
       this.props.checkServerState(this.props.ipAddress.ipAddress)
-      // setTimeout(() => {
-        if (this.props.server.server) {
-          console.log("Соединение с сервером установлено!")
-        } else {
-          console.log("Нет соединения с сервером!")
-          this.props.navigation.navigate("ErrorConnectToServer")
-        }
-      // }, 200);
-        
+      if (this.props.server.server) {
 
+      } else {
+
+        this.props.navigation.navigate("ErrorConnectToServer")
+      }
     }, 2000);
   }
 
@@ -219,44 +215,44 @@ class LoginScreen extends Component {
                   height: heightPercentageToDP('4.5%')
                 }}
               >
-              <Grid>
-                <Col size={10}>
-                  <TextInput
-                    maxLength={32}
-                    value={this.props.password.password}
-                    onChangeText={(value) => this.props.passwordState(value)}
-                    style={styles.passwordText}
-                    placeholder="Пароль..."
-                    placeholderTextColor="#A2A0A0"
-                    secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
-                  />
-                </Col>
-                <Col style={{ paddingRight: widthPercentageToDP('0.8%') }}>
-                  <TouchableOpacity
-                    style={{
-                      paddingTop: heightPercentageToDP('1%'),
-                      alignItems: "center"
-                    }}
-                    onPress={this.updateSecurityTextEntry}
-                  >
-                    {this.props.secureTextEntry.secureTextEntry
-                      ?
-                      <EyeIcon
-                        name="eye-closed"
-                        size={1.5 * heightPercentageToDP("2%")}
-                        color="rgba(188, 182, 185, 0.7)"
-                      />
-                      :
-                      <EyeIcon
-                        name="eye"
-                        size={1.5 * heightPercentageToDP("2%")}
-                        color="rgba(188, 182, 185, 0.7)"
-                      />
-                    }
+                <Grid>
+                  <Col size={10}>
+                    <TextInput
+                      maxLength={32}
+                      value={this.props.password.password}
+                      onChangeText={(value) => this.props.passwordState(value)}
+                      style={styles.passwordText}
+                      placeholder="Пароль..."
+                      placeholderTextColor="#A2A0A0"
+                      secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
+                    />
+                  </Col>
+                  <Col style={{ paddingRight: widthPercentageToDP('0.8%') }}>
+                    <TouchableOpacity
+                      style={{
+                        paddingTop: heightPercentageToDP('1%'),
+                        alignItems: "center"
+                      }}
+                      onPress={this.updateSecurityTextEntry}
+                    >
+                      {this.props.secureTextEntry.secureTextEntry
+                        ?
+                        <EyeIcon
+                          name="eye-closed"
+                          size={1.5 * heightPercentageToDP("2%")}
+                          color="rgba(188, 182, 185, 0.7)"
+                        />
+                        :
+                        <EyeIcon
+                          name="eye"
+                          size={1.5 * heightPercentageToDP("2%")}
+                          color="rgba(188, 182, 185, 0.7)"
+                        />
+                      }
 
-                  </TouchableOpacity>
-                </Col>
-              </Grid>
+                    </TouchableOpacity>
+                  </Col>
+                </Grid>
               </Shadow>
             </View>
 
@@ -329,7 +325,6 @@ const styles = StyleSheet.create({
 });
 
 const pickerSelectStyles = StyleSheet.create({
-
   inputAndroid: {
     fontSize: heightPercentageToDP('2.1%'),
     textAlign: "center",

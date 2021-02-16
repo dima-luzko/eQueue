@@ -20,7 +20,6 @@ export default usersReducer = (state = initialState, action) => {
                 isFetching: false,
                 error: true
             }
-
         default:
             return state
     }

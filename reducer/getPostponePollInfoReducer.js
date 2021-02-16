@@ -1,4 +1,4 @@
-import {GET_POSTPONE_POOL_INFO} from '../constants/constants'
+import { GET_POSTPONE_POOL_INFO } from '../constants/constants'
 
 const initialState = {
     postponeCustomer: undefined
@@ -6,7 +6,6 @@ const initialState = {
 
 export default callClientReducer = (state = initialState, action) => {
     switch (action.type) {
-        
         case GET_POSTPONE_POOL_INFO:
             return {
                 ...state,

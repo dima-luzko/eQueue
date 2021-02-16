@@ -9,8 +9,6 @@ import { invitePostponedCustomer } from '../action/invitePostponedCustomerAction
 import { updateText, updateDisableButtom, updateImage, showPostponedTotalLength } from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
 
-
-
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
     // Convert string input to decimal number
@@ -27,8 +25,6 @@ export {
     widthPercentageToDP,
     heightPercentageToDP
 };
-
-
 
 class InvitePostponeCustomer extends Component {
 
@@ -57,13 +53,11 @@ class InvitePostponeCustomer extends Component {
         this.props.postponePoolInfo()
         let queueLength = 0;
         setTimeout(() => {
-
             if (this.props.postponeCustomer.postponeCustomer && this.props.postponeCustomer.postponeCustomer.length > 0) {
                 queueLength = this.props.postponeCustomer.postponeCustomer.length
                 console.log("Общее количество отложенных клиентов в очереди: ", queueLength ? queueLength : "0")
             }
             this.props.showPostponedTotalLength(queueLength)
-
         }, 100)
     }
 
@@ -72,12 +66,10 @@ class InvitePostponeCustomer extends Component {
         if (postponeCustomer && postponeCustomer.length > 0) {
             return (
                 <View>
-
                     <ScrollView
                         style={{ height: heightPercentageToDP('50%') }}
                         horizontal={true}
                     >
-
                         <FlatList
                             ListFooterComponent={<View><Text></Text></View>}
                             showsVerticalScrollIndicator={false}
@@ -175,19 +167,12 @@ class InvitePostponeCustomer extends Component {
                                                     color: item.id + "" === this.state.customerId ? "#FFFFFF" : "#AFAFAF"
                                                 }}>{item.post_status}</Text>
                                         </View>
-
                                     }
-
-
                                 </TouchableOpacity>
                             }
                         />
-
                     </ScrollView>
-
                 </View>
-
-
             )
         }
     }
@@ -213,8 +198,6 @@ class InvitePostponeCustomer extends Component {
                     <Text style={styles.valueInQueue}>Общее количество отложеных клиентов в очереди: {this.props.posponedLength.posponedLength ? this.props.posponedLength.posponedLength : "0"}</Text>
                 </View>
 
-
-
                 <View style={{ height: heightPercentageToDP('52%') }}>
                     {this.postponedClientList()}
                 </View>
@@ -231,12 +214,10 @@ class InvitePostponeCustomer extends Component {
                             width: widthPercentageToDP('70%'),
                             height: heightPercentageToDP('4.5%')
                         }}
-
                         containerStyle={{
                             alignSelf: "center",
                             marginBottom: heightPercentageToDP('2%'),
                         }}
-
                         titleStyle={{
                             fontSize: heightPercentageToDP('1.8%'),
                             color: this.props.posponedLength.posponedLength ? "#FFFFFF" : "#B6B6B6",
@@ -253,7 +234,6 @@ class InvitePostponeCustomer extends Component {
 
                     <TouchableOpacity>
                         <Button
-
                             raised={true}
                             title="Отмена"
                             buttonStyle={{
@@ -283,17 +263,12 @@ class InvitePostponeCustomer extends Component {
                         />
                     </TouchableOpacity>
                 </View>
-
-
-
-
             </View >
         )
     }
 }
 
 const styles = StyleSheet.create({
-
     valueInQueue: {
         marginTop: heightPercentageToDP('5%'),
         textAlign: "center",
@@ -314,8 +289,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "500",
         color: "#FFFFFF"
-    },
-
+    }
 })
 
 const mapStateToProps = state => {
@@ -335,7 +309,6 @@ const mapStateToProps = state => {
         disableFinishClient: state.disableFinishClient,
         disableButtonExit: state.disableButtonExit,
         posponedLength: state.posponedLength
-
     };
 };
 

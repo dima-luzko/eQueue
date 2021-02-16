@@ -227,7 +227,7 @@ class CustomerToPostpone extends Component {
                         }}
                         onPress={() => {
                             this.postponeData(),
-                            this.props.changeTotalMinutes(0)
+                                this.props.changeTotalMinutes(0)
                         }}
                     />
                 </View>
@@ -262,8 +262,6 @@ class CustomerToPostpone extends Component {
                         }}
                     />
                 </View>
-
-
             </View>
         )
     }
@@ -306,9 +304,8 @@ const styles = StyleSheet.create({
         paddingStart: widthPercentageToDP('2.5%'),
         color: "#AFAFAF",
         fontSize: heightPercentageToDP('2%')
-
-
     },
+
     inputStyle: {
         width: widthPercentageToDP('70%'),
         backgroundColor: "#E9E9E9",
@@ -331,6 +328,7 @@ const styles = StyleSheet.create({
         alignSelf: "flex-end",
         marginRight: widthPercentageToDP('1.7%')
     },
+
     checkBoxStyle: {
         width: widthPercentageToDP('70%'),
         backgroundColor: "#E9E9E9",
