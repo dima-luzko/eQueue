@@ -14,7 +14,6 @@ import ConnectingToIP from './screens/ConnectingToIPScreen'
 import ErrorConnectToServer from './screens/errorConnectToServerScreen'
 import ServerNoConnection from './screens/serverNoConnectionScreen'
 import ServerConnection from './screens/serverConnectionScreen'
-import ActivityIndicatorScreen from './screens/activityIndicatorScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 
