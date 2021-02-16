@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react-native'
-import Dialog, { DialogContent} from 'react-native-popup-dialog';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
-import { passwordState, userState, showPassword} from '../action/updateStateAction'
+import { passwordState, userState, showPassword } from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
 import { UIActivityIndicator } from 'react-native-indicators';
 
@@ -84,73 +84,61 @@ class ErrorConnectToServer extends Component {
                     <View>
                         <Grid>
                             <Col style={{ height: heightPercentageToDP('10%') }}>
-                                <Shadow
-                                    style={{
-                                        shadowOffset: { width: 0, height: 2 },
-                                        shadowColor: "rgba(253, 174, 190, 0.7)",
-                                        shadowRadius: 4,
-                                        width: widthPercentageToDP('38%'),
+                                <Button
+                                    raised={true}
+                                    title="Попробовать снова"
+                                    buttonStyle={{
+                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
                                         borderRadius: 4,
-                                        height: heightPercentageToDP('5%'),
-                                        backgroundColor: "rgba(253, 174, 190, 0.7)",
-
+                                        width: widthPercentageToDP('38%'),
+                                        height: heightPercentageToDP('5%')
                                     }}
-                                >
-                                    <Button
-                                        title="Попробовать снова"
-                                        buttonStyle={{
-                                            backgroundColor: 'rgba(253, 174, 190, 0.7)',
-                                            borderRadius: 4,
-                                            width: widthPercentageToDP('38%'),
-                                            height: heightPercentageToDP('5%')
-                                        }}
 
-                                        titleStyle={{
-                                            fontSize: heightPercentageToDP('1.67%'),
-                                            color: '#FFFFFF',
-                                            fontWeight: "bold",
-                                            fontFamily: "Roboto",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() => {
-                                            this.checkServer()
-                                        }}
-                                    />
-                                </Shadow>
+                                    containerStyle={{
+                                        marginRight: widthPercentageToDP('2%'),
+                                        alignSelf: "flex-end"
+                                    }}
+
+                                    titleStyle={{
+                                        fontSize: heightPercentageToDP('1.67%'),
+                                        color: '#FFFFFF',
+                                        fontWeight: "bold",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={() => {
+                                        this.checkServer()
+                                    }}
+                                />
                             </Col>
                             <Col style={{ height: heightPercentageToDP('10%') }}>
-                                <Shadow
-                                    style={{
-                                        shadowOffset: { width: 0, height: 2 },
-                                        shadowColor: "rgba(253, 174, 190, 0.7)",
-                                        shadowRadius: 4,
-                                        width: widthPercentageToDP('40%'),
+                                <Button
+                                    raised={true}
+                                    title="Ввести новый ip-адресс"
+                                    buttonStyle={{
+                                        backgroundColor: 'rgba(253, 174, 190, 0.7)',
                                         borderRadius: 4,
+                                        width: widthPercentageToDP('38%'),
                                         height: heightPercentageToDP('5%'),
-                                        backgroundColor: "rgba(253, 174, 190, 0.7)"
                                     }}
-                                >
-                                    <Button
-                                        title="Ввести новый ip-адресс"
-                                        buttonStyle={{
-                                            backgroundColor: 'rgba(253, 174, 190, 0.7)',
-                                            borderRadius: 4,
-                                            width: widthPercentageToDP('40%'),
-                                            height: heightPercentageToDP('5%'),
-                                        }}
 
-                                        titleStyle={{
-                                            fontSize: heightPercentageToDP('1.67%'),
-                                            color: '#FFFFFF',
-                                            fontWeight: "bold",
-                                            fontFamily: "Roboto",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() => {
-                                            this.props.navigation.replace("ConnectingToIP")
-                                        }}
-                                    />
-                                </Shadow>
+                                    containerStyle={{
+                                        marginLeft: widthPercentageToDP('2%'),
+                                        alignSelf: "flex-start"
+                                    }}
+
+                                    titleStyle={{
+                                        fontSize: heightPercentageToDP('1.67%'),
+                                        color: '#FFFFFF',
+                                        fontWeight: "bold",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={() => {
+                                        this.setState({ visiable: false })
+                                        this.props.navigation.replace("ConnectingToIP")
+                                    }}
+                                />
                             </Col>
                         </Grid>
 
@@ -159,46 +147,34 @@ class ErrorConnectToServer extends Component {
                 )
             case 1:
                 return (
-                    <Shadow
-                        style={{
-                            shadowOffset: { width: 0, height: 2 },
-                            shadowColor: "rgba(65, 211, 141, 0.7)",
-                            shadowRadius: 4,
-                            width: widthPercentageToDP('38%'),
+                    <Button
+                        raised={true}
+                        title="ОK"
+                        buttonStyle={{
+                            backgroundColor: '#41D38D',
                             borderRadius: 4,
-                            height: heightPercentageToDP('5%'),
-                            backgroundColor: "#41D38D",
-                            marginLeft: widthPercentageToDP('22%')
+                            width: widthPercentageToDP('38%')
                         }}
-                    >
-                        <Button
-                            title="ОK"
-                            buttonStyle={{
-                                backgroundColor: '#41D38D',
-                                borderRadius: 4,
-                                width: widthPercentageToDP('38%')
-                            }}
 
-                            containerStyle={{
-                                alignSelf: "center"
-                            }}
+                        containerStyle={{
+                            alignSelf: "center"
+                        }}
 
-                            titleStyle={{
-                                fontSize: heightPercentageToDP('2%'),
-                                color: '#FFFFFF',
-                                fontWeight: "bold",
-                                fontFamily: "Roboto",
-                                alignItems: "center"
-                            }}
-                            onPress={() => {
-                                this.props.navigation.replace("LoginScreen"),
-                                    this.props.userState(""),
-                                    this.props.passwordState(""),
-                                    this.props.showPassword(true)
-                                this.setState({ visiable: false })
-                            }}
-                        />
-                    </Shadow>
+                        titleStyle={{
+                            fontSize: heightPercentageToDP('2%'),
+                            color: '#FFFFFF',
+                            fontWeight: "bold",
+                            fontFamily: "Roboto",
+                            alignItems: "center"
+                        }}
+                        onPress={() => {
+                            this.props.navigation.replace("LoginScreen"),
+                                this.props.userState(""),
+                                this.props.passwordState(""),
+                                this.props.showPassword(true)
+                            this.setState({ visiable: false })
+                        }}
+                    />
                 )
             case 2:
                 return (
