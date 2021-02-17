@@ -3,12 +3,13 @@ import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { checkServerState } from '../action/serverStateAction'
+import { checkServerState ,serverControl} from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
 import { selectIpAddress } from '../action/updateStateAction'
 import { UIActivityIndicator } from 'react-native-indicators';
+
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -64,7 +65,7 @@ class ErrorConnectToServer extends Component {
     //     setTimeout(() => {
             
         
-        // this.setState({ text: 2, buttom: 2 })
+        this.setState({ text: 2, buttom: 2 })
     // }, 400);
         // setTimeout(() => {
             // setInterval(() => {
@@ -141,7 +142,8 @@ class ErrorConnectToServer extends Component {
                                     onPress={() => {
                                         this.setState({ visiable: false })
                                         //this.props.selectIpAddress('192.168.0.128')
-                                        this.props.navigation.navigate("ConnectingToIP")
+                                        this.props.navigation.navigate("ConnectingToIP"),
+                                        this.props.serverControl(false)
                                     }}
                                 />
                             </Col>
@@ -178,6 +180,7 @@ class ErrorConnectToServer extends Component {
                                 this.props.passwordState(""),
                                 this.props.showPassword(true)
                             this.setState({ visiable: false })
+                            this.props.serverControl(true)
                         }}
                     />
                 )
@@ -257,6 +260,7 @@ const mapDispatchToProps = dispatch => {
         userState: (userSelected) => dispatch(userState(userSelected)),
         showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
         selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
+        serverControl: (control) => dispatch(serverControl(control))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ErrorConnectToServer); 

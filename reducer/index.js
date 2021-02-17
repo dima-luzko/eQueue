@@ -35,5 +35,6 @@ export default combineReducers({
     socket: updateStateReducer,
     totalLength: updateStateReducer,
     totalMinutes: updateStateReducer,
-    posponedLength: updateStateReducer
+    posponedLength: updateStateReducer,
+    control:serverStateReducer
 })

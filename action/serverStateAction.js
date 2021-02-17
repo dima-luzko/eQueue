@@ -13,6 +13,19 @@ export const serverStateError = () => {
     }
 }
 
+export const server = control => {
+    return {
+        type: "SERVER_CONTROL",
+        control
+    }
+}
+
+export const serverControl = (control) => {
+    return (dispatch) => {
+        dispatch(server(control))
+    }
+}
+
 export const checkServerState = (ipAddress) => {
     return (dispatch) => {
         fetch("http://" + ipAddress + ":8081/api" + SERVER_STATE_URL)

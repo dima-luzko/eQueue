@@ -64,7 +64,7 @@ class ConnectingToIP extends Component {
                         this.props.navigation.navigate("ServerNoConnection")
                         console.error("Нет соединения с сервером!");
                     }
-                }, 300);
+                }, 600);
             // }
             // else {
             //     this.errorInputIPAlert()
@@ -106,7 +106,7 @@ class ConnectingToIP extends Component {
                                     >
                                         <TextInput
                                             style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
-                                            value={this.props.ipAddress.ipAddress}
+                                            defaultValue={this.props.ipAddress.ipAddress}
                                             onChangeText={value => this.props.selectIpAddress(value)}
                                             placeholder="Введите ip - адресс для подключения к серверу"
                                             maxLength={15}

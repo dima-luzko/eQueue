@@ -9,7 +9,7 @@ import { passwordState, userState, showPassword } from '../action/updateStateAct
 import EyeIcon from 'react-native-vector-icons/Octicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import DoubleClick from 'react-native-double-tap'
-import { checkServerState } from '../action/serverStateAction'
+import { checkServerState, serverControl } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Shadow } from 'react-native-neomorph-shadows';
 import { Col, Grid } from "react-native-easy-grid"
@@ -66,7 +66,8 @@ class LoginScreen extends Component {
 
   LoginCheck = () => {
     const { users } = this.props.users
-    users.forEach(user => {
+    if (this.props.control.control ) {
+      users.forEach(user => {
       if (this.props.userSelected.userSelected === user.id)
         if (this.props.password.password === user.password || user.password === "") {
           this.props.navigation.replace('CallClient')
@@ -75,17 +76,20 @@ class LoginScreen extends Component {
           this.errorPasswordAlert()
         }
     })
+    }
+    
   }
 
   componentDidMount() {
     this.props.usersFetchData()
-    //this.check()
+    this.check()
   }
+
 
   check() {
     setInterval(() => {
       this.props.checkServerState(this.props.ipAddress.ipAddress)
-      if (!this.props.server.server) {
+      if (this.props.control.control && !this.props.server.server) {
         this.props.navigation.navigate("ErrorConnectToServer")
       }
     }, 2000);
@@ -343,7 +347,8 @@ const mapStateToProps = state => {
     userSelected: state.userSelected,
     secureTextEntry: state.secureTextEntry,
     ipAddress: state.ipAddress,
-    server: state.server
+    server: state.server,
+    control: state.control
   };
 };
 
@@ -355,7 +360,8 @@ const mapDispatchToProps = dispatch => {
     passwordState: (password) => dispatch(passwordState(password)),
     userState: (userSelected) => dispatch(userState(userSelected)),
     showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
-    checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress))
+    checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
+    serverControl: (control) => dispatch(serverControl(control))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

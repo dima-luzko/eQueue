@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
+import { serverControl } from '../action/serverStateAction'
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -93,7 +94,8 @@ class ServerConnection extends Component {
                                                 this.props.userState(""),
                                                 this.props.passwordState(""),
                                                 this.props.showPassword(true),
-                                                this.setState({ visiable: false })
+                                                this.setState({ visiable: false }),
+                                                this.props.serverControl(true)
                                         }}
                                     />
                                 </Shadow>
@@ -134,7 +136,8 @@ const mapDispatchToProps = dispatch => {
         selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
         passwordState: (password) => dispatch(passwordState(password)),
         userState: (userSelected) => dispatch(userState(userSelected)),
-        showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry))
+        showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
+        serverControl: (control) => dispatch(serverControl(control))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ServerConnection); 
