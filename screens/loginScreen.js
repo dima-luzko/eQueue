@@ -79,16 +79,13 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.props.usersFetchData()
-    this.check()
+    //this.check()
   }
 
   check() {
     setInterval(() => {
       this.props.checkServerState(this.props.ipAddress.ipAddress)
-      if (this.props.server.server) {
-
-      } else {
-
+      if (!this.props.server.server) {
         this.props.navigation.navigate("ErrorConnectToServer")
       }
     }, 2000);

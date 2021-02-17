@@ -66,8 +66,8 @@ class ErrorConnectToServer extends Component {
         
         // this.setState({ text: 2, buttom: 2 })
     // }, 400);
-        setTimeout(() => {
-            setInterval(() => {
+        // setTimeout(() => {
+            // setInterval(() => {
                 this.props.checkServerState(this.props.ipAddress.ipAddress)
                 setTimeout(() => {
                     if (this.props.server.server) {
@@ -77,8 +77,8 @@ class ErrorConnectToServer extends Component {
                         this.setState({ text: 0, buttom: 0 })
                     }
                 }, 1200);
-            }, 2000);
-        }, 600);
+            // }, 2000);
+        // }, 600);
     }
 
     changeButtom() {

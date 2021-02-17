@@ -47,9 +47,10 @@ class ConnectingToIP extends Component {
     }
 
     checkServer() {
-        setTimeout(() => {
-            this.props.checkServerState(this.props.ipAddress.ipAddress)
-            if (this.props.ipAddress.ipAddress) {
+        this.props.checkServerState(this.props.ipAddress.ipAddress)
+        // setTimeout(() => {
+            
+            // if (this.props.ipAddress.ipAddress) {
 
                 console.log("Введенный ip-адрес: " + this.props.ipAddress.ipAddress);
                 setTimeout(() => {
@@ -64,11 +65,11 @@ class ConnectingToIP extends Component {
                         console.error("Нет соединения с сервером!");
                     }
                 }, 300);
-            }
-            else {
-                this.errorInputIPAlert()
-            }
-        }, 300);
+            // }
+            // else {
+            //     this.errorInputIPAlert()
+            // }
+        // }, 300);
     }
 
     render() {
