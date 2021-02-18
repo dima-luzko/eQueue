@@ -62,9 +62,11 @@ class ConnectingToIP extends Component {
 
                     else {
                         this.props.navigation.navigate("ServerNoConnection")
-                        console.error("Нет соединения с сервером!");
+                        console.error("Нет соединения с сервером!")
+                        this.props.selectIpAddress(null)
                     }
                 }, 600);
+              
             // }
             // else {
             //     this.errorInputIPAlert()
@@ -140,7 +142,7 @@ class ConnectingToIP extends Component {
                                             alignItems: "center"
                                         }}
                                         onPress={() => {
-                                            this.setState({ dialogVisible: false })
+                                            this.setState({ dialogVisible: false})
                                             this.checkServer()
                                         }}
                                     />

@@ -141,9 +141,9 @@ class ErrorConnectToServer extends Component {
                                     }}
                                     onPress={() => {
                                         this.setState({ visiable: false })
-                                        //this.props.selectIpAddress('192.168.0.128')
-                                        this.props.navigation.navigate("ConnectingToIP"),
-                                        this.props.serverControl(false)
+                                        this.props.selectIpAddress(null)
+                                        this.props.navigation.navigate("ConnectingToIP")
+                                        this.props.serverControl(true)
                                     }}
                                 />
                             </Col>
@@ -175,7 +175,7 @@ class ErrorConnectToServer extends Component {
                             alignItems: "center"
                         }}
                         onPress={() => {
-                            this.props.navigation.replace("LoginScreen"),
+                            this.props.navigation.navigate("LoginScreen"),
                                 this.props.userState(""),
                                 this.props.passwordState(""),
                                 this.props.showPassword(true)

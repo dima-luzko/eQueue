@@ -90,7 +90,7 @@ class ServerConnection extends Component {
                                             alignItems: "center"
                                         }}
                                         onPress={() => {
-                                            this.props.navigation.replace("LoginScreen"),
+                                            this.props.navigation.navigate("LoginScreen"),
                                                 this.props.userState(""),
                                                 this.props.passwordState(""),
                                                 this.props.showPassword(true),

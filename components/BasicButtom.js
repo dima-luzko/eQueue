@@ -215,7 +215,7 @@ class CallClient extends Component {
             <TouchableOpacity
               disabled={this.props.disableButtonExit.disableButtonExit}
               onPress={() => {
-                this.props.navigation.navigate('LoginScreen'),
+                this.props.navigation.navigate("LoginScreen"),
                   this.props.userState(""),
                   this.props.passwordState(""),
                   this.props.showPassword(true)

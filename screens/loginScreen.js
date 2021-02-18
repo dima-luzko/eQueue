@@ -15,6 +15,8 @@ import { Shadow } from 'react-native-neomorph-shadows';
 import { Col, Grid } from "react-native-easy-grid"
 import RNPickerSelect from 'react-native-picker-select';
 import PickerIcon from 'react-native-vector-icons/FontAwesome5'
+import { clearInterval } from 'stompjs'
+import { selectIpAddress } from '../action/updateStateAction'
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -33,12 +35,15 @@ export {
   heightPercentageToDP
 };
 
+
+
 class LoginScreen extends Component {
 
   constructor() {
     super();
     this.state = {
-      pickerValue: undefined
+      pickerValue: undefined,
+      control: true
     };
   }
 
@@ -66,36 +71,58 @@ class LoginScreen extends Component {
 
   LoginCheck = () => {
     const { users } = this.props.users
-    if (this.props.control.control ) {
+    if (this.props.control.control) {
       users.forEach(user => {
-      if (this.props.userSelected.userSelected === user.id)
-        if (this.props.password.password === user.password || user.password === "") {
-          this.props.navigation.replace('CallClient')
-          this.props.loggedUser(user)
-        } else {
-          this.errorPasswordAlert()
-        }
-    })
+        if (this.props.userSelected.userSelected === user.id)
+          if (this.props.password.password === user.password || user.password === "") {
+            this.props.navigation.replace('CallClient')
+            this.props.loggedUser(user)
+          } else {
+            this.errorPasswordAlert()
+          }
+      })
     }
-    
+
   }
 
   componentDidMount() {
     this.props.usersFetchData()
     this.check()
+    this.checkTime()
   }
 
+  checkTime(){
+    var time = new Date(),
+    hours = time.getHours(),
+    minutes = time.getMinutes(),
+    second = time.getSeconds()
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(hours, ':', minutes, ':', second)
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+  }
 
   check() {
-    
-    setInterval(() => {
-      console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
-      this.props.checkServerState(this.props.ipAddress.ipAddress)
-      if (this.props.control.control && !this.props.server.server) {
-        this.props.navigation.navigate("ErrorConnectToServer")
-      }
-    }, 2000);
+    if (this.state.control) {
+      setInterval(() => {
+        this.setState({ control: false })
+        console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
+        this.props.checkServerState(this.props.ipAddress.ipAddress)
+        if (this.props.control.control && !this.props.server.server) {
+          this.props.navigation.navigate("ErrorConnectToServer")
+        }
+      }, 2000);
+    }
+
   }
+
+  // componentWillUnmount(){
+  //   clearInterval(this.val)
+  // }
 
   renderPicker() {
     const { users } = this.props.users
@@ -191,6 +218,7 @@ class LoginScreen extends Component {
         <StatusBar translucent={true} backgroundColor={'transparent'} />
         <DoubleClick
           doubleTap={() => {
+            // this.props.selectIpAddress(null),
             this.props.navigation.replace('ConnectingToIP')
           }}
           delay={200}
@@ -363,7 +391,8 @@ const mapDispatchToProps = dispatch => {
     userState: (userSelected) => dispatch(userState(userSelected)),
     showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
     checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
-    serverControl: (control) => dispatch(serverControl(control))
+    serverControl: (control) => dispatch(serverControl(control)),
+    selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
