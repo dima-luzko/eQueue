@@ -87,7 +87,9 @@ class LoginScreen extends Component {
 
 
   check() {
+    
     setInterval(() => {
+      console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
       this.props.checkServerState(this.props.ipAddress.ipAddress)
       if (this.props.control.control && !this.props.server.server) {
         this.props.navigation.navigate("ErrorConnectToServer")
