@@ -17,6 +17,7 @@ import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
 import UserIcon from 'react-native-vector-icons/FontAwesome'
 
+
 const Export = function (props) {
   const navigation = useNavigation();
 

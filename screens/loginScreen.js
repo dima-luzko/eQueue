@@ -87,8 +87,8 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.props.usersFetchData()
-    this.check()
-    this.checkTime()
+    // this.check()
+    // this.checkTime()
   }
 
   checkTime(){
@@ -108,7 +108,7 @@ class LoginScreen extends Component {
 
   check() {
     if (this.state.control) {
-      setInterval(() => {
+       setInterval(() => {
         this.setState({ control: false })
         console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
         this.props.checkServerState(this.props.ipAddress.ipAddress)
@@ -218,7 +218,7 @@ class LoginScreen extends Component {
         <StatusBar translucent={true} backgroundColor={'transparent'} />
         <DoubleClick
           doubleTap={() => {
-            // this.props.selectIpAddress(null),
+            //this.props.selectIpAddress(null),
             this.props.navigation.replace('ConnectingToIP')
           }}
           delay={200}

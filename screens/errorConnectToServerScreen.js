@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { checkServerState ,serverControl} from '../action/serverStateAction'
+import { checkServerState, serverControl } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
@@ -62,23 +62,23 @@ class ErrorConnectToServer extends Component {
     }
 
     checkServer() {
-    //     setTimeout(() => {
-            
-        
+        //     setTimeout(() => {
+
+
         this.setState({ text: 2, buttom: 2 })
-    // }, 400);
+        // }, 400);
         // setTimeout(() => {
-            // setInterval(() => {
-                this.props.checkServerState(this.props.ipAddress.ipAddress)
-                setTimeout(() => {
-                    if (this.props.server.server) {
-                        this.setState({ text: 1, buttom: 1 })
-                    }
-                    else {
-                        this.setState({ text: 0, buttom: 0 })
-                    }
-                }, 1200);
-            // }, 2000);
+        // setInterval(() => {
+        this.props.checkServerState(this.props.ipAddress.ipAddress)
+        setTimeout(() => {
+            if (this.props.server.server) {
+                this.setState({ text: 1, buttom: 1 })
+            }
+            else {
+                this.setState({ text: 0, buttom: 0 })
+            }
+        }, 1200);
+        // }, 2000);
         // }, 600);
     }
 
@@ -143,7 +143,7 @@ class ErrorConnectToServer extends Component {
                                         this.setState({ visiable: false })
                                         this.props.selectIpAddress(null)
                                         this.props.navigation.navigate("ConnectingToIP")
-                                        this.props.serverControl(true)
+                                        this.props.serverControl(false)
                                     }}
                                 />
                             </Col>
