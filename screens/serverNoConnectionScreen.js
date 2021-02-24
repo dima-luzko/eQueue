@@ -4,7 +4,7 @@ import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
-import { selectIpAddress } from '../action/updateStateAction'
+import { selectIpAddress , changeText1, changeText2, changeText3, changeText4} from '../action/updateStateAction'
 import { Shadow } from 'react-native-neomorph-shadows';
 
 const widthPercentageToDP = widthPercent => {
@@ -86,7 +86,10 @@ class ServerNoConnection extends Component {
                                             alignItems: "center"
                                         }}
                                         onPress={() => {
-                                            this.props.selectIpAddress(""),
+                                            this.props.changeText1(null),
+                                            this.props.changeText2(null),
+                                            this.props.changeText3(null),
+                                            this.props.changeText4(null),
                                                 this.setState({ visiable: false }),
                                                 this.props.navigation.replace("ConnectingToIP")
                                         }}
@@ -125,7 +128,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress))
+        selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
+        changeText1: (text_1) => dispatch(changeText1(text_1)),
+        changeText2: (text_2) => dispatch(changeText2(text_2)),
+        changeText3: (text_3) => dispatch(changeText3(text_3)),
+        changeText4: (text_4) => dispatch(changeText4(text_4))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ServerNoConnection); 

@@ -84,6 +84,58 @@ export const totalMinutesToPostponeClient = totalMinutes => {
     }
 }
 
+export const text1 = text_1 => {
+    return {
+        type: "TEXT_1",
+        text_1
+    }
+}
+
+export const changeText1 = (text_1) => {
+    return (dispatch) => {
+        dispatch(text1(text_1))
+    }
+}
+
+export const text2 = text_2 => {
+    return {
+        type: "TEXT_2",
+        text_2
+    }
+}
+
+export const changeText2 = (text_2) => {
+    return (dispatch) => {
+        dispatch(text2(text_2))
+    }
+}
+
+export const text3 = text_3 => {
+    return {
+        type: "TEXT_3",
+        text_3
+    }
+}
+
+export const changeText3 = (text_3) => {
+    return (dispatch) => {
+        dispatch(text3(text_3))
+    }
+}
+
+export const text4 = text_4 => {
+    return {
+        type: "TEXT_4",
+        text_4
+    }
+}
+
+export const changeText4 = (text_4) => {
+    return (dispatch) => {
+        dispatch(text4(text_4))
+    }
+}
+
 export const changeTotalMinutes = (totalMinutes) => {
     return (dispatch) => {
         dispatch(totalMinutesToPostponeClient(totalMinutes))
