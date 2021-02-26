@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image, Dimensions, PixelRatio, Alert, StatusBar } from 'react-native'
+import { View, StyleSheet, Image, Dimensions, PixelRatio, Alert, StatusBar, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { usersFetchData } from '../action/usersAction'
-import { Picker } from '@react-native-picker/picker'
-import { Input, Item } from 'native-base';
 import { Button } from 'react-native-elements'
 import { loggedUser } from '../action/loggedUserAction'
 import { getSelfServices } from '../action/selfServicesAction'
-import { passwordState, userState, showPassword } from '../action/updateStateAction'
+import { passwordState, userState, showPassword, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
 import EyeIcon from 'react-native-vector-icons/Octicons'
-import TriangleIcon from 'react-native-vector-icons/MaterialIcons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import DoubleClick from 'react-native-double-tap'
-import { checkServerState } from '../action/serverStateAction'
+import { checkServerState, serverControl } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
+import { Shadow } from 'react-native-neomorph-shadows';
+import { Col, Grid } from "react-native-easy-grid"
+import RNPickerSelect from 'react-native-picker-select';
+import PickerIcon from 'react-native-vector-icons/FontAwesome5'
+import { clearInterval } from 'stompjs'
+import { selectIpAddress } from '../action/updateStateAction'
 
 const widthPercentageToDP = widthPercent => {
   const screenWidth = Dimensions.get('window').width;
@@ -32,7 +35,17 @@ export {
   heightPercentageToDP
 };
 
+
+
 class LoginScreen extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      pickerValue: undefined,
+      control: true
+    };
+  }
 
   errorPasswordAlert() {
     Alert.alert(
@@ -58,62 +71,133 @@ class LoginScreen extends Component {
 
   LoginCheck = () => {
     const { users } = this.props.users
-    users.forEach(user => {
-      if (this.props.userSelected.userSelected === user.id)
-        if (this.props.password.password === user.password || user.password === "") {
-          this.props.navigation.navigate('CallClient')
-          this.props.loggedUser(user)
-        } else {
-          this.errorPasswordAlert()
-        }
-    })
+    if (this.props.control.control) {
+      users.forEach(user => {
+        if (this.props.userSelected.userSelected === user.id)
+          if (this.props.password.password === user.password || user.password === "") {
+            this.props.navigation.replace('CallClient')
+            this.props.loggedUser(user)
+          } else {
+            this.errorPasswordAlert()
+          }
+      })
+    }
+
   }
 
   componentDidMount() {
     this.props.usersFetchData()
-    //this.check()
+    // this.check()
+    // this.checkTime()
+  }
+
+  checkTime() {
+    var time = new Date(),
+      hours = time.getHours(),
+      minutes = time.getMinutes(),
+      second = time.getSeconds()
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(hours, ':', minutes, ':', second)
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
   }
 
   check() {
-    setInterval(() => {
-      this.props.checkServerState(this.props.ipAddress.ipAddress)
-      setTimeout(() => {
-        if (this.props.server.server) {
-          console.log("Соединение с сервером установлено!")
-        } else {
-          console.error("Нет соединения с сервером!")
+    if (this.state.control) {
+      setInterval(() => {
+        this.setState({ control: false })
+        console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
+        this.props.checkServerState(this.props.ipAddress.ipAddress)
+        if (this.props.control.control && !this.props.server.server) {
           this.props.navigation.navigate("ErrorConnectToServer")
         }
-      }, 100);
-    }, 2000);
+      }, 2000);
+    }
+
   }
+
+  // componentWillUnmount(){
+  //   clearInterval(this.val)
+  // }
 
   renderPicker() {
     const { users } = this.props.users
     if (users && users.length > 0) {
       return (
         <View style={styles.pickerStyle}>
-          <Picker
-            style={styles.pickerText}
-            selectedValue={this.props.userSelected.userSelected}
-            onValueChange={(itemValue) => this.props.userState(itemValue)} >
-            <Picker.Item label="Выберите пользователя..." value='default' />
-            {users.map((item, key) =>
-              <Picker.Item
-                label={item.name} value={item.id} key={key} />
-            )}
-          </Picker>
+
+          <Shadow
+            inner
+            style={{
+              shadowOffset: { width: 2, height: 2 },
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowRadius: 2,
+              width: widthPercentageToDP('72%'),
+              borderRadius: 8,
+              height: heightPercentageToDP('4.5%')
+            }}
+          >
+            <RNPickerSelect
+              value={this.props.userSelected.userSelected}
+              style={{ ...pickerSelectStyles }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => {
+                return <PickerIcon
+                  style={{ paddingTop: heightPercentageToDP('0.7%'), marginRight: widthPercentageToDP('2.5%') }}
+                  name="angle-down"
+                  size={1.5 * heightPercentageToDP("2%")}
+                  color="rgba(188, 182, 185, 0.7)"
+                />
+              }}
+              placeholder={{ label: "Выберите пользователя... ", value: null }}
+              onValueChange={(itemValue) => this.props.userState(itemValue)}
+              items={
+                users.map(item => ({
+                  label: item.name,
+                  value: item.id
+                }))
+              }
+            />
+          </Shadow>
         </View>
       )
     } else {
       return (
         <View style={styles.pickerStyle}>
-          <Picker
-            style={styles.pickerText}
+          <Shadow
+            inner
+            style={{
+              shadowOffset: { width: 2, height: 2 },
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowRadius: 2,
+              width: widthPercentageToDP('72%'),
+              borderRadius: 8,
+              height: heightPercentageToDP('4.5%')
+            }}
           >
-            <Picker.Item label="Выберите пользователя..." value='default' />
-            <Picker.Item label="Пользователь" value='1' />
-          </Picker>
+            <RNPickerSelect
+              value={this.state.pickerValue}
+              style={{ ...pickerSelectStyles }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => {
+                return <PickerIcon
+                  style={{ paddingTop: heightPercentageToDP('0.7%'), marginRight: widthPercentageToDP('2.5%') }}
+                  name="angle-down"
+                  size={1.5 * heightPercentageToDP("2%")}
+                  color="rgba(188, 182, 185, 0.7)"
+                />
+              }}
+              placeholder={{}}
+              onValueChange={(value) => (console.log(value), this.setState({ pickerValue: value }))}
+              items={[
+                { label: "Выберите пользователя... ", value: null }
+              ]}
+            />
+          </Shadow>
         </View>
       )
     }
@@ -126,7 +210,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <LinearGradient
-        colors={["rgba(255, 51, 88, 0.4) 0%", "rgba(205, 72, 176, 0.4) 100%"]}
+        colors={["rgba(254, 141, 161, 0.8) 0%", "rgba(72, 93, 205, 0.56) 100%"]}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 1 }}
         style={{ flex: 1 }}
@@ -134,7 +218,12 @@ class LoginScreen extends Component {
         <StatusBar translucent={true} backgroundColor={'transparent'} />
         <DoubleClick
           doubleTap={() => {
-            this.props.navigation.replace('ConnectingToIP')
+            this.props.changeText1(null),
+              this.props.changeText2(null),
+              this.props.changeText3(null),
+              this.props.changeText4(null),
+              this.props.serverControl(false),
+              this.props.navigation.replace('ConnectingToIP')
           }}
           delay={200}
         >
@@ -149,56 +238,71 @@ class LoginScreen extends Component {
 
             {this.renderPicker()}
 
-            {/* <View>
-              <TriangleIcon
-                name="arrow-drop-down"
-                size={4 * widthPercentageToDP("2.5%")}
-                color="green"
+            <View style={styles.passwordStyle}>
+              <Shadow
+                inner
                 style={{
-                  marginStart: widthPercentageToDP('59%'),
-                  marginVertical: heightPercentageToDP('-7%')
-                }} />
-            </View> */}
-
-            <Item style={styles.passwordStyle}>
-              <Input
-                value={this.props.password.password}
-                onChangeText={(value) => this.props.passwordState(value)}
-                style={styles.passwordText}
-                placeholder="Пароль..."
-                placeholderTextColor="#A2A0A0"
-                secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
-              />
-              <TouchableOpacity
-                onPress={this.updateSecurityTextEntry}
+                  shadowOffset: { width: 2, height: 2 },
+                  shadowColor: "rgba(0, 0, 0, 0.25)",
+                  shadowRadius: 2,
+                  width: widthPercentageToDP('72%'),
+                  borderRadius: 8,
+                  height: heightPercentageToDP('4.5%')
+                }}
               >
-                {this.props.secureTextEntry.secureTextEntry ?
-                  <EyeIcon
-                    name="eye-closed"
-                    size={2 * widthPercentageToDP("2.5%")}
-                    color="rgba(188, 182, 185, 0.7)"
-                    style={{
-                      paddingRight: heightPercentageToDP('2%')
-                    }} />
-                  :
-                  <EyeIcon
-                    name="eye"
-                    size={2 * widthPercentageToDP("2.5%")}
-                    color="rgba(188, 182, 185, 0.7)"
-                    style={{
-                      paddingRight: heightPercentageToDP('2%')
-                    }} />
-                }
-              </TouchableOpacity>
-            </Item>
+                <Grid>
+                  <Col size={10}>
+                    <TextInput
+                      maxLength={32}
+                      value={this.props.password.password}
+                      onChangeText={(value) => this.props.passwordState(value)}
+                      style={styles.passwordText}
+                      placeholder="Пароль..."
+                      placeholderTextColor="#A2A0A0"
+                      secureTextEntry={this.props.secureTextEntry.secureTextEntry ? true : false}
+                    />
+                  </Col>
+                  <Col style={{ paddingRight: widthPercentageToDP('0.8%') }}>
+                    <TouchableOpacity
+                      style={{
+                        paddingTop: heightPercentageToDP('1%'),
+                        alignItems: "center"
+                      }}
+                      onPress={this.updateSecurityTextEntry}
+                    >
+                      {this.props.secureTextEntry.secureTextEntry
+                        ?
+                        <EyeIcon
+                          name="eye-closed"
+                          size={1.5 * heightPercentageToDP("2%")}
+                          color="rgba(188, 182, 185, 0.7)"
+                        />
+                        :
+                        <EyeIcon
+                          name="eye"
+                          size={1.5 * heightPercentageToDP("2%")}
+                          color="rgba(188, 182, 185, 0.7)"
+                        />
+                      }
+
+                    </TouchableOpacity>
+                  </Col>
+                </Grid>
+              </Shadow>
+            </View>
 
             <Button
+              raised={true}
               title="Войти"
               buttonStyle={{
                 width: widthPercentageToDP('72%'),
                 backgroundColor: "rgba(255, 255, 255, 0.9)",
                 borderRadius: 8,
                 height: heightPercentageToDP('4.5%')
+              }}
+
+              containerStyle={{
+                alignItems: "center"
               }}
 
               titleStyle={{
@@ -238,8 +342,12 @@ const styles = StyleSheet.create({
   },
 
   passwordText: {
-    marginLeft: widthPercentageToDP('27%'),
-    fontSize: heightPercentageToDP('2%')
+    fontSize: heightPercentageToDP('2%'),
+    textAlign: "center",
+    paddingLeft: widthPercentageToDP('10%'),
+    color: "#A2A0A0",
+    height: heightPercentageToDP('5.6%'),
+    paddingTop: heightPercentageToDP('0.5%')
   },
 
   pickerStyle: {
@@ -247,16 +355,22 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.7)",
     borderRadius: 8,
     height: heightPercentageToDP('4.5%'),
-    marginBottom: heightPercentageToDP('2.5%'),
-    paddingRight: heightPercentageToDP('2%'),
-    paddingLeft: heightPercentageToDP('5%'),
-    justifyContent: "center"
-  },
-
-  pickerText: {
-    color: "#A2A0A0"
+    marginBottom: heightPercentageToDP('2.5%')
   }
 });
+
+const pickerSelectStyles = StyleSheet.create({
+  inputAndroid: {
+    fontSize: heightPercentageToDP('2.1%'),
+    textAlign: "center",
+    paddingVertical: heightPercentageToDP('1%'),
+    color: "#A2A0A0"
+  },
+  placeholder: {
+    color: "#AFAFAF"
+  }
+})
+
 
 const mapStateToProps = state => {
   return {
@@ -267,7 +381,8 @@ const mapStateToProps = state => {
     userSelected: state.userSelected,
     secureTextEntry: state.secureTextEntry,
     ipAddress: state.ipAddress,
-    server: state.server
+    server: state.server,
+    control: state.control
   };
 };
 
@@ -279,9 +394,13 @@ const mapDispatchToProps = dispatch => {
     passwordState: (password) => dispatch(passwordState(password)),
     userState: (userSelected) => dispatch(userState(userSelected)),
     showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
-    checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress))
+    checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
+    serverControl: (control) => dispatch(serverControl(control)),
+    selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
+    changeText1: (text_1) => dispatch(changeText1(text_1)),
+    changeText2: (text_2) => dispatch(changeText2(text_2)),
+    changeText3: (text_3) => dispatch(changeText3(text_3)),
+    changeText4: (text_4) => dispatch(changeText4(text_4))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
-
-

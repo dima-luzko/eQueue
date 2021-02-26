@@ -1,5 +1,5 @@
-import {REDIRECT_CUSTOMER_URL} from '../constants/url'
-import {store} from '../App'
+import { REDIRECT_CUSTOMER_URL } from '../constants/url'
+import { store } from '../App'
 
 export const redirect = () => {
     return {
@@ -7,20 +7,19 @@ export const redirect = () => {
     }
 }
 
-
 export const redirectCustomer = (data) => {
     return (dispatch) => {
 
         fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + REDIRECT_CUSTOMER_URL, {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      })
-        .then(() => {
-            dispatch(redirect())
+            method: 'post',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         })
+            .then(() => {
+                dispatch(redirect())
+            })
     }
 }
