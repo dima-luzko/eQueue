@@ -118,7 +118,7 @@ class ConnectingToIP extends Component {
                                                 <TextInput
                                                     style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
                                                     value={this.props.text_1.text_1}
-                                                    onChangeText={value => this.props.changeText1(value > 254 ? "254": value)}
+                                                    onChangeText={value => this.props.changeText1(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="127"
                                                     maxLength={3}
                                                     numberOfLines={1}
@@ -147,7 +147,7 @@ class ConnectingToIP extends Component {
                                                 <TextInput
                                                     style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
                                                     value={this.props.text_2.text_2}
-                                                    onChangeText={value => this.props.changeText2(value > 254 ? "254": value)}
+                                                    onChangeText={value => this.props.changeText2(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="0"
                                                     maxLength={3}
                                                     numberOfLines={1}
@@ -175,7 +175,7 @@ class ConnectingToIP extends Component {
                                                 <TextInput
                                                     style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
                                                     value={this.props.text_3.text_3}
-                                                    onChangeText={value => this.props.changeText3(value > 254 ? "254": value)}
+                                                    onChangeText={value => this.props.changeText3(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="0"
                                                     maxLength={3}
                                                     numberOfLines={1}
@@ -203,7 +203,7 @@ class ConnectingToIP extends Component {
                                                 <TextInput
                                                     style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
                                                     value={this.props.text_4.text_4}
-                                                    onChangeText={value => this.props.changeText4(value > 254 ? "254": value)}
+                                                    onChangeText={value => this.props.changeText4(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="1"
                                                     maxLength={3}
                                                     numberOfLines={1}
