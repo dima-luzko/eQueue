@@ -74,9 +74,12 @@ class ConnectingToIP extends Component {
             }, 800);
 
         }, 500);
-
-
     }
+
+    handleChange(input) {
+        if (input.value < 0) input.value = 0;
+        if (input.value > 254) input.value = 254;
+      }
 
     render() {
         return (
@@ -113,13 +116,14 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%'), color: "#A2A0A0" }}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
                                                     value={this.props.text_1.text_1}
-                                                    onChangeText={value => this.props.changeText1(value)}
+                                                    onChangeText={value => this.props.changeText1(value > 254 ? "254": value)}
                                                     placeholder="127"
                                                     maxLength={3}
                                                     numberOfLines={1}
                                                     keyboardType='numeric'
+                                                    
                                                 />
                                             </Shadow>
                                         </Col>
@@ -141,9 +145,9 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%'), color: "#A2A0A0" }}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
                                                     value={this.props.text_2.text_2}
-                                                    onChangeText={value => this.props.changeText2(value)}
+                                                    onChangeText={value => this.props.changeText2(value > 254 ? "254": value)}
                                                     placeholder="0"
                                                     maxLength={3}
                                                     numberOfLines={1}
@@ -169,9 +173,9 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%'), color: "#A2A0A0" }}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
                                                     value={this.props.text_3.text_3}
-                                                    onChangeText={value => this.props.changeText3(value)}
+                                                    onChangeText={value => this.props.changeText3(value > 254 ? "254": value)}
                                                     placeholder="0"
                                                     maxLength={3}
                                                     numberOfLines={1}
@@ -197,9 +201,9 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%'), color: "#A2A0A0" }}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
                                                     value={this.props.text_4.text_4}
-                                                    onChangeText={value => this.props.changeText4(value)}
+                                                    onChangeText={value => this.props.changeText4(value > 254 ? "254": value)}
                                                     placeholder="1"
                                                     maxLength={3}
                                                     numberOfLines={1}
@@ -260,11 +264,8 @@ const styles = StyleSheet.create({
 
     inputStyle: {
         width: widthPercentageToDP('10%'),
-
         borderRadius: 4,
         height: heightPercentageToDP('6%'),
-        // alignSelf: 'center',
-        // justifyContent: "center"
     },
     text: {
         textAlign: 'center',
