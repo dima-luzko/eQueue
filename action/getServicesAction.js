@@ -1,5 +1,5 @@
-import {GET_SERVICES_URL} from '../constants/url'
-import {store} from '../App'
+import { GET_SERVICES_URL } from '../constants/url'
+import { store } from '../App'
 
 export const getServicesSuccess = services => {
     return {
@@ -8,12 +8,12 @@ export const getServicesSuccess = services => {
     }
 }
 
-export const getServices = () =>{
-    return (dispatch) =>{
-            fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_SERVICES_URL)
+export const getServices = () => {
+    return (dispatch) => {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_SERVICES_URL)
             .then(result => result.json())
             .then((json) => {
-            dispatch(getServicesSuccess(json))
+                dispatch(getServicesSuccess(json))
             })
     }
-    }
+}

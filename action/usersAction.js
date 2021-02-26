@@ -1,7 +1,5 @@
 import { GET_USERS_URL } from '../constants/url'
 import { store } from '../App'
-import {Alert} from 'react-native'
-
 
 export const getDataSuccess = users => {
     return {
@@ -25,5 +23,5 @@ export const usersFetchData = () => {
             .then((json) => {
                 dispatch(getDataSuccess(json))
             })
-        }
+    }
 }

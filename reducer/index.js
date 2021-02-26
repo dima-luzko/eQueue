@@ -8,9 +8,6 @@ import resultListReducer from '../reducer/resultListReducer'
 import updateStateReducer from '../reducer/updateStateReducer'
 import serverStateReducer from '../reducer/serverStateReducer'
 
-
-
-
 export default combineReducers({
     users: usersReducer,
     user: loggedUserReducer,
@@ -36,6 +33,13 @@ export default combineReducers({
     ipAddress: updateStateReducer,
     server : serverStateReducer,
     socket: updateStateReducer,
-    totalLength: updateStateReducer
-
+    totalLength: updateStateReducer,
+    totalMinutes: updateStateReducer,
+    posponedLength: updateStateReducer,
+    control:serverStateReducer,
+    text_1: updateStateReducer,
+    text_2: updateStateReducer,
+    text_3: updateStateReducer,
+    text_4: updateStateReducer,
+    serverState: serverStateReducer
 })

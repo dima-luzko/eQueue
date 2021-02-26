@@ -18,7 +18,6 @@ export let GET_RESULT_LIST_URL
 export let CHANGE_FLEX_PRIORITY_URL
 export let SERVER_STATE_URL =  "/common/health"
 
-
 setTimeout(() => {
     SOCKET_URL = "/websocket"
     GET_USERS_URL = "/operator/getUsers"

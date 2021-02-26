@@ -1,5 +1,5 @@
-import {INVITE_NEXT_CUSTOMER_URL,GET_START_CUSTOMER_URL,GET_FINISH_CUSTOMER_URL} from '../constants/url'
-import {store} from '../App'
+import { INVITE_NEXT_CUSTOMER_URL, GET_START_CUSTOMER_URL, GET_FINISH_CUSTOMER_URL } from '../constants/url'
+import { store } from '../App'
 
 export const inviteCustomer = customer => {
     return {
@@ -18,16 +18,14 @@ export const getStartInviteCustomer = customer => {
 export const getFinishInviteCustomer = () => {
     return {
         type: "GET_FINISH_INVITE_CUSTOMER",
-        
+
     }
 }
-
-
 
 export const inviteNextCustomer = (loggedUserId) => {
     return (dispatch) => {
 
-        fetch( "http://" + store.getState().ipAddress.ipAddress + ":8081/api" + INVITE_NEXT_CUSTOMER_URL + loggedUserId, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + INVITE_NEXT_CUSTOMER_URL + loggedUserId, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -44,30 +42,30 @@ export const inviteNextCustomer = (loggedUserId) => {
 export const getStartCustomer = (loggedUserId) => {
     return () => {
 
-        fetch( "http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_START_CUSTOMER_URL +loggedUserId , {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_START_CUSTOMER_URL + loggedUserId, {
             method: 'get',
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
-          })
-               
+        })
+
     }
 }
 
 export const getFinishCustomer = (data) => {
     return (dispatch) => {
 
-        fetch( "http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_FINISH_CUSTOMER_URL, {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      })
-        .then(() => {
-            dispatch(getFinishInviteCustomer())
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_FINISH_CUSTOMER_URL, {
+            method: 'post',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         })
+            .then(() => {
+                dispatch(getFinishInviteCustomer())
+            })
     }
 }
