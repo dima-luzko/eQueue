@@ -41,4 +41,5 @@ export default combineReducers({
     text_2: updateStateReducer,
     text_3: updateStateReducer,
     text_4: updateStateReducer,
+    serverState: serverStateReducer
 })

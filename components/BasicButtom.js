@@ -16,7 +16,7 @@ import { SOCKET_URL } from '../constants/url'
 import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
 import UserIcon from 'react-native-vector-icons/FontAwesome'
-
+import { serverControl } from '../action/serverStateAction'
 
 const Export = function (props) {
   const navigation = useNavigation();
@@ -311,6 +311,7 @@ class CallClient extends Component {
             }}
             onPress={() => {
               this.props.navigation.navigate('InvitePostponeCustomer')
+              this.props.serverControl(true)
             }}
           />
         </View>
@@ -413,6 +414,7 @@ class CallClient extends Component {
             }}
             onPress={() => {
               this.props.navigation.navigate('RedirectCustomer')
+              this.props.serverControl(true)
             }}
           />
         </View>
@@ -445,6 +447,7 @@ class CallClient extends Component {
             }}
             onPress={() => {
               this.props.navigation.navigate('CustomerToPostpone')
+              this.props.serverControl(true)
             }}
           />
         </View>
@@ -477,6 +480,7 @@ class CallClient extends Component {
             }}
             onPress={() => {
               this.props.navigation.navigate('ResultList')
+              this.props.serverControl(true)
             }}
           />
         </View>
@@ -578,7 +582,8 @@ const mapStateToProps = state => {
     userSelected: state.userSelected,
     secureTextEntry: state.secureTextEntry,
     socket: state.socket,
-    totalLength: state.totalLength
+    totalLength: state.totalLength,
+    control: state.control
   };
 };
 
@@ -596,6 +601,7 @@ const mapDispatchToProps = dispatch => {
     showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
     getSocketData: (socket) => dispatch(getSocketData(socket)),
     showTotalLength: (totalLength) => dispatch(showTotalLength(totalLength)),
+    serverControl: (control) => dispatch(serverControl(control)),
     updateDisableButtom: (
       disableButtonCallClient,
       disableButtonInvitePostponeCustomer,

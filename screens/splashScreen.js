@@ -50,39 +50,18 @@ class SplashScreen extends Component {
             this.props.selectIpAddress(ipStatus)
             this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
             this.check()
-        this.checkTime()
         }, 2000);
 
         
     }
-
-    checkTime(){
-        var time = new Date(),
-        hours = time.getHours(),
-        minutes = time.getMinutes(),
-        second = time.getSeconds()
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        console.log(hours, ':', minutes, ':', second)
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    
-      }
-    
       check() {
-        // if (this.state.control) {
            setInterval(() => {
-        //    this.setState({ control: false })
             console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
             this.props.checkServerState(this.props.ipAddress.ipAddress)
             if (this.props.control.control && !this.props.server.server) {
               this.props.navigation.navigate("ErrorConnectToServer")
             }
           }, 2000);
-        // }
-    
       }
 
     render() {

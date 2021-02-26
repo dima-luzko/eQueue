@@ -4,12 +4,11 @@ import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
-import { checkServerState } from '../action/serverStateAction'
-import { selectIpAddress, changeText1, changeText2, changeText3, changeText4, text1 } from '../action/updateStateAction'
+import { checkServerState, setServerState } from '../action/serverStateAction'
+import { selectIpAddress, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Shadow } from 'react-native-neomorph-shadows';
 import { Col, Grid } from "react-native-easy-grid";
-import { color } from 'react-native-reanimated';
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -53,35 +52,30 @@ class ConnectingToIP extends Component {
 
         this.props.selectIpAddress(glueIpAdress)
 
+        this.props.setServerState()
+
+        setTimeout(() => {
             this.props.checkServerState(this.props.ipAddress.ipAddress)
-     
-        
-        // setTimeout(() => {
 
-        // if (this.props.ipAddress.ipAddress) {
-        setTimeout(() => {
-            console.log("Введенный ip-адрес: " + this.props.ipAddress.ipAddress);
-        }, 300);
+            setTimeout(() => {
+                console.log("Введенный ip-адрес: " + this.props.ipAddress.ipAddress);
+            }, 300);
+            setTimeout(() => {
+                if (this.props.server.server) {
+                    AsyncStorage.setItem('ip', this.props.ipAddress.ipAddress)
+                    this.props.navigation.navigate("ServerConnection")
+                    console.log("Соединение с сервером установлено!");
+                }
 
-        setTimeout(() => {
-            if (this.props.server.server) {
-                AsyncStorage.setItem('ip', this.props.ipAddress.ipAddress)
-                this.props.navigation.navigate("ServerConnection")
-                console.log("Соединение с сервером установлено!");
-            }
+                else {
+                    this.props.navigation.navigate("ServerNoConnection")
+                    console.error("Нет соединения с сервером!")
+                }
+            }, 800);
 
-            else {
-                this.props.navigation.navigate("ServerNoConnection")
-                console.error("Нет соединения с сервером!")
-               
-            }
-        }, 600);
+        }, 500);
 
-        // }
-        // else {
-        //     this.errorInputIPAlert()
-        // }
-        // }, 300);
+
     }
 
     render() {
@@ -296,6 +290,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
+        setServerState: () => dispatch(setServerState()),
         selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
         changeText1: (text_1) => dispatch(changeText1(text_1)),
         changeText2: (text_2) => dispatch(changeText2(text_2)),
