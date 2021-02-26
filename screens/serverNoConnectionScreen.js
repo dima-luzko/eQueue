@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react-native'
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
+import Dialog, { DialogContent } from 'react-native-popup-dialog'
 import { Button } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
-import { selectIpAddress , changeText1, changeText2, changeText3, changeText4} from '../action/updateStateAction'
-import { Shadow } from 'react-native-neomorph-shadows';
+import { selectIpAddress, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
 
 const widthPercentageToDP = widthPercent => {
     const screenWidth = Dimensions.get('window').width;
@@ -53,48 +52,36 @@ class ServerNoConnection extends Component {
                                 <Text style={styles.textNotConnection}>Нет соединения с сервером!</Text>
                             </View>
                             <View >
-                                <Shadow
-                                    style={{
-                                        shadowOffset: { width: 0, height: 2 },
-                                        shadowColor: "rgba(253, 174, 190, 0.7)",
-                                        shadowRadius: 4,
-                                        width: widthPercentageToDP('38%'),
+                                <Button
+                                    raised={true}
+                                    title="Попробовать снова"
+                                    buttonStyle={{
+                                        backgroundColor: "#FDAEBE",
                                         borderRadius: 4,
                                         height: heightPercentageToDP('5%'),
-                                        backgroundColor: "#FDAEBE",
-                                        marginLeft: widthPercentageToDP('22%')
+                                        width: widthPercentageToDP('38%')
                                     }}
-                                >
-                                    <Button
-                                        title="Попробовать снова"
-                                        buttonStyle={{
-                                            backgroundColor: "#FDAEBE",
-                                            borderRadius: 4,
-                                            height: heightPercentageToDP('5%'),
-                                            width: widthPercentageToDP('38%')
-                                        }}
 
-                                        containerStyle={{
-                                            alignSelf: "center"
-                                        }}
+                                    containerStyle={{
+                                        alignSelf: "center"
+                                    }}
 
-                                        titleStyle={{
-                                            fontSize: heightPercentageToDP('1.67%'),
-                                            color: '#FFFFFF',
-                                            fontWeight: "bold",
-                                            fontFamily: "Roboto",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() => {
-                                            this.props.changeText1(null),
+                                    titleStyle={{
+                                        fontSize: heightPercentageToDP('1.67%'),
+                                        color: '#FFFFFF',
+                                        fontWeight: "bold",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={() => {
+                                        this.props.changeText1(null),
                                             this.props.changeText2(null),
                                             this.props.changeText3(null),
                                             this.props.changeText4(null),
-                                                this.setState({ visiable: false }),
-                                                this.props.navigation.replace("ConnectingToIP")
-                                        }}
-                                    />
-                                </Shadow>
+                                            this.setState({ visiable: false }),
+                                            this.props.navigation.replace("ConnectingToIP")
+                                    }}
+                                />
                             </View>
                         </DialogContent>
                     </Dialog>

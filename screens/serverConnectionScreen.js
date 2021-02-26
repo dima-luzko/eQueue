@@ -6,7 +6,6 @@ import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
 import { selectIpAddress } from '../action/updateStateAction'
 import { passwordState, userState, showPassword } from '../action/updateStateAction'
-import { Shadow } from 'react-native-neomorph-shadows';
 import { serverControl } from '../action/serverStateAction'
 
 const widthPercentageToDP = widthPercent => {
@@ -56,49 +55,36 @@ class ServerConnection extends Component {
                                 <Text style={styles.textConnection}>Соединение с сервером установлено!</Text>
                             </View>
                             <View >
-
-                                <Shadow
-                                    style={{
-                                        shadowOffset: { width: 0, height: 2 },
-                                        shadowColor: "rgba(65, 211, 141, 0.7)",
-                                        shadowRadius: 4,
-                                        width: widthPercentageToDP('38%'),
+                                <Button
+                                    raised={true}
+                                    title="ОK"
+                                    buttonStyle={{
+                                        backgroundColor: '#41D38D',
                                         borderRadius: 4,
                                         height: heightPercentageToDP('5%'),
-                                        backgroundColor: "#41D38D",
-                                        marginLeft: widthPercentageToDP('22%')
+                                        width: widthPercentageToDP('38%')
                                     }}
-                                >
-                                    <Button
-                                        title="ОK"
-                                        buttonStyle={{
-                                            backgroundColor: '#41D38D',
-                                            borderRadius: 4,
-                                            height: heightPercentageToDP('5%'),
-                                            width: widthPercentageToDP('38%')
-                                        }}
 
-                                        containerStyle={{
-                                            alignSelf: "center"
-                                        }}
+                                    containerStyle={{
+                                        alignSelf: "center"
+                                    }}
 
-                                        titleStyle={{
-                                            fontSize: heightPercentageToDP('2%'),
-                                            color: '#FFFFFF',
-                                            fontWeight: "bold",
-                                            fontFamily: "Roboto",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() => {
-                                            this.props.navigation.replace("LoginScreen"),
-                                                this.props.userState(""),
-                                                this.props.passwordState(""),
-                                                this.props.showPassword(true),
-                                                this.setState({ visiable: false }),
-                                                this.props.serverControl(true)
-                                        }}
-                                    />
-                                </Shadow>
+                                    titleStyle={{
+                                        fontSize: heightPercentageToDP('2%'),
+                                        color: '#FFFFFF',
+                                        fontWeight: "bold",
+                                        fontFamily: "Roboto",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={() => {
+                                        this.props.navigation.replace("LoginScreen"),
+                                            this.props.userState(""),
+                                            this.props.passwordState(""),
+                                            this.props.showPassword(true),
+                                            this.setState({ visiable: false }),
+                                            this.props.serverControl(true)
+                                    }}
+                                />
                             </View>
                         </DialogContent>
                     </Dialog>
