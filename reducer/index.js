@@ -36,5 +36,10 @@ export default combineReducers({
     totalLength: updateStateReducer,
     totalMinutes: updateStateReducer,
     posponedLength: updateStateReducer,
-    control:serverStateReducer
+    control:serverStateReducer,
+    text_1: updateStateReducer,
+    text_2: updateStateReducer,
+    text_3: updateStateReducer,
+    text_4: updateStateReducer,
+    serverState: serverStateReducer
 })

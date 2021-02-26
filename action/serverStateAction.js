@@ -20,6 +20,20 @@ export const server = control => {
     }
 }
 
+export const serverStateCheck = () => {
+    return {
+        type: "SERVER_STATE"
+    }
+}
+
+export const setServerState = () => {
+    return (dispatch) => {
+        dispatch(serverStateCheck())
+    }
+}
+
+
+
 export const serverControl = (control) => {
     return (dispatch) => {
         dispatch(server(control))

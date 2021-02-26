@@ -5,7 +5,7 @@ import { usersFetchData } from '../action/usersAction'
 import { Button } from 'react-native-elements'
 import { loggedUser } from '../action/loggedUserAction'
 import { getSelfServices } from '../action/selfServicesAction'
-import { passwordState, userState, showPassword } from '../action/updateStateAction'
+import { passwordState, userState, showPassword, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
 import EyeIcon from 'react-native-vector-icons/Octicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import DoubleClick from 'react-native-double-tap'
@@ -91,11 +91,11 @@ class LoginScreen extends Component {
     // this.checkTime()
   }
 
-  checkTime(){
+  checkTime() {
     var time = new Date(),
-    hours = time.getHours(),
-    minutes = time.getMinutes(),
-    second = time.getSeconds()
+      hours = time.getHours(),
+      minutes = time.getMinutes(),
+      second = time.getSeconds()
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -108,7 +108,7 @@ class LoginScreen extends Component {
 
   check() {
     if (this.state.control) {
-       setInterval(() => {
+      setInterval(() => {
         this.setState({ control: false })
         console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
         this.props.checkServerState(this.props.ipAddress.ipAddress)
@@ -218,8 +218,12 @@ class LoginScreen extends Component {
         <StatusBar translucent={true} backgroundColor={'transparent'} />
         <DoubleClick
           doubleTap={() => {
-            //this.props.selectIpAddress(null),
-            this.props.navigation.replace('ConnectingToIP')
+            this.props.changeText1(null),
+              this.props.changeText2(null),
+              this.props.changeText3(null),
+              this.props.changeText4(null),
+              this.props.serverControl(false),
+              this.props.navigation.replace('ConnectingToIP')
           }}
           delay={200}
         >
@@ -392,7 +396,11 @@ const mapDispatchToProps = dispatch => {
     showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
     checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
     serverControl: (control) => dispatch(serverControl(control)),
-    selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress))
+    selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
+    changeText1: (text_1) => dispatch(changeText1(text_1)),
+    changeText2: (text_2) => dispatch(changeText2(text_2)),
+    changeText3: (text_3) => dispatch(changeText3(text_3)),
+    changeText4: (text_4) => dispatch(changeText4(text_4))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

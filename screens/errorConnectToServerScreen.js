@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { checkServerState, serverControl } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Col, Grid } from "react-native-easy-grid";
-import { passwordState, userState, showPassword } from '../action/updateStateAction'
+import { passwordState, userState, showPassword, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
 import { selectIpAddress } from '../action/updateStateAction'
 import { UIActivityIndicator } from 'react-native-indicators';
 
@@ -141,8 +141,11 @@ class ErrorConnectToServer extends Component {
                                     }}
                                     onPress={() => {
                                         this.setState({ visiable: false })
-                                        this.props.selectIpAddress(null)
-                                        this.props.navigation.navigate("ConnectingToIP")
+                                        this.props.changeText1(null),
+                                            this.props.changeText2(null),
+                                            this.props.changeText3(null),
+                                            this.props.changeText4(null),
+                                            this.props.navigation.replace("ConnectingToIP")
                                         this.props.serverControl(false)
                                     }}
                                 />
@@ -260,7 +263,11 @@ const mapDispatchToProps = dispatch => {
         userState: (userSelected) => dispatch(userState(userSelected)),
         showPassword: (secureTextEntry) => dispatch(showPassword(secureTextEntry)),
         selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
-        serverControl: (control) => dispatch(serverControl(control))
+        serverControl: (control) => dispatch(serverControl(control)),
+        changeText1: (text_1) => dispatch(changeText1(text_1)),
+        changeText2: (text_2) => dispatch(changeText2(text_2)),
+        changeText3: (text_3) => dispatch(changeText3(text_3)),
+        changeText4: (text_4) => dispatch(changeText4(text_4))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ErrorConnectToServer); 

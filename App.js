@@ -35,6 +35,7 @@ export default class App extends Component {
             screenOptions={{ headerShown: false }}
           >
 
+
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
