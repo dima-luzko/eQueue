@@ -42,7 +42,7 @@ export const serverControl = (control) => {
 
 export const checkServerState = (ipAddress) => {
     return (dispatch) => {
-        fetch("http://" + ipAddress + ":8081/api" + SERVER_STATE_URL)
+        fetch("http://" + ipAddress + ":8084/api" + SERVER_STATE_URL)
             .then((result) => {
                 console.log("Success: ",result.status,"","http://" + ipAddress + ":8084/api" + SERVER_STATE_URL);
                 result.status === 200 ?
