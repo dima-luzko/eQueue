@@ -252,8 +252,8 @@ class CallClient extends Component {
         <View>
           <Button
             raised={true}
-            disabled={this.props.totalLength.totalLength ? this.props.disableButtonCallClient.disableButtonCallClient : true}
-            title="Вызвать следующего клиента"
+            disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true: this.props.disableButtonCallClient.disableButtonCallClient}
+            title={this.props.customer.customer ? "Вызвать еще раз" : "Вызвать следующего клиента"} 
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
