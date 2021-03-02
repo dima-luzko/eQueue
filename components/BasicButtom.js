@@ -120,7 +120,7 @@ class CallClient extends Component {
 
   connectingToSocket = () => {
 
-    const ws = new SockJS("http://" + store.getState().ipAddress.ipAddress + ":8081" + SOCKET_URL);
+    const ws = new SockJS("http://" + store.getState().ipAddress.ipAddress + ":8084" + SOCKET_URL);
     this.stompClient = Stomp.over(ws);
 
     let that = this;
