@@ -25,7 +25,7 @@ export const getFinishInviteCustomer = () => {
 export const inviteNextCustomer = (loggedUserId) => {
     return (dispatch) => {
 
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + INVITE_NEXT_CUSTOMER_URL + loggedUserId, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + INVITE_NEXT_CUSTOMER_URL + loggedUserId, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -42,7 +42,7 @@ export const inviteNextCustomer = (loggedUserId) => {
 export const getStartCustomer = (loggedUserId) => {
     return () => {
 
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_START_CUSTOMER_URL + loggedUserId, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_START_CUSTOMER_URL + loggedUserId, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -56,7 +56,7 @@ export const getStartCustomer = (loggedUserId) => {
 export const getFinishCustomer = (data) => {
     return (dispatch) => {
 
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_FINISH_CUSTOMER_URL, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_FINISH_CUSTOMER_URL, {
             method: 'post',
             headers: {
                 Accept: 'application/json',

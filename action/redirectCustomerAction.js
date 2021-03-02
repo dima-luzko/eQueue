@@ -10,7 +10,7 @@ export const redirect = () => {
 export const redirectCustomer = (data) => {
     return (dispatch) => {
 
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + REDIRECT_CUSTOMER_URL, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + REDIRECT_CUSTOMER_URL, {
             method: 'post',
             headers: {
                 Accept: 'application/json',

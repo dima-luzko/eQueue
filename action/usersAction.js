@@ -18,7 +18,7 @@ export const getDataFail = error => {
 export const usersFetchData = () => {
     return (dispatch) => {
 
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_USERS_URL)
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_USERS_URL)
             .then(result => result.json())
             .then((json) => {
                 dispatch(getDataSuccess(json))

@@ -9,7 +9,7 @@ export const postpone = () => {
 
 export const postponeCustomer = (data) => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + POSTPONE_CUSTOMER_URL, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + POSTPONE_CUSTOMER_URL, {
             method: 'post',
             headers: {
                 Accept: 'application/json',

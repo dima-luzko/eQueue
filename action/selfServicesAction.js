@@ -10,7 +10,7 @@ export const selfServices = (selfServices) => {
 
 export const getSelfServices = (userId, point) => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_SELF_SERVICES_URL + userId + '&point=' + point, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_SELF_SERVICES_URL + userId + '&point=' + point, {
             method: 'get',
             headers: {
                 Accept: 'application/json',

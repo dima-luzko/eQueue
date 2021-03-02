@@ -10,7 +10,7 @@ export const result = resultList => {
 
 export const getResultList = () => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_RESULT_LIST_URL)
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_RESULT_LIST_URL)
             .then(result => result.json())
             .then((json) => {
                 dispatch(result(json))

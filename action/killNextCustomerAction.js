@@ -9,7 +9,7 @@ export const killCustomer = () => {
 
 export const killNextCustomer = (userId) => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + KILL_NEXT_CUSTOMER_URL + userId, {
+        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + KILL_NEXT_CUSTOMER_URL + userId, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
