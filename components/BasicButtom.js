@@ -286,8 +286,8 @@ class CallClient extends Component {
         <View>
           <Button
             raised={true}
-            disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true : this.props.disableButtonCallClient.disableButtonCallClient}
-            title={this.props.customer.customer ? "Вызвать еще раз" : "Вызвать следующего клиента"}
+           disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true : this.props.disableButtonCallClient.disableButtonCallClient}
+            title={this.props.customer.customer ? "Вызвать еще раз" : "Вызвать следующего"}
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
@@ -301,7 +301,7 @@ class CallClient extends Component {
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
+              fontSize: heightPercentageToDP('2.5%'),
               color: "#FFFFFF",
               textAlign: "center",
               alignItems: "center",
@@ -322,7 +322,7 @@ class CallClient extends Component {
             <Button
               raised={true}
               disabled={this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer}
-              title="Посмотреть отложенных клиентов"
+              title="Посмотреть отложенных"
               buttonStyle={{
                 backgroundColor: "#41D38D",
                 borderRadius: 8,
@@ -336,7 +336,7 @@ class CallClient extends Component {
               }}
 
               titleStyle={{
-                fontSize: heightPercentageToDP('1.8%'),
+                fontSize: heightPercentageToDP('2.5%'),
                 color: "#FFFFFF",
                 textAlign: "center",
                 alignItems: "center",
@@ -369,7 +369,7 @@ class CallClient extends Component {
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
+              fontSize: heightPercentageToDP('2.5%'),
               color: "#FFFFFF",
               textAlign: "center",
               alignItems: "center",
@@ -390,7 +390,7 @@ class CallClient extends Component {
           <Button
             raised={true}
             disabled={this.props.disableButtonStartClient.disableButtonStartClient}
-            title="Начать работу с клиентом"
+            title="Начать работу"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
@@ -404,7 +404,7 @@ class CallClient extends Component {
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
+              fontSize: heightPercentageToDP('2.5%'),
               color: "#FFFFFF",
               textAlign: "center",
               alignItems: "center",
@@ -426,7 +426,7 @@ class CallClient extends Component {
             <Button
               raised={true}
               disabled={this.props.disableButtonRedirectClient.disableButtonRedirectClient}
-              title="Перенаправить клиента"
+              title="Перенаправить"
               buttonStyle={{
                 backgroundColor: "#41D38D",
                 borderRadius: 8,
@@ -440,7 +440,7 @@ class CallClient extends Component {
               }}
 
               titleStyle={{
-                fontSize: heightPercentageToDP('1.8%'),
+                fontSize: heightPercentageToDP('2.5%'),
                 color: "#FFFFFF",
                 textAlign: "center",
                 alignItems: "center",
@@ -460,7 +460,7 @@ class CallClient extends Component {
             <Button
               raised={true}
               disabled={this.props.disableButtonPostponeClient.disableButtonPostponeClient}
-              title="Отложить клиента"
+              title="Отложить"
               buttonStyle={{
                 backgroundColor: "#41D38D",
                 borderRadius: 8,
@@ -474,7 +474,7 @@ class CallClient extends Component {
               }}
 
               titleStyle={{
-                fontSize: heightPercentageToDP('1.8%'),
+                fontSize: heightPercentageToDP('2.5%'),
                 color: "#FFFFFF",
                 textAlign: "center",
                 alignItems: "center",
@@ -493,7 +493,7 @@ class CallClient extends Component {
           <Button
             raised={true}
             disabled={this.props.disableFinishClient.disableFinishClient}
-            title="Закончить работу с клиентом"
+            title="Закончить работу"
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
@@ -507,7 +507,7 @@ class CallClient extends Component {
             }}
 
             titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
+              fontSize: heightPercentageToDP('2.5%'),
               color: "#FFFFFF",
               textAlign: "center",
               alignItems: "center",
