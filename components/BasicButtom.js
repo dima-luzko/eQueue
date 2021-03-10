@@ -9,6 +9,7 @@ import { getSelfServices } from '../action/selfServicesAction'
 import { useNavigation } from '@react-navigation/native';
 import { Appbar } from 'react-native-paper'
 import { killNextCustomer } from '../action/killNextCustomerAction';
+import { getFinishCustomer } from '../action/callClientAction'
 import { updateText, updateDisableButtom, updateImage, passwordState, userState, showPassword, getSocketData, showTotalLength } from '../action/updateStateAction'
 import SockJS from 'sockjs-client/dist/sockjs'
 import Stomp from 'stompjs'
@@ -17,6 +18,8 @@ import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
 import UserIcon from 'react-native-vector-icons/FontAwesome'
 import { serverControl } from '../action/serverStateAction'
+import Sound from 'react-native-sound';
+
 
 const Export = function (props) {
   const navigation = useNavigation();
@@ -53,10 +56,13 @@ const maxTimeoutCounter = 10;
 class CallClient extends Component {
   _isMounted = false;
 
+  sound = new Sound('sound_for_langth.mp3')
+
   constructor(props) {
     super(props);
     this.state = {
-      connecting: true
+      connecting: true,
+      prevTotalLength: 0
     };
   }
 
@@ -118,6 +124,10 @@ class CallClient extends Component {
     }
   }
 
+  playSound = () => {
+    this.sound.play()
+  }
+
   connectingToSocket = () => {
 
     const ws = new SockJS("http://" + store.getState().ipAddress.ipAddress + ":8084" + SOCKET_URL);
@@ -138,6 +148,13 @@ class CallClient extends Component {
             len += value.line.length
           })
         }
+
+        if (that.state.prevTotalLength ==0 && len == 1) {
+          that.playSound()
+        }
+
+        that.setState({ prevTotalLength: len })
+
         states.getSocketData(data)
         states.showTotalLength(len)
         console.log("+++++++ " + len);
@@ -151,6 +168,17 @@ class CallClient extends Component {
 
     });
 
+
+
+  }
+
+  finishCustomer() {
+    return (
+      {
+        user_id: this.props.user.user.id,
+        result_id: -1
+      }
+    )
   }
 
   componentWillUnmount() {
@@ -185,15 +213,15 @@ class CallClient extends Component {
 
             }}
           >
-              <UserIcon
-                name="user-circle-o"
-                size={2 * heightPercentageToDP("3%")}
-                color="white"
-                style={{
-                  marginLeft: widthPercentageToDP('2%')
-                }}
-              />
-              
+            <UserIcon
+              name="user-circle-o"
+              size={2 * heightPercentageToDP("3%")}
+              color="white"
+              style={{
+                marginLeft: widthPercentageToDP('2%')
+              }}
+            />
+
 
             <Appbar.Content
               titleStyle={{
@@ -216,6 +244,10 @@ class CallClient extends Component {
             <TouchableOpacity
               disabled={this.props.disableButtonExit.disableButtonExit}
               onPress={() => {
+                setTimeout(() => {
+                  this.stompClient.disconnect()
+                }, 200);
+
                 this.props.navigation.navigate("LoginScreen"),
                   this.props.userState(""),
                   this.props.passwordState(""),
@@ -252,8 +284,8 @@ class CallClient extends Component {
         <View>
           <Button
             raised={true}
-            disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true: this.props.disableButtonCallClient.disableButtonCallClient}
-            title={this.props.customer.customer ? "Вызвать еще раз" : "Вызвать следующего клиента"} 
+            disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true : this.props.disableButtonCallClient.disableButtonCallClient}
+            title={this.props.customer.customer ? "Вызвать еще раз" : "Вызвать следующего клиента"}
             buttonStyle={{
               backgroundColor: "#41D38D",
               borderRadius: 8,
@@ -286,7 +318,7 @@ class CallClient extends Component {
         <View>
           <Button
             raised={true}
-            disabled={ this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer }
+            disabled={this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer}
             title="Посмотреть отложенных клиентов"
             buttonStyle={{
               backgroundColor: "#41D38D",
@@ -479,8 +511,9 @@ class CallClient extends Component {
               fontFamily: "Roboto"
             }}
             onPress={() => {
-              this.props.navigation.navigate('ResultList')
-              this.props.serverControl(true)
+              this.props.customer.customer.to_service.result_required == false ? this.props.getFinishCustomer(this.finishCustomer()) : this.props.navigation.navigate('ResultList'),
+                this.props.updateDisableButtom(false, false, true, true, true, true, true, false),
+                this.props.serverControl(true)
             }}
           />
         </View>
@@ -602,6 +635,7 @@ const mapDispatchToProps = dispatch => {
     getSocketData: (socket) => dispatch(getSocketData(socket)),
     showTotalLength: (totalLength) => dispatch(showTotalLength(totalLength)),
     serverControl: (control) => dispatch(serverControl(control)),
+    getFinishCustomer: (data) => dispatch(getFinishCustomer(data)),
     updateDisableButtom: (
       disableButtonCallClient,
       disableButtonInvitePostponeCustomer,

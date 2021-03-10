@@ -12,6 +12,8 @@ target 'eQueue' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'eQueueTests' do
     inherit! :complete
     # Pods for testing
