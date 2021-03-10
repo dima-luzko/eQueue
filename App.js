@@ -14,6 +14,7 @@ import ConnectingToIP from './screens/ConnectingToIPScreen'
 import ErrorConnectToServer from './screens/errorConnectToServerScreen'
 import ServerNoConnection from './screens/serverNoConnectionScreen'
 import ServerConnection from './screens/serverConnectionScreen'
+import Setting from './screens/settingScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -34,6 +35,7 @@ export default class App extends Component {
           <Stack.Navigator
             screenOptions={{ headerShown: false }}
           >
+
 
 
             <Stack.Screen
@@ -81,6 +83,13 @@ export default class App extends Component {
             <Stack.Screen
               name="ResultList"
               component={ResultList} />
+
+
+            <Stack.Screen
+              name="Setting"
+              component={Setting}
+            />
+
 
           </Stack.Navigator>
         </NavigationContainer>

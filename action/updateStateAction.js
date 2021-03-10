@@ -130,6 +130,32 @@ export const text4 = text_4 => {
     }
 }
 
+export const postponed = postponedCheckButton => {
+    return {
+        type: "POSTPONED_CHECK",
+        postponedCheckButton
+    }
+}
+
+export const postponedCheck = (postponedCheckButton) => {
+    return (dispatch) => {
+        dispatch(postponed(postponedCheckButton))
+    }
+}
+
+export const redirect = redirectCheckButton => {
+    return {
+        type: "REDIRECT_CHECK",
+        redirectCheckButton
+    }
+}
+
+export const redirectCheck = (redirectCheckButton) => {
+    return (dispatch) => {
+        dispatch(redirect(redirectCheckButton))
+    }
+}
+
 export const changeText4 = (text_4) => {
     return (dispatch) => {
         dispatch(text4(text_4))

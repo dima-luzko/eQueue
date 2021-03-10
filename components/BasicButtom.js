@@ -149,7 +149,7 @@ class CallClient extends Component {
           })
         }
 
-        if (that.state.prevTotalLength ==0 && len == 1) {
+        if (that.state.prevTotalLength == 0 && len == 1) {
           that.playSound()
         }
 
@@ -167,9 +167,6 @@ class CallClient extends Component {
       }
 
     });
-
-
-
   }
 
   finishCustomer() {
@@ -213,15 +210,20 @@ class CallClient extends Component {
 
             }}
           >
-            <UserIcon
-              name="user-circle-o"
-              size={2 * heightPercentageToDP("3%")}
-              color="white"
-              style={{
-                marginLeft: widthPercentageToDP('2%')
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate("Setting")
               }}
-            />
-
+            >
+              <UserIcon
+                name="user-circle-o"
+                size={2 * heightPercentageToDP("3%")}
+                color="white"
+                style={{
+                  marginLeft: widthPercentageToDP('2%')
+                }}
+              />
+            </TouchableOpacity>
 
             <Appbar.Content
               titleStyle={{
@@ -315,38 +317,39 @@ class CallClient extends Component {
             }}
           />
         </View>
-        <View>
-          <Button
-            raised={true}
-            disabled={this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer}
-            title="Посмотреть отложенных клиентов"
-            buttonStyle={{
-              backgroundColor: "#41D38D",
-              borderRadius: 8,
-              width: widthPercentageToDP('65%'),
-              height: heightPercentageToDP('4.5%')
-            }}
+        {this.props.postponedCheckButton.postponedCheckButton &&
+          <View>
+            <Button
+              raised={true}
+              disabled={this.props.disableButtonInvitePostponeCustomer.disableButtonInvitePostponeCustomer}
+              title="Посмотреть отложенных клиентов"
+              buttonStyle={{
+                backgroundColor: "#41D38D",
+                borderRadius: 8,
+                width: widthPercentageToDP('65%'),
+                height: heightPercentageToDP('4.5%')
+              }}
 
-            containerStyle={{
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%')
-            }}
+              containerStyle={{
+                alignSelf: "center",
+                marginBottom: heightPercentageToDP('2%')
+              }}
 
-            titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
-              color: "#FFFFFF",
-              textAlign: "center",
-              alignItems: "center",
-              fontWeight: "500",
-              fontStyle: "normal",
-              fontFamily: "Roboto"
-            }}
-            onPress={() => {
-              this.props.navigation.navigate('InvitePostponeCustomer')
-              this.props.serverControl(true)
-            }}
-          />
-        </View>
+              titleStyle={{
+                fontSize: heightPercentageToDP('1.8%'),
+                color: "#FFFFFF",
+                textAlign: "center",
+                alignItems: "center",
+                fontWeight: "500",
+                fontStyle: "normal",
+                fontFamily: "Roboto"
+              }}
+              onPress={() => {
+                this.props.navigation.navigate('InvitePostponeCustomer')
+                this.props.serverControl(true)
+              }}
+            />
+          </View>}
 
         <View>
           <Button
@@ -418,71 +421,73 @@ class CallClient extends Component {
           />
         </View>
 
-        <View>
-          <Button
-            raised={true}
-            disabled={this.props.disableButtonRedirectClient.disableButtonRedirectClient}
-            title="Перенаправить клиента"
-            buttonStyle={{
-              backgroundColor: "#41D38D",
-              borderRadius: 8,
-              width: widthPercentageToDP('65%'),
-              height: heightPercentageToDP('4.5%')
-            }}
+        {this.props.redirectCheckButton.redirectCheckButton &&
+          <View>
+            <Button
+              raised={true}
+              disabled={this.props.disableButtonRedirectClient.disableButtonRedirectClient}
+              title="Перенаправить клиента"
+              buttonStyle={{
+                backgroundColor: "#41D38D",
+                borderRadius: 8,
+                width: widthPercentageToDP('65%'),
+                height: heightPercentageToDP('4.5%')
+              }}
 
-            containerStyle={{
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%')
-            }}
+              containerStyle={{
+                alignSelf: "center",
+                marginBottom: heightPercentageToDP('2%')
+              }}
 
-            titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
-              color: "#FFFFFF",
-              textAlign: "center",
-              alignItems: "center",
-              fontWeight: "500",
-              fontStyle: "normal",
-              fontFamily: "Roboto"
-            }}
-            onPress={() => {
-              this.props.navigation.navigate('RedirectCustomer')
-              this.props.serverControl(true)
-            }}
-          />
-        </View>
+              titleStyle={{
+                fontSize: heightPercentageToDP('1.8%'),
+                color: "#FFFFFF",
+                textAlign: "center",
+                alignItems: "center",
+                fontWeight: "500",
+                fontStyle: "normal",
+                fontFamily: "Roboto"
+              }}
+              onPress={() => {
+                this.props.navigation.navigate('RedirectCustomer')
+                this.props.serverControl(true)
+              }}
+            />
+          </View>}
 
-        <View>
-          <Button
-            raised={true}
-            disabled={this.props.disableButtonPostponeClient.disableButtonPostponeClient}
-            title="Отложить клиента"
-            buttonStyle={{
-              backgroundColor: "#41D38D",
-              borderRadius: 8,
-              width: widthPercentageToDP('65%'),
-              height: heightPercentageToDP('4.5%')
-            }}
+        {this.props.postponedCheckButton.postponedCheckButton &&
+          <View>
+            <Button
+              raised={true}
+              disabled={this.props.disableButtonPostponeClient.disableButtonPostponeClient}
+              title="Отложить клиента"
+              buttonStyle={{
+                backgroundColor: "#41D38D",
+                borderRadius: 8,
+                width: widthPercentageToDP('65%'),
+                height: heightPercentageToDP('4.5%')
+              }}
 
-            containerStyle={{
-              alignSelf: "center",
-              marginBottom: heightPercentageToDP('2%')
-            }}
+              containerStyle={{
+                alignSelf: "center",
+                marginBottom: heightPercentageToDP('2%')
+              }}
 
-            titleStyle={{
-              fontSize: heightPercentageToDP('1.8%'),
-              color: "#FFFFFF",
-              textAlign: "center",
-              alignItems: "center",
-              fontWeight: "500",
-              fontStyle: "normal",
-              fontFamily: "Roboto"
-            }}
-            onPress={() => {
-              this.props.navigation.navigate('CustomerToPostpone')
-              this.props.serverControl(true)
-            }}
-          />
-        </View>
+              titleStyle={{
+                fontSize: heightPercentageToDP('1.8%'),
+                color: "#FFFFFF",
+                textAlign: "center",
+                alignItems: "center",
+                fontWeight: "500",
+                fontStyle: "normal",
+                fontFamily: "Roboto"
+              }}
+              onPress={() => {
+                this.props.navigation.navigate('CustomerToPostpone')
+                this.props.serverControl(true)
+              }}
+            />
+          </View>}
 
         <View>
           <Button
@@ -616,7 +621,9 @@ const mapStateToProps = state => {
     secureTextEntry: state.secureTextEntry,
     socket: state.socket,
     totalLength: state.totalLength,
-    control: state.control
+    control: state.control,
+    redirectCheckButton: state.redirectCheckButton,
+    postponedCheckButton: state.postponedCheckButton
   };
 };
 

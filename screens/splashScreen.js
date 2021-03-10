@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, PixelRatio, Dimensions, StatusBar, Alert, Image, Text } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
-import { selectIpAddress } from '../action/updateStateAction'
+import { selectIpAddress, postponedCheck, redirectCheck  } from '../action/updateStateAction'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -45,8 +45,12 @@ class SplashScreen extends Component {
 
     componentDidMount = async () => {
         let ipStatus = await AsyncStorage.getItem('ip')
+        let redirectCheck = await AsyncStorage.getItem('redirectCheck')
+        let postponedCheck = await AsyncStorage.getItem('postponedCheck')
 
         setTimeout(() => {
+            this.props.redirectCheck(redirectCheck == "true")
+            this.props.postponedCheck(postponedCheck == "true")
             this.props.selectIpAddress(ipStatus)
             this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
             this.check()
@@ -135,7 +139,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
-        selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress))
+        selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
+        redirectCheck: (redirectCheckButton) => dispatch(redirectCheck(redirectCheckButton)),
+        postponedCheck: (postponedCheckButton) => dispatch(postponedCheck(postponedCheckButton))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen); 

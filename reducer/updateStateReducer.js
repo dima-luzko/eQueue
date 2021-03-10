@@ -3,7 +3,7 @@ import {
     UPDATE_STATE_BUTTOM, PASSWORD, SELECT_USER,
     SECURE_TEXT_ENTRY, INPUT_IP_ADDRESS, TOTAL_LENGTH,
     GET_SOCKET_DATA, TOTAL_MINUTES, TEXT_1, TEXT_2,
-    TEXT_3, TEXT_4
+    TEXT_3, TEXT_4, POSTPONED_CHECK, REDIRECT_CHECK
 } from '../constants/constants'
 
 const initialState = {
@@ -28,11 +28,23 @@ const initialState = {
     text_1: null,
     text_2: null,
     text_3: null,
-    text_4: null
+    text_4: null,
+    redirectCheckButton: true,
+    postponedCheckButton: true
 }
 
 export default updateStateReducer = (state = initialState, action) => {
     switch (action.type) {
+        case POSTPONED_CHECK:
+            return {
+                ...state,
+                postponedCheckButton: action.postponedCheckButton
+            }
+        case REDIRECT_CHECK:
+            return {
+                ...state,
+                redirectCheckButton: action.redirectCheckButton
+            }
         case UPDATE_TEXT:
             return {
                 ...state,
