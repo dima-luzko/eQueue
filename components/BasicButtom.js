@@ -508,7 +508,9 @@ class CallClient extends Component {
             onPress={() => {
               this.props.customer.customer.to_service.result_required == false ? this.props.getFinishCustomer(this.finishCustomer()) : this.props.navigation.navigate('ResultList'),
                 this.props.updateDisableButtom(false, false, true, true, true, true, true, false),
-                this.props.serverControl(true)
+                this.props.serverControl(true),
+                this.props.updateText(0),
+                this.props.updateImage(0)
             }}
           />
         </View>
