@@ -42,14 +42,14 @@ export const serverControl = (control) => {
 
 export const checkServerState = (ipAddress) => {
     return (dispatch) => {
-        fetch("http://" + ipAddress + ":8084/api" + SERVER_STATE_URL)
+        fetch(ipAddress + SERVER_STATE_URL)
             .then((result) => {
-                console.log("Success: ",result.status,"","http://" + ipAddress + ":8084/api" + SERVER_STATE_URL);
+                console.log("Success: ", result.status, "", ipAddress + SERVER_STATE_URL);
                 result.status === 200 ?
-                dispatch(serverState()) : dispatch(serverStateError())
+                    dispatch(serverState()) : dispatch(serverStateError())
             })
             .catch(() => {
-                console.log("Error: ","","http://" + ipAddress + ":8084/api" + SERVER_STATE_URL);
+                console.log("Error: ", "", ipAddress + SERVER_STATE_URL);
                 dispatch(serverStateError())
             });
     }

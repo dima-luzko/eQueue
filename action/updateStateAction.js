@@ -130,6 +130,19 @@ export const text4 = text_4 => {
     }
 }
 
+export const text5 = text_5 => {
+    return {
+        type: "TEXT_5",
+        text_5
+    }
+}
+
+export const changeText5 = (text_5) => {
+    return (dispatch) => {
+        dispatch(text5(text_5))
+    }
+}
+
 export const postponed = postponedCheckButton => {
     return {
         type: "POSTPONED_CHECK",

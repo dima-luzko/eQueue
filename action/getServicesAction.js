@@ -10,7 +10,7 @@ export const getServicesSuccess = services => {
 
 export const getServices = () => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_SERVICES_URL)
+        fetch(store.getState().ipAddress.ipAddress + GET_SERVICES_URL)
             .then(result => result.json())
             .then((json) => {
                 dispatch(getServicesSuccess(json))

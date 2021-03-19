@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
 import { checkServerState, setServerState } from '../action/serverStateAction'
-import { selectIpAddress, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
+import { selectIpAddress, changeText1, changeText2, changeText3, changeText4, changeText5 } from '../action/updateStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { Shadow } from 'react-native-neomorph-shadows';
 import { Col, Grid } from "react-native-easy-grid";
@@ -48,7 +48,7 @@ class ConnectingToIP extends Component {
     }
 
     checkServer() {
-        var glueIpAdress = this.props.text_1.text_1 + "." + this.props.text_2.text_2 + "." + this.props.text_3.text_3 + "." + this.props.text_4.text_4
+        var glueIpAdress = "http://" + this.props.text_1.text_1 + "." + this.props.text_2.text_2 + "." + this.props.text_3.text_3 + "." + this.props.text_4.text_4 + ":" + this.props.text_5.text_5 
 
         this.props.selectIpAddress(glueIpAdress)
 
@@ -101,7 +101,7 @@ class ConnectingToIP extends Component {
                                 <Text style={styles.text}>Введите ip - aдресс сервера</Text>
                                 <View style={styles.inputStyle}>
                                     <Grid>
-                                        <Col style={{ width: widthPercentageToDP('10%'), marginLeft: widthPercentageToDP('18%'), backgroundColor: "rgba(244, 244, 244, 0.9)" }}>
+                                        <Col style={{ width: widthPercentageToDP('10%'), marginLeft: widthPercentageToDP('10%'), backgroundColor: "rgba(244, 244, 244, 0.9)" }}>
                                             <Shadow
                                                 inner
                                                 style={{
@@ -116,7 +116,7 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), textAlign: "center"}}
                                                     value={this.props.text_1.text_1}
                                                     onChangeText={value => this.props.changeText1(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="127"
@@ -145,7 +145,7 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), textAlign: "center"}}
                                                     value={this.props.text_2.text_2}
                                                     onChangeText={value => this.props.changeText2(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="0"
@@ -173,7 +173,7 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%')}}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), textAlign: "center"}}
                                                     value={this.props.text_3.text_3}
                                                     onChangeText={value => this.props.changeText3(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="0"
@@ -201,11 +201,39 @@ class ConnectingToIP extends Component {
                                                 }}
                                             >
                                                 <TextInput
-                                                    style={{ fontSize: heightPercentageToDP('1.75%'), marginLeft: widthPercentageToDP('2%') }}
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), textAlign: "center"}}
                                                     value={this.props.text_4.text_4}
                                                     onChangeText={value => this.props.changeText4(value > 254 ? "254": value && value < 0 ? "0" : value)}
                                                     placeholder="1"
                                                     maxLength={3}
+                                                    numberOfLines={1}
+                                                    keyboardType='numeric'
+                                                />
+                                            </Shadow>
+                                        </Col>
+                                        <Col style={{ width: widthPercentageToDP('3%') }}>
+                                            <Text style={{ color: "#A2A0A0", fontSize: heightPercentageToDP('4.5%'), marginTop: heightPercentageToDP('-1%') }}>:</Text>
+                                        </Col>
+                                        <Col style={{ width: widthPercentageToDP('12%'), backgroundColor: "rgba(244, 244, 244, 0.9)" }}>
+                                            <Shadow
+                                                inner
+                                                style={{
+                                                    shadowOffset: { width: 2, height: 2 },
+                                                    shadowColor: "rgba(0, 0, 0, 0.25)",
+                                                    shadowRadius: 2,
+                                                    width: widthPercentageToDP('12%'),
+                                                    borderRadius: 4,
+                                                    height: heightPercentageToDP('6%'),
+                                                    justifyContent: "center",
+                                                    alignSelf: "center"
+                                                }}
+                                            >
+                                                <TextInput
+                                                    style={{ fontSize: heightPercentageToDP('1.75%'), textAlign: "center" }}
+                                                    value={this.props.text_5.text_5}
+                                                    onChangeText={value => this.props.changeText5(value)}
+                                                    placeholder="1"
+                                                    maxLength={5}
                                                     numberOfLines={1}
                                                     keyboardType='numeric'
                                                 />
@@ -285,6 +313,7 @@ const mapStateToProps = state => {
         text_2: state.text_2,
         text_3: state.text_3,
         text_4: state.text_4,
+        text_5: state.text_5
     };
 };
 
@@ -297,6 +326,7 @@ const mapDispatchToProps = dispatch => {
         changeText2: (text_2) => dispatch(changeText2(text_2)),
         changeText3: (text_3) => dispatch(changeText3(text_3)),
         changeText4: (text_4) => dispatch(changeText4(text_4)),
+        changeText5: (text_5) => dispatch(changeText5(text_5)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectingToIP); 

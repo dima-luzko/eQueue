@@ -10,7 +10,7 @@ export const postponeInfo = postponeCustomer => {
 
 export const postponePoolInfo = () => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + GET_POSTPONE_POOL_INFO_URL)
+        fetch(store.getState().ipAddress.ipAddress + GET_POSTPONE_POOL_INFO_URL)
             .then(result => result.json())
             .then((json) => {
                 dispatch(postponeInfo(json))

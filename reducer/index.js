@@ -41,6 +41,7 @@ export default combineReducers({
     text_2: updateStateReducer,
     text_3: updateStateReducer,
     text_4: updateStateReducer,
+    text_5: updateStateReducer,
     serverState: serverStateReducer,
     postponedCheckButton: updateStateReducer,
     redirectCheckButton: updateStateReducer

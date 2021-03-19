@@ -10,7 +10,7 @@ export const inviteCustomer = customer => {
 
 export const invitePostponedCustomer = (userId, customerId) => {
     return (dispatch) => {
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8084/api" + INVITE_POSTPONE_CUSTOMER_URL + userId + '&customer_id=' + customerId, {
+        fetch(store.getState().ipAddress.ipAddress + INVITE_POSTPONE_CUSTOMER_URL + userId + '&customer_id=' + customerId, {
             method: 'get',
             headers: {
                 Accept: 'application/json',

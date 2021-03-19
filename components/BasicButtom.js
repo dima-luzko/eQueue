@@ -49,9 +49,6 @@ export {
 };
 
 
-let timeout = 5000;
-let timeoutCounter = 0;
-const maxTimeoutCounter = 10;
 
 class CallClient extends Component {
   _isMounted = false;
@@ -130,7 +127,7 @@ class CallClient extends Component {
 
   connectingToSocket = () => {
 
-    const ws = new SockJS("http://" + store.getState().ipAddress.ipAddress + ":8084" + SOCKET_URL);
+    const ws = new SockJS(store.getState().ipAddress.ipAddress + SOCKET_URL);
     this.stompClient = Stomp.over(ws);
 
     let that = this;
@@ -159,13 +156,6 @@ class CallClient extends Component {
         states.showTotalLength(len)
         console.log("+++++++ " + len);
       });
-    }, () => {
-      timeoutCounter++;
-
-      if (timeoutCounter < maxTimeoutCounter) {
-        setTimeout(connect, timeoutCounter * timeout);
-      }
-
     });
   }
 
@@ -286,7 +276,7 @@ class CallClient extends Component {
         <View>
           <Button
             raised={true}
-           disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true : this.props.disableButtonCallClient.disableButtonCallClient}
+            disabled={this.props.totalLength.totalLength == 0 && !this.props.customer.customer ? true : this.props.disableButtonCallClient.disableButtonCallClient}
             title={this.props.customer.customer ? "Вызвать еще раз" : "Вызвать следующего"}
             buttonStyle={{
               backgroundColor: "#41D38D",
