@@ -32,30 +32,41 @@ class Setting extends Component {
             <View>
                 <SettingsBar />
                 <Text style={styles.headText}>Операции для работы с клиентами</Text>
-                <Grid>
-                    <Row>
-                        <Col style={{ width: widthPercentageToDP('10%'), marginLeft: widthPercentageToDP('8%') }}>
-                            <CheckBox
-                                value={this.props.postponedCheckButton.postponedCheckButton}
-                                onValueChange={(newValue => {this.props.postponedCheck(newValue),AsyncStorage.setItem('postponedCheck',newValue + "")})}
-                            />
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>Отложить</Text>
-                        </Col>
-                    </Row>
-                    <Row style={{ marginTop: heightPercentageToDP('5%') }}>
-                        <Col style={{ width: widthPercentageToDP('10%'), marginLeft: widthPercentageToDP('8%') }}>
-                            <CheckBox
-                                value={this.props.redirectCheckButton.redirectCheckButton}
-                                onValueChange={(newValue => { this.props.redirectCheck(newValue), AsyncStorage.setItem('redirectCheck',newValue + "")})}
-                            />
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>Перенаправить</Text>
-                        </Col>
-                    </Row>
-                </Grid>
+                <View>
+                    <Grid>
+                        <Row>
+                            <Col style={{ width: widthPercentageToDP('10%'), marginLeft: widthPercentageToDP('8%') }}>
+                                <View style={styles.container}>
+                                    <CheckBox
+                                        value={this.props.postponedCheckButton.postponedCheckButton}
+                                        onValueChange={(newValue => { this.props.postponedCheck(newValue), AsyncStorage.setItem('postponedCheck', newValue + "") })}
+                                    />
+                                </View>
+                            </Col>
+                            <Col style={{ width: widthPercentageToDP('40%') }} >
+                                <View style={styles.container}>
+                                    <Text style={styles.text}>Отложить</Text>
+                                </View>
+                            </Col>
+                        </Row>
+                        <Row style={{marginTop: heightPercentageToDP('5%')}}>
+                            <Col style={{ width: widthPercentageToDP('10%'), marginLeft: widthPercentageToDP('8%')}}>
+                            <View style={styles.container}>
+                                <CheckBox
+                                    value={this.props.redirectCheckButton.redirectCheckButton}
+                                    onValueChange={(newValue => { this.props.redirectCheck(newValue), AsyncStorage.setItem('redirectCheck', newValue + "") })}
+                                />
+                                </View>
+                            </Col>
+                            <Col>
+                            <View style={styles.container}>
+                                <Text style={styles.text}>Перенаправить</Text>
+                                </View>
+                            </Col>
+                        </Row>
+                    </Grid>
+                </View>
+
                 <View>
                     <Button
                         raised={true}
@@ -90,7 +101,6 @@ class Setting extends Component {
             </View>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -107,13 +117,16 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        alignSelf: "flex-start",
-        marginTop: heightPercentageToDP('0.2%'),
-        fontSize: heightPercentageToDP('2.5%'),
+        fontSize: heightPercentageToDP('2%'),
         fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         color: "#A1A0A0"
+    },
+
+    container: {
+        height: heightPercentageToDP('2%'),
+        justifyContent: "center"
     }
 });
 

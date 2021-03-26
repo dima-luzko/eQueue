@@ -7,6 +7,7 @@ import getServicesReducer from '../reducer/getServicesReducer'
 import resultListReducer from '../reducer/resultListReducer'
 import updateStateReducer from '../reducer/updateStateReducer'
 import serverStateReducer from '../reducer/serverStateReducer'
+import getNextCustomerInfoReducer from '../reducer/getNextCustomerInfoReducer'
 
 export default combineReducers({
     users: usersReducer,
@@ -44,5 +45,6 @@ export default combineReducers({
     text_5: updateStateReducer,
     serverState: serverStateReducer,
     postponedCheckButton: updateStateReducer,
-    redirectCheckButton: updateStateReducer
+    redirectCheckButton: updateStateReducer,
+    nextCustomer: getNextCustomerInfoReducer
 })

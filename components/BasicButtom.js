@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native-elements';
 import { View, Text } from 'native-base';
-import { StyleSheet, PixelRatio, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
+import { StyleSheet, PixelRatio, Dimensions, TouchableOpacity, StatusBar, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { inviteNextCustomer, getStartCustomer } from '../action/callClientAction'
 import { loggedUser } from '../action/loggedUserAction'
@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Appbar } from 'react-native-paper'
 import { killNextCustomer } from '../action/killNextCustomerAction';
 import { getFinishCustomer } from '../action/callClientAction'
+import { getNextCustomerInfo } from '../action/getNextCustomerInfoAction'
 import { updateText, updateDisableButtom, updateImage, passwordState, userState, showPassword, getSocketData, showTotalLength } from '../action/updateStateAction'
 import SockJS from 'sockjs-client/dist/sockjs'
 import Stomp from 'stompjs'
@@ -18,8 +19,8 @@ import { store } from '../App'
 import LinearGradient from 'react-native-linear-gradient'
 import UserIcon from 'react-native-vector-icons/FontAwesome'
 import { serverControl } from '../action/serverStateAction'
-import Sound from 'react-native-sound';
-
+import Sound from 'react-native-sound'
+import { Col, Row, Grid } from "react-native-easy-grid"
 
 const Export = function (props) {
   const navigation = useNavigation();
@@ -48,8 +49,6 @@ export {
   heightPercentageToDP
 };
 
-
-
 class CallClient extends Component {
   _isMounted = false;
 
@@ -59,7 +58,8 @@ class CallClient extends Component {
     super(props);
     this.state = {
       connecting: true,
-      prevTotalLength: 0
+      prevTotalLength: 0,
+      noConnect: false
     };
   }
 
@@ -76,8 +76,8 @@ class CallClient extends Component {
         console.log("Общее количество клиентов в очереди: ", queueLength ? queueLength : "0")
       }
       this.props.showTotalLength(queueLength)
-
     }, 200)
+    this.props.getNextCustomerInfo(this.props.user.user.id)
   }
 
   changeText() {
@@ -133,8 +133,10 @@ class CallClient extends Component {
     let that = this;
     let states = this.props;
     let users = this.props;
+    let next = this.props;
 
     that.stompClient.connect({}, function (frame) {
+      that.setState({ noConnect: false })
       that.stompClient.subscribe("/topic/" + users.user.user.id, (message) => {
 
         const data = JSON.parse(message.body);
@@ -148,6 +150,7 @@ class CallClient extends Component {
 
         if (that.state.prevTotalLength == 0 && len == 1) {
           that.playSound()
+          next.getNextCustomerInfo(users.user.user.id)
         }
 
         that.setState({ prevTotalLength: len })
@@ -156,7 +159,15 @@ class CallClient extends Component {
         states.showTotalLength(len)
         console.log("+++++++ " + len);
       });
-    });
+    },
+      that.stompClient.error = function (error) {
+        console.log("error", "no connection to socket");
+        that.setState({ noConnect: true })
+        setTimeout(() => {
+          that.UNSAFE_componentWillMount()
+        }, 5000);
+      });
+
   }
 
   finishCustomer() {
@@ -177,6 +188,11 @@ class CallClient extends Component {
       this.connectingToSocket();
       this.setState({ connecting: false });
     };
+
+  }
+
+  visiablNextCustomerInfo() {
+    this.props.getNextCustomerInfo(this.props.user.user.id)
 
   }
 
@@ -258,19 +274,37 @@ class CallClient extends Component {
         <View>
           {this.changeText()}
         </View>
-
-        <View>
-          <Text style={styles.number} numberOfLines={1}> {this.props.customer.customer ? this.props.customer.customer.prefix + this.props.customer.customer.number : ""}</Text>
-        </View>
-        <View
-          style={{
-            width: widthPercentageToDP('90%'),
-            height: heightPercentageToDP('10%'),
-            marginBottom: heightPercentageToDP('2%')
-          }} >
-          <Text numberOfLines={3}
-            style={styles.services}
-          >{this.props.customer.customer ? this.props.customer.customer.to_service.name : ""} </Text>
+        <View style={{ marginLeft: widthPercentageToDP('18%'), height: heightPercentageToDP('20%') }}>
+          <Grid>
+            <Col style={{ width: widthPercentageToDP('15%') }}>
+              <View style={{ marginTop: heightPercentageToDP('5%'), width: widthPercentageToDP('15%'), alignItems: "center" }}>
+                <Text style={styles.number1} numberOfLines={1}>{this.props.nextCustomer.nextCustomer ? this.props.nextCustomer.nextCustomer.prefix + this.props.nextCustomer.nextCustomer.number : ""}</Text>
+                {this.props.nextCustomer.nextCustomer &&
+                  <Image
+                    style={styles.arrow}
+                    source={
+                      require('../images/arrow.png')
+                    }
+                  />}
+              </View>
+            </Col>
+            <Col style={{ width: widthPercentageToDP('5%') }}>
+              <View style={{ marginTop: heightPercentageToDP('6%') }}>
+                <Image
+                  style={styles.verticalLine}
+                  source={
+                    require('../images/vertical_line2.png')
+                  }
+                />
+              </View>
+            </Col>
+            <Col style={{ width: widthPercentageToDP('45%')}}>
+              <View style={styles.containerForService}>
+                <Text style={styles.number} numberOfLines={1}> {this.props.customer.customer ? this.props.customer.customer.prefix + this.props.customer.customer.number : ""}</Text>
+                <Text numberOfLines={3} style={styles.services}>{this.props.customer.customer ? this.props.customer.customer.to_service.name : ""} </Text>
+              </View>
+            </Col>
+          </Grid>
         </View>
 
         <View>
@@ -304,6 +338,15 @@ class CallClient extends Component {
                 this.props.updateText(1),
                 this.props.updateImage(1)
               this.props.updateDisableButtom(false, true, false, false, true, true, true, true)
+              setTimeout(() => {
+                this.props.customer.customer ?
+                  this.props.getNextCustomerInfo(this.props.user.user.id)
+                  :
+                  setTimeout(() => {
+                    this.props.getNextCustomerInfo(this.props.user.user.id)
+                  }, 1000);
+                console.log("========", this.props.customer.customer);
+              }, 500);
             }}
           />
         </View>
@@ -542,6 +585,19 @@ const styles = StyleSheet.create({
     color: "#A1A0A0"
   },
 
+  arrow: {
+    height: heightPercentageToDP('1.5%'),
+    resizeMode: 'contain',
+    width: widthPercentageToDP('15%'),
+    alignContent: "center"
+    // marginLeft: widthPercentageToDP('-1%'),
+  },
+
+  verticalLine: {
+    height: heightPercentageToDP('8%'),
+    resizeMode: 'contain'
+  },
+
   clientCallingForm: {
     marginTop: heightPercentageToDP('3%'),
     height: heightPercentageToDP('9%'),
@@ -560,12 +616,19 @@ const styles = StyleSheet.create({
   },
 
   number: {
-    textAlign: "center",
     fontFamily: "Roboto",
-    fontWeight: "600",
-    marginTop: heightPercentageToDP('3%'),
-    fontSize: heightPercentageToDP('2.5%'),
-    color: "#A1A0A0"
+    fontWeight: "bold",
+    fontSize: heightPercentageToDP('3%'),
+    color: "#A1A0A0",
+    textAlign: "center",
+  },
+
+  number1: {
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    marginTop: heightPercentageToDP('2%'),
+    fontSize: heightPercentageToDP('3%'),
+    color: "#C6C6C6",
   },
 
   services: {
@@ -573,7 +636,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: heightPercentageToDP('2.5%'),
     color: "#A1A0A0",
-    marginLeft: widthPercentageToDP('11%'),
     textAlign: "center"
   },
 
@@ -581,8 +643,13 @@ const styles = StyleSheet.create({
     marginStart: "16%",
     marginTop: heightPercentageToDP('1%'),
     height: heightPercentageToDP('3%'),
-    width: widthPercentageToDP('85%')
+    textAlign: "center"
+  },
 
+  containerForService: {
+    width: widthPercentageToDP('45%'),
+    height: heightPercentageToDP('20%'),
+    justifyContent: "center"
   },
 
   imageBreak: {
@@ -615,13 +682,15 @@ const mapStateToProps = state => {
     totalLength: state.totalLength,
     control: state.control,
     redirectCheckButton: state.redirectCheckButton,
-    postponedCheckButton: state.postponedCheckButton
+    postponedCheckButton: state.postponedCheckButton,
+    nextCustomer: state.nextCustomer
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     inviteNextCustomer: (loggedUserId) => dispatch(inviteNextCustomer(loggedUserId)),
+    getNextCustomerInfo: (loggedUserId) => dispatch(getNextCustomerInfo(loggedUserId)),
     getStartCustomer: (loggedUserId) => dispatch(getStartCustomer(loggedUserId)),
     getSelfServices: (userId, point) => dispatch(getSelfServices(userId, point)),
     loggedUser: (user) => dispatch(loggedUser(user)),
