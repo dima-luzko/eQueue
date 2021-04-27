@@ -96,14 +96,6 @@ class LoginScreen extends Component {
       hours = time.getHours(),
       minutes = time.getMinutes(),
       second = time.getSeconds()
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(hours, ':', minutes, ':', second)
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
   }
 
   check() {
@@ -153,7 +145,7 @@ class LoginScreen extends Component {
                   color="rgba(188, 182, 185, 0.7)"
                 />
               }}
-              placeholder={{ label: "Выберите пользователя... ", value: null }}
+              placeholder={{ label: "Выберите пользователя... ", value: "Выберите пользователя... " }}
               onValueChange={(itemValue) => this.props.userState(itemValue)}
               items={
                 users.map(item => ({

@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-  server:{port: 8900},
   transformer: {
     getTransformOptions: async () => ({
       transform: {

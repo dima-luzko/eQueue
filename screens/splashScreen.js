@@ -52,7 +52,7 @@ class SplashScreen extends Component {
             this.props.redirectCheck(redirectCheck == "true")
             this.props.postponedCheck(postponedCheck == "true")
             this.props.selectIpAddress(ipStatus)
-            this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
+            //this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
             this.check()
         }, 2000);
 
