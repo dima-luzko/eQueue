@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, Text, TouchableOpacity, FlatList, Alert } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, FlatList, Alert } from 'react-native'
 import Bar from '../components/appbar'
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -8,23 +8,8 @@ import { getFinishCustomer } from '../action/callClientAction'
 import { updateText, updateDisableButtom, updateImage } from '../action/updateStateAction'
 import { Row, Grid } from "react-native-easy-grid"
 import { Shadow } from 'react-native-neomorph-shadows'
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
-const widthPercentageToDP = widthPercent => {
-    const screenWidth = Dimensions.get('window').width;
-    // Convert string input to decimal number
-    const elemWidth = parseFloat(widthPercent);
-    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
-};
-const heightPercentageToDP = heightPercent => {
-    const screenHeight = Dimensions.get('window').height;
-    // Convert string input to decimal number
-    const elemHeight = parseFloat(heightPercent);
-    return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-    widthPercentageToDP,
-    heightPercentageToDP
-};
 
 class ResultList extends Component {
 

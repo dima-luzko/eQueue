@@ -1,6 +1,6 @@
 import { Text } from 'native-base'
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import Bar from '../components/appbar'
 import CheckBox from '@react-native-community/checkbox';
 import { Button } from 'react-native-elements';
@@ -9,23 +9,7 @@ import { postponeCustomer } from '../action/posponeCustomerAction';
 import { updateText, updateDisableButtom, updateImage, changeTotalMinutes } from '../action/updateStateAction'
 import { Col, Grid } from "react-native-easy-grid";
 import { Shadow } from 'react-native-neomorph-shadows';
-
-const widthPercentageToDP = widthPercent => {
-    const screenWidth = Dimensions.get('window').width;
-    // Convert string input to decimal number
-    const elemWidth = parseFloat(widthPercent);
-    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100)
-}
-const heightPercentageToDP = heightPercent => {
-    const screenHeight = Dimensions.get('window').height;
-    // Convert string input to decimal number
-    const elemHeight = parseFloat(heightPercent);
-    return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-    widthPercentageToDP,
-    heightPercentageToDP
-};
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
 class CustomerToPostpone extends Component {
 

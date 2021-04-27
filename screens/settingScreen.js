@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, PixelRatio, Dimensions, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import SettingsBar from '../components/settingBar'
 import CheckBox from '@react-native-community/checkbox'
 import { Col, Grid, Row } from "react-native-easy-grid"
@@ -7,23 +7,8 @@ import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { postponedCheck, redirectCheck } from '../action/updateStateAction'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
-const widthPercentageToDP = widthPercent => {
-    const screenWidth = Dimensions.get('window').width;
-    // Convert string input to decimal number
-    const elemWidth = parseFloat(widthPercent);
-    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
-};
-const heightPercentageToDP = heightPercent => {
-    const screenHeight = Dimensions.get('window').height;
-    // Convert string input to decimal number
-    const elemHeight = parseFloat(heightPercent);
-    return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-    widthPercentageToDP,
-    heightPercentageToDP
-};
 
 class Setting extends Component {
 

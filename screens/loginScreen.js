@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image, Dimensions, PixelRatio, Alert, StatusBar, TextInput } from 'react-native'
+import { View, StyleSheet, Image, Alert, StatusBar, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { usersFetchData } from '../action/usersAction'
 import { Button } from 'react-native-elements'
@@ -17,24 +17,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import PickerIcon from 'react-native-vector-icons/FontAwesome5'
 import { clearInterval } from 'stompjs'
 import { selectIpAddress } from '../action/updateStateAction'
-
-const widthPercentageToDP = widthPercent => {
-  const screenWidth = Dimensions.get('window').width;
-  // Convert string input to decimal number
-  const elemWidth = parseFloat(widthPercent);
-  return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
-};
-const heightPercentageToDP = heightPercent => {
-  const screenHeight = Dimensions.get('window').height;
-  // Convert string input to decimal number
-  const elemHeight = parseFloat(heightPercent);
-  return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-  widthPercentageToDP,
-  heightPercentageToDP
-};
-
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
 
 class LoginScreen extends Component {

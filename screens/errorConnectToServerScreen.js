@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Dimensions, PixelRatio, Text, StatusBar } from 'react-native'
+import { View, StyleSheet, Text, StatusBar } from 'react-native'
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
@@ -9,24 +9,8 @@ import { Col, Grid } from "react-native-easy-grid";
 import { passwordState, userState, showPassword, changeText1, changeText2, changeText3, changeText4 } from '../action/updateStateAction'
 import { selectIpAddress } from '../action/updateStateAction'
 import { UIActivityIndicator } from 'react-native-indicators';
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
-
-const widthPercentageToDP = widthPercent => {
-    const screenWidth = Dimensions.get('window').width;
-    // Convert string input to decimal number
-    const elemWidth = parseFloat(widthPercent);
-    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
-};
-const heightPercentageToDP = heightPercent => {
-    const screenHeight = Dimensions.get('window').height;
-    // Convert string input to decimal number
-    const elemHeight = parseFloat(heightPercent);
-    return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-    widthPercentageToDP,
-    heightPercentageToDP
-};
 
 class ErrorConnectToServer extends Component {
 

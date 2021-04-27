@@ -1,27 +1,11 @@
 import React, { Component } from 'react'
-import { StyleSheet, PixelRatio, Dimensions, StatusBar, Alert, Image, Text } from 'react-native'
+import { StyleSheet, StatusBar, Alert, Image, Text } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
 import { selectIpAddress, postponedCheck, redirectCheck  } from '../action/updateStateAction'
 import { checkServerState } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
-
-const widthPercentageToDP = widthPercent => {
-    const screenWidth = Dimensions.get('window').width;
-    // Convert string input to decimal number
-    const elemWidth = parseFloat(widthPercent);
-    return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
-};
-const heightPercentageToDP = heightPercent => {
-    const screenHeight = Dimensions.get('window').height;
-    // Convert string input to decimal number
-    const elemHeight = parseFloat(heightPercent);
-    return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-    widthPercentageToDP,
-    heightPercentageToDP
-};
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
 class SplashScreen extends Component {
 

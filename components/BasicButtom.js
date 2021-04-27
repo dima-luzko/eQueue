@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native-elements';
 import { View, Text } from 'native-base';
-import { StyleSheet, PixelRatio, Dimensions, TouchableOpacity, StatusBar, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, StatusBar, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { inviteNextCustomer, getStartCustomer } from '../action/callClientAction'
 import { loggedUser } from '../action/loggedUserAction'
@@ -21,6 +21,7 @@ import UserIcon from 'react-native-vector-icons/FontAwesome'
 import { serverControl } from '../action/serverStateAction'
 import Sound from 'react-native-sound'
 import { Col, Row, Grid } from "react-native-easy-grid"
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
 const Export = function (props) {
   const navigation = useNavigation();
@@ -32,22 +33,6 @@ export {
   Export
 }
 
-const widthPercentageToDP = widthPercent => {
-  const screenWidth = Dimensions.get('window').width;
-  // Convert string input to decimal number
-  const elemWidth = parseFloat(widthPercent);
-  return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
-};
-const heightPercentageToDP = heightPercent => {
-  const screenHeight = Dimensions.get('window').height;
-  // Convert string input to decimal number
-  const elemHeight = parseFloat(heightPercent);
-  return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
-};
-export {
-  widthPercentageToDP,
-  heightPercentageToDP
-};
 
 class CallClient extends Component {
   _isMounted = false;
