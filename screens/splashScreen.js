@@ -9,17 +9,6 @@ import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimen
 
 class SplashScreen extends Component {
 
-    errorNetworkAlert() {
-        Alert.alert(
-            "Нет интернет-соединения",
-            "Данные не могут быть загружены." + "\n" + "Отсутствует интернет-соединение.",
-            [
-                { text: "Попробуйте снова" }
-            ],
-            { cancelable: false }
-        );
-    }
-
     constructor() {
         super();
         this.state = {
@@ -36,7 +25,7 @@ class SplashScreen extends Component {
             this.props.redirectCheck(redirectCheck == "true")
             this.props.postponedCheck(postponedCheck == "true")
             this.props.selectIpAddress(ipStatus)
-            //this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
+            this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
             this.check()
         }, 2000);
 
