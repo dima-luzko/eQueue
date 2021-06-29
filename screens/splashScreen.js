@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, StatusBar, Alert, Image, Text } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux'
-import { selectIpAddress, postponedCheck, redirectCheck  } from '../action/updateStateAction'
-import { checkServerState } from '../action/serverStateAction'
+import { selectIpAddress, postponedCheck, redirectCheck } from '../action/updateStateAction'
+import { checkServerState, serverControl } from '../action/serverStateAction'
 import LinearGradient from 'react-native-linear-gradient'
 import { widthPercentageToDP, heightPercentageToDP } from '../utils/convertDimenToPercentage'
 
@@ -12,9 +12,9 @@ class SplashScreen extends Component {
     constructor() {
         super();
         this.state = {
-          control: true
+            control: true
         };
-      }
+    }
 
     componentDidMount = async () => {
         let ipStatus = await AsyncStorage.getItem('ip')
@@ -25,21 +25,22 @@ class SplashScreen extends Component {
             this.props.redirectCheck(redirectCheck == "true")
             this.props.postponedCheck(postponedCheck == "true")
             this.props.selectIpAddress(ipStatus)
-            this.props.navigation.navigate(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
+          //  this.props.navigation.replace(ipStatus ? 'LoginScreen' : 'ConnectingToIP')
             this.check()
         }, 2000);
 
-        
+
     }
-      check() {
-           setInterval(() => {
+    check() {
+        // this.props.serverControl(false)
+        setInterval(() => {
             console.log("Рендер текущего ip: ", this.props.ipAddress.ipAddress);
             this.props.checkServerState(this.props.ipAddress.ipAddress)
             if (this.props.control.control && !this.props.server.server) {
-              this.props.navigation.navigate("ErrorConnectToServer")
+                this.props.navigation.navigate("ErrorConnectToServer")
             }
-          }, 2000);
-      }
+        }, 2000);
+    }
 
     render() {
         return (
@@ -114,6 +115,7 @@ const mapDispatchToProps = dispatch => {
         checkServerState: (ipAddress) => dispatch(checkServerState(ipAddress)),
         selectIpAddress: (ipAddress) => dispatch(selectIpAddress(ipAddress)),
         redirectCheck: (redirectCheckButton) => dispatch(redirectCheck(redirectCheckButton)),
+        serverControl: (control) => dispatch(serverControl(control)),
         postponedCheck: (postponedCheckButton) => dispatch(postponedCheck(postponedCheckButton))
     }
 }

@@ -70,7 +70,7 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.props.usersFetchData()
-    // this.check()
+    this.check()
     // this.checkTime()
   }
 
@@ -82,6 +82,7 @@ class LoginScreen extends Component {
   }
 
   check() {
+
     if (this.state.control) {
       setInterval(() => {
         this.setState({ control: false })
@@ -287,7 +288,8 @@ class LoginScreen extends Component {
 
               onPress={() => {
                 this.LoginCheck(),
-                  this.props.userSelected.userSelected ? this.props.userSelected.userSelected : this.errorUserAlert()
+                  this.props.userSelected.userSelected ? this.props.userSelected.userSelected : this.errorUserAlert(),
+                  this.props.serverControl(true)
               }} />
           </View>
         </DoubleClick>
