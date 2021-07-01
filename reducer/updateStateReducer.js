@@ -1,6 +1,10 @@
-import { UPDATE_TEXT, UPDATE_IMAGE, UPDATE_STATE_BUTTOM, PASSWORD, SELECT_USER, SECURE_TEXT_ENTRY, INPUT_IP_ADDRESS, TOTAL_LENGTH, GET_SOCKET_DATA } from '../constants/constants'
-
-
+import {
+    POSTPONED_TOTAL_LENGTH, UPDATE_TEXT, UPDATE_IMAGE,
+    UPDATE_STATE_BUTTOM, PASSWORD, SELECT_USER,
+    SECURE_TEXT_ENTRY, INPUT_IP_ADDRESS, TOTAL_LENGTH,
+    GET_SOCKET_DATA, TOTAL_MINUTES, TEXT_1, TEXT_2,
+    TEXT_3, TEXT_4, TEXT_5, POSTPONED_CHECK, REDIRECT_CHECK
+} from '../constants/constants'
 
 const initialState = {
     text: 0,
@@ -16,14 +20,32 @@ const initialState = {
     userSelected: "",
     password: '',
     secureTextEntry: true,
-    ipAddress: "",
+    ipAddress: null,
     socket: undefined,
-    totalLength: 0
-
+    totalLength: 0,
+    totalMinutes: 0,
+    posponedLength: 0,
+    text_1: null,
+    text_2: null,
+    text_3: null,
+    text_4: null,
+    text_5: null,
+    redirectCheckButton: true,
+    postponedCheckButton: true
 }
 
 export default updateStateReducer = (state = initialState, action) => {
     switch (action.type) {
+        case POSTPONED_CHECK:
+            return {
+                ...state,
+                postponedCheckButton: action.postponedCheckButton
+            }
+        case REDIRECT_CHECK:
+            return {
+                ...state,
+                redirectCheckButton: action.redirectCheckButton
+            }
         case UPDATE_TEXT:
             return {
                 ...state,
@@ -71,10 +93,47 @@ export default updateStateReducer = (state = initialState, action) => {
                 ...state,
                 totalLength: action.totalLength
             }
+
+        case POSTPONED_TOTAL_LENGTH:
+            return {
+                ...state,
+                posponedLength: action.posponedLength
+            }
+
+        case TOTAL_MINUTES:
+            return {
+                ...state,
+                totalMinutes: action.totalMinutes
+            }
         case GET_SOCKET_DATA:
             return {
                 ...state,
                 socket: action.socket
+            }
+        case TEXT_1:
+            return {
+                ...state,
+                text_1: action.text_1
+            }
+        case TEXT_2:
+            return {
+                ...state,
+                text_2: action.text_2
+            }
+        case TEXT_3:
+            return {
+                ...state,
+                text_3: action.text_3
+            }
+        case TEXT_4:
+            return {
+                ...state,
+                text_4: action.text_4
+            }
+        case TEXT_5:
+            return {
+                ...state,
+                text_5: action.text_5
             }
 
         default:

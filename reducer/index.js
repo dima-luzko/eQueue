@@ -7,9 +7,7 @@ import getServicesReducer from '../reducer/getServicesReducer'
 import resultListReducer from '../reducer/resultListReducer'
 import updateStateReducer from '../reducer/updateStateReducer'
 import serverStateReducer from '../reducer/serverStateReducer'
-
-
-
+import getNextCustomerInfoReducer from '../reducer/getNextCustomerInfoReducer'
 
 export default combineReducers({
     users: usersReducer,
@@ -36,6 +34,17 @@ export default combineReducers({
     ipAddress: updateStateReducer,
     server : serverStateReducer,
     socket: updateStateReducer,
-    totalLength: updateStateReducer
-
+    totalLength: updateStateReducer,
+    totalMinutes: updateStateReducer,
+    posponedLength: updateStateReducer,
+    control:serverStateReducer,
+    text_1: updateStateReducer,
+    text_2: updateStateReducer,
+    text_3: updateStateReducer,
+    text_4: updateStateReducer,
+    text_5: updateStateReducer,
+    serverState: serverStateReducer,
+    postponedCheckButton: updateStateReducer,
+    redirectCheckButton: updateStateReducer,
+    nextCustomer: getNextCustomerInfoReducer
 })

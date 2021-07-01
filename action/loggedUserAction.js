@@ -5,11 +5,8 @@ export const getLoggedUser = user => {
     }
 }
 
-
-export const loggedUser = (user) =>{
-    return (dispatch) =>{
-        
-            dispatch(getLoggedUser(user))
-         
+export const loggedUser = (user) => {
+    return (dispatch) => {
+        dispatch(getLoggedUser(user))
     }
-    }
+}

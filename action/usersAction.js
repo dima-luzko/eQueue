@@ -1,7 +1,5 @@
 import { GET_USERS_URL } from '../constants/url'
 import { store } from '../App'
-import {Alert} from 'react-native'
-
 
 export const getDataSuccess = users => {
     return {
@@ -20,10 +18,10 @@ export const getDataFail = error => {
 export const usersFetchData = () => {
     return (dispatch) => {
 
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_USERS_URL)
+        fetch(store.getState().ipAddress.ipAddress + GET_USERS_URL)
             .then(result => result.json())
             .then((json) => {
                 dispatch(getDataSuccess(json))
             })
-        }
+    }
 }

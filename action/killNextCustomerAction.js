@@ -1,5 +1,5 @@
-import {KILL_NEXT_CUSTOMER_URL} from '../constants/url'
-import {store} from '../App'
+import { KILL_NEXT_CUSTOMER_URL } from '../constants/url'
+import { store } from '../App'
 
 export const killCustomer = () => {
     return {
@@ -7,11 +7,9 @@ export const killCustomer = () => {
     }
 }
 
-
 export const killNextCustomer = (userId) => {
     return (dispatch) => {
-
-        fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + KILL_NEXT_CUSTOMER_URL + userId, {
+        fetch(store.getState().ipAddress.ipAddress + KILL_NEXT_CUSTOMER_URL + userId, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -21,7 +19,5 @@ export const killNextCustomer = (userId) => {
             .then(() => {
                 dispatch(killCustomer())
             })
-
-
     }
 }

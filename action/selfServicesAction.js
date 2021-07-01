@@ -1,5 +1,5 @@
-import {GET_SELF_SERVICES_URL} from '../constants/url'
-import {store} from '../App'
+import { GET_SELF_SERVICES_URL } from '../constants/url'
+import { store } from '../App'
 
 export const selfServices = (selfServices) => {
     return {
@@ -8,9 +8,9 @@ export const selfServices = (selfServices) => {
     }
 }
 
-export const getSelfServices = (userId,point) => {
+export const getSelfServices = (userId, point) => {
     return (dispatch) => {
-           fetch("http://" + store.getState().ipAddress.ipAddress + ":8081/api" + GET_SELF_SERVICES_URL + userId + '&point=' + point, {
+        fetch(store.getState().ipAddress.ipAddress + GET_SELF_SERVICES_URL + userId + '&point=' + point, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -19,7 +19,7 @@ export const getSelfServices = (userId,point) => {
         })
             .then(result => result.json())
             .then((json) => {
-                    dispatch(selfServices(json))
+                dispatch(selfServices(json))
             })
     }
 }

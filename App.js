@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import reducer from './reducer'
@@ -9,12 +9,12 @@ import RedirectCustomer from './screens/redirectCustomerScreen'
 import CustomerToPostpone from './screens/customerToPostponeScreen'
 import InvitePostponeCustomer from './screens/invitePostponeCustomerScreen'
 import ResultList from './screens/resultListScreen'
-import ChangeFlexPriority from './screens/ChangeFlexPriorityScreen'
 import SplashScreen from './screens/splashScreen'
 import ConnectingToIP from './screens/ConnectingToIPScreen'
 import ErrorConnectToServer from './screens/errorConnectToServerScreen'
 import ServerNoConnection from './screens/serverNoConnectionScreen'
 import ServerConnection from './screens/serverConnectionScreen'
+import Setting from './screens/settingScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -36,15 +36,15 @@ export default class App extends Component {
             screenOptions={{ headerShown: false }}
           >
 
-            {/* <Stack.Screen
+            <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
-            /> */}
+            />
 
-            {/* <Stack.Screen
+            <Stack.Screen
               name="ErrorConnectToServer"
               component={ErrorConnectToServer}
-            /> */}
+            />
 
             <Stack.Screen
               name="ConnectingToIP"
@@ -83,8 +83,10 @@ export default class App extends Component {
               component={ResultList} />
 
             <Stack.Screen
-              name="ChangeFlexPriority"
-              component={ChangeFlexPriority} />
+              name="Setting"
+              component={Setting}
+            />
+
 
           </Stack.Navigator>
         </NavigationContainer>
